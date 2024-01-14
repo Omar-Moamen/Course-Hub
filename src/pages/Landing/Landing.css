@@ -1,0 +1,36 @@
+:root {
+   --white-Color: #ffffffb3;
+   --btn-Color: #f4623a;
+   --btn-Hover: #cf5331;
+   --dark-Color: #212529;
+}
+
+.landing {
+   height: 200vh;
+}
+
+.landing h1 {
+   font-size: 50px;
+}
+
+hr.divider {
+   height: 3px;
+   background: var(--btn-Color);
+   max-width: 50px;
+   opacity: 1;
+}
+
+.landing p {
+   color: var(--white-Color);
+}
+
+.landing a {
+   background-color: var(--btn-Color);
+   font-size: 14px;
+   padding: 18px 34px;
+}
+
+.landing a:hover {
+
+   background-color: var(--btn-Hover);
+}

@@ -1,0 +1,8 @@
+.landing-overlay {
+   background-image: linear-gradient(to bottom,
+         #5c4d42cc 0%, #5c4d42cc 100%),
+      url('../../assets/img/bg-masthead.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+}

@@ -1,0 +1,32 @@
+#mainNav {
+   color: #ffffffb3;
+   height: 72px;
+   width: 100%;
+   font-weight: bold;
+   transition: .2s;
+   -webkit-transition: .2s;
+   -moz-transition: .2s;
+   -ms-transition: .2s;
+   -o-transition: .2s;
+}
+
+#mainNav .navbar-brand {
+   font-size: 20px;
+}
+
+#mainNav a {
+   color: inherit !important;
+   font-size: 14px;
+}
+
+#mainNav a:hover {
+   color: var(--btn-Hover) !important;
+}
+
+.nav-link {
+   transition: none !important;
+   -webkit-transition: none !important;
+   -moz-transition: none !important;
+   -ms-transition: none !important;
+   -o-transition: none !important;
+}
