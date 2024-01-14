@@ -6,11 +6,17 @@
 }
 
 .landing {
-   height: 200vh;
+   height: 100vh;
 }
 
 .landing h1 {
-   font-size: 50px;
+   font-size: 48px;
+}
+
+@media(max-width: 992px) {
+   .landing h1 {
+      font-size: 30px
+   }
 }
 
 hr.divider {

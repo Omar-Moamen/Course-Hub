@@ -1,4 +1,4 @@
-import {Container, Nav, Navbar} from "react-bootstrap";
+import {Container, Nav, NavDropdown, Navbar} from "react-bootstrap";
 import {useRef} from "react";
 import './Header.css';
 
@@ -6,6 +6,7 @@ function Header()
 {
    const navRef = useRef();
 
+   // Show Navbar while scrolling down 
    const scrollHandler = () =>
    {
       window.addEventListener("scroll", () =>
@@ -22,8 +23,6 @@ function Header()
             navRef.current.classList.remove('text-black');
             navRef.current.classList.add('bg-transparent');
          }
-         // Handle new hover
-
       })
    }
 
@@ -31,15 +30,22 @@ function Header()
 
 
    return (
-      <Navbar id="mainNav" ref={navRef} expand="lg" className=" fixed-top bg-transparent">
+      <Navbar id="mainNav" className="bg-transparent fixed-top py-2" ref={navRef} expand="lg">
          <Container>
-            <Navbar.Brand href="#home">Logo</Navbar.Brand>
-            <Nav className="ms-auto">
-               <Nav.Link className="mx-3" href="#home">Home</Nav.Link>
-               <Nav.Link className="mx-3" href="#link">Link</Nav.Link>
-               <Nav.Link className="mx-3" href="#link">Link</Nav.Link>
-               <Nav.Link className="mx-3" href="#link">Link</Nav.Link>
-            </Nav>
+            <Navbar.Brand href="#">Logo</Navbar.Brand>
+            <Navbar.Toggle aria-controls="navbarScroll" />
+            <Navbar.Collapse id="navbarScroll">
+               <Nav
+                  className="ms-auto gap-3 my-2 my-lg-0 fw-bold"
+                  style={{maxHeight: '100px'}}
+                  navbarScroll
+               >
+                  <Nav.Link href="#action1">Home</Nav.Link>
+                  <Nav.Link href="#action2">About</Nav.Link>
+                  <Nav.Link href="#action2">Services</Nav.Link>
+                  <Nav.Link href="#action2">Contact</Nav.Link>
+               </Nav>
+            </Navbar.Collapse>
          </Container>
       </Navbar>
    )
