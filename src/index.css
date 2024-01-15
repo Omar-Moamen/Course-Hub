@@ -1,8 +1,10 @@
 :root {
   --white-Color: #ffffffb3;
-  --btn-Color: #f4623a;
-  --btn-Hover: #cf5331;
+  --orange-Color: #f4623a;
+  --orange-Hover: #cf5331;
   --dark-Color: #212529;
+  --main-Transition: 0.2s;
+  height: 200vh
 }
 
 * {
@@ -15,9 +17,4 @@ body {
   font-family: 'Merriweather Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }

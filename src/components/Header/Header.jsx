@@ -1,4 +1,4 @@
-import {Container, Nav, NavDropdown, Navbar} from "react-bootstrap";
+import {Container, Nav, Navbar} from "react-bootstrap";
 import {useRef} from "react";
 import './Header.css';
 
@@ -15,12 +15,13 @@ function Header()
          if (scrollTop !== 0 && navRef)
          {
             navRef.current.classList.remove('bg-transparent');
-            navRef.current.classList.add('bg-light', 'text-black');
+            navRef.current.classList.add('bg-light', 'text-black', 'alt-nav-hover');
          }
          else
          {
             navRef.current.classList.remove('bg-light');
             navRef.current.classList.remove('text-black');
+            navRef.current.classList.remove('alt-nav-hover');
             navRef.current.classList.add('bg-transparent');
          }
       })
@@ -30,7 +31,7 @@ function Header()
 
 
    return (
-      <Navbar id="mainNav" className="bg-transparent fixed-top py-2" ref={navRef} expand="lg">
+      <Navbar id="mainNav" className="bg-transparent fixed-top py-2 py-lg-3" ref={navRef} expand="lg">
          <Container>
             <Navbar.Brand href="#">Logo</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
@@ -41,8 +42,8 @@ function Header()
                   navbarScroll
                >
                   <Nav.Link href="#action1">Home</Nav.Link>
-                  <Nav.Link href="#action2">About</Nav.Link>
                   <Nav.Link href="#action2">Services</Nav.Link>
+                  <Nav.Link href="#action2">About</Nav.Link>
                   <Nav.Link href="#action2">Contact</Nav.Link>
                </Nav>
             </Navbar.Collapse>

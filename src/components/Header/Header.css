@@ -2,11 +2,11 @@
    color: #ffffffb3;
    width: 100%;
    font-weight: bold;
-   transition: .2s;
-   -webkit-transition: .2s;
-   -moz-transition: .2s;
-   -ms-transition: .2s;
-   -o-transition: .2s;
+   transition: var(--main-Transition);
+   -webkit-transition: var(--main-Transition);
+   -moz-transition: var(--main-Transition);
+   -ms-transition: var(--main-Transition);
+   -o-transition: var(--main-Transition);
 }
 
 #mainNav .navbar-brand {
@@ -15,11 +15,15 @@
 
 #mainNav a {
    color: inherit !important;
-   font-size: 14px;
+   font-size: 15px;
 }
 
 #mainNav a:hover {
-   color: var(--btn-Hover) !important;
+   color: white !important;
+}
+
+#mainNav.alt-nav-hover a:hover {
+   color: var(--orange-Color) !important;
 }
 
 .nav-link {
