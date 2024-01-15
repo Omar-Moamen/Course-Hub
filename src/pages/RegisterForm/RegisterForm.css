@@ -1,0 +1,46 @@
+.register-form {
+   top: 100px;
+}
+
+.register-form form {
+   border-color: var(--orangeColor);
+   box-shadow: var(--mainShadow);
+}
+
+@media(max-width: 576px) {
+   .register-form form {
+      width: 100% !important;
+   }
+}
+
+.register-form form h4 {
+   color: var(--orangeColor)
+}
+
+.register-form form label {
+   font-weight: bold;
+}
+
+.register-form form input::placeholder {
+   opacity: 0.6;
+}
+
+.register-form>.container {
+   min-height: 300px;
+}
+
+.register-form form button {
+   background-color: var(--orangeColor);
+   border-color: var(--orangeColor);
+}
+
+.register-form form button:hover {
+   background-color: var(--orangeHover);
+   border-color: var(--orangeHover);
+}
+
+@media(max-width: 576px) {
+   .register-form form button {
+      width: 100% !important;
+   }
+}

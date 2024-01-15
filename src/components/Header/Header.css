@@ -2,11 +2,15 @@
    color: #ffffffb3;
    width: 100%;
    font-weight: bold;
-   transition: var(--main-Transition);
-   -webkit-transition: var(--main-Transition);
-   -moz-transition: var(--main-Transition);
-   -ms-transition: var(--main-Transition);
-   -o-transition: var(--main-Transition);
+   transition: var(--mainTransition);
+   -webkit-transition: var(--mainTransition);
+   -moz-transition: var(--mainTransition);
+   -ms-transition: var(--mainTransition);
+   -o-transition: var(--mainTransition);
+}
+
+#mainNav.main-nav-shadow {
+   box-shadow: var(--mainShadow);
 }
 
 #mainNav .navbar-brand {
@@ -23,10 +27,12 @@
 }
 
 #mainNav.alt-nav-hover a:hover {
-   color: var(--orange-Color) !important;
+   color: var(--orangeColor) !important;
 }
 
-.nav-link {
+
+#mainNav a {
+   text-decoration: none;
    transition: none !important;
    -webkit-transition: none !important;
    -moz-transition: none !important;

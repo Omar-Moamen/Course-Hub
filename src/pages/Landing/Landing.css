@@ -1,3 +1,13 @@
+.landing-overlay {
+   background-image: linear-gradient(to bottom,
+         #5c4d42cc 0%, #5c4d42cc 100%),
+      url('../../assets/img/bg-masthead.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   height: 100vh;
+}
+
 .landing {
    height: 100vh;
 }
@@ -14,22 +24,22 @@
 
 hr.divider {
    height: 3px;
-   background: var(--orange-Color);
+   background: var(--orangeColor);
    max-width: 50px;
    opacity: 1;
 }
 
 .landing p {
-   color: var(--white-Color);
+   color: var(--whiteColor);
 }
 
 .landing a {
-   background-color: var(--orange-Color);
+   background-color: var(--orangeColor);
    font-size: 14px;
    padding: 18px 34px;
 }
 
 .landing a:hover {
 
-   background-color: var(--orange-Hover);
+   background-color: var(--orangeHover);
 }

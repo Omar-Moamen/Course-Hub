@@ -1,0 +1,34 @@
+.sign-in-form {
+   top: 100px;
+}
+
+.sign-in-form form {
+   border-color: var(--orangeColor);
+   box-shadow: var(--mainShadow);
+}
+
+.sign-in-form form h4 {
+   color: var(--orangeColor)
+}
+
+.sign-in-form form label {
+   font-weight: bold;
+}
+
+.sign-in-form form input::placeholder {
+   opacity: 0.6;
+}
+
+.sign-in-form>.container {
+   min-height: 300px;
+}
+
+.sign-in-form form .sign-in-btn {
+   background-color: var(--orangeColor);
+   border-color: var(--orangeColor);
+}
+
+.sign-in-form form .sign-in-btn:hover {
+   background-color: var(--orangeHover);
+   border-color: var(--orangeHover);
+}
