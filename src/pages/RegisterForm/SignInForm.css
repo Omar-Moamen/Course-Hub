@@ -1,5 +1,5 @@
 .sign-in-form {
-   top: 100px;
+   top: 150px;
 }
 
 .sign-in-form form {
@@ -11,12 +11,9 @@
    color: var(--orangeColor)
 }
 
-.sign-in-form form label {
-   font-weight: bold;
-}
-
 .sign-in-form form input::placeholder {
    opacity: 0.6;
+   font-weight: 300;
 }
 
 .sign-in-form>.container {

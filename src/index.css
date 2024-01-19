@@ -7,7 +7,6 @@
   --darkColor: #212529;
   --mainTransition: 0.2s;
   --mainShadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  height: 200vh;
 }
 
 * {

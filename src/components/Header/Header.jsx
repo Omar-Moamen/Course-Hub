@@ -1,7 +1,7 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {useRef} from "react";
 import './Header.css';
-import {NavLink, useLocation} from "react-router-dom";
+import {Link, NavLink, useLocation} from "react-router-dom";
 
 function Header()
 {
@@ -24,9 +24,7 @@ function Header()
             navRef.current.classList.remove('bg-light');
             navRef.current.classList.remove('text-black');
             navRef.current.classList.remove('alt-nav-hover');
-            navRef.current.classList.remove('sticky-top');
             navRef.current.classList.remove('main-nav-shadow');
-            navRef.current.classList.add('fixed-top');
          }
       })
    }
@@ -35,11 +33,11 @@ function Header()
 
    return (
       <Navbar id="mainNav"
-         className={`${pathname !== '/' ? "text-black alt-nav-hover main-nav-shadow sticky-top" : "fixed-top"} py-3`}
+         className={`${pathname !== '/' ? "text-black alt-nav-hover main-nav-shadow" : null} fixed-top py-3`}
          ref={navRef}
          expand="lg">
          <Container className="px-4 px-lg-5">
-            <Navbar.Brand href="#">Logo</Navbar.Brand>
+            <Link to={'/'} className="navbar-brand">Logo</Link>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
                <Nav
