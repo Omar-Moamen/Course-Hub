@@ -1,9 +1,10 @@
 import {Fragment, useState} from 'react';
-import {faMinus, faPlus} from '@fortawesome/free-solid-svg-icons';
+import {Button, Col, Form, Row} from 'react-bootstrap';
 import './RegisterForm.css';
-import {Formik, Form, Field, FieldArray} from "formik";
+import {Formik, Field, FieldArray, ErrorMessage} from "formik";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import * as Yup from 'yup';
+import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
 
 
 const registerSchema = Yup.object().shape({
@@ -24,6 +25,11 @@ const registerSchema = Yup.object().shape({
       .string()
       .email("Make sure to enter valid email")
       .required("Email is required"),
+   parentCity: Yup
+      .string()
+      .min(2)
+      .max(20, "City name must be maximum 20 characters")
+      .required("City is required"),
    students: Yup
       .array(Yup
          .object({
@@ -42,25 +48,7 @@ const registerSchema = Yup.object().shape({
 // Start Component
 function RegisterForm()
 {
-   const [clickCount, setClickCount] = useState(1);
    const [disable, setDisable] = useState(false)
-
-   const handleClick = (param) =>
-   {
-      console.log(clickCount)
-      // Increment the click count
-      if (clickCount > 4)
-      {
-         setDisable(true)
-      }
-      else
-      {
-         setDisable(false)
-      }
-      return param;
-   }
-
-   console.log(disable)
 
    const initialValues = {
       parentFirstName: '',
@@ -84,80 +72,105 @@ function RegisterForm()
                onSubmit={onSubmit}
                validationSchema={registerSchema}
             >
-               {({errors, touched}) => (
-                  <Form className="w-75 px-4 px-md-5 border-1 rounded-2">
+               {({handleSubmit, handleChange, values, errors, touched}) => (
+                  <Form
+                     className="w-75 px-4 border-1 rounded-2"
+                     onSubmit={handleSubmit}>
                      <div className='parent-section'>
                         <h4 className="mt-4 mb-4">Parent Info:</h4>
-                        <div className="row align-items-start">
-                           <div className="mb-3 col-md-6">
-                              <label
-                                 htmlFor='parentFirstName'
-                                 className="form-label">First Name</label>
-                              <Field
-                                 className={`form-control 
-                                 ${!!errors.parentFirstName &&
-                                       touched.parentFirstName ?
-                                       "is-invalid" : null}`}
-                                 id="parentFirstName"
+                        <Row className="align-items-start">
+                           <Form.Group
+                              as={Col}
+                              md="6"
+                              className="mb-3"
+                              controlId="parentFirstName">
+                              <Form.Label>First Name</Form.Label>
+                              <Form.Control
+                                 className={`form-control`}
                                  name="parentFirstName"
                                  type="text"
-                                 placeholder="Enter First Name"
-                                 aria-describedby="parentFirstNameValidationFeedback" />
-                              <div
-                                 id="parentFirstNameValidationFeedback"
-                                 className="invalid-feedback">
+                                 placeholder="First Name"
+                                 value={values.parentFirstName}
+                                 onChange={handleChange}
+                                 isInvalid={!!errors.parentFirstName}
+                              />
+                              <Form.Control.Feedback type="invalid">
                                  {errors.parentFirstName}
-                              </div>
-                           </div>
-                           <div className="mb-3 col-md-6">
-                              <label htmlFor='parentLastName'
-                                 className="form-label">
-                                 Last Name
-                              </label>
-                              <Field
-                                 className={`form-control ${!!errors.parentLastName && touched.parentLastName ? "is-invalid" : null}`}
-                                 id="parentLastName"
+                              </Form.Control.Feedback>
+                           </Form.Group>
+                           <Form.Group
+                              as={Col}
+                              md="6"
+                              className="mb-3"
+                              controlId="parentLastName">
+                              <Form.Label>Last Name</Form.Label>
+                              <Form.Control
                                  name="parentLastName"
                                  type="text"
-                                 placeholder="Enter Last Name"
-                                 aria-describedby="parentLastNameValidationFeedback" />
-                              <div id="parentLastNameValidationFeedback" className="invalid-feedback">
+                                 placeholder="Last Name"
+                                 value={values.parentLastName}
+                                 onChange={handleChange}
+                                 isInvalid={!!errors.parentLastName}
+                              />
+                              <Form.Control.Feedback type='invalid'>
                                  {errors.parentLastName}
-                              </div>
-                           </div>
-                        </div>
-                        <div className='row align-items-start mb-3'>
-                           <div className="mb-3 col-md-6">
-                              <label
-                                 htmlFor='parentPhone'
-                                 className="form-label">Phone Number</label>
-                              <Field
-                                 className={`form-control ${!!errors.parentPhone && touched.parentPhone ? "is-invalid" : null}`}
-                                 id="parentPhone"
+                              </Form.Control.Feedback>
+                           </Form.Group>
+                        </Row>
+                        <Row className='align-items-start'>
+                           <Form.Group
+                              as={Col}
+                              md="6"
+                              className="mb-3"
+                              controlId='parentPhone'>
+                              <Form.Label>Phone Number</Form.Label>
+                              <Form.Control
                                  name="parentPhone"
                                  type="text"
                                  placeholder="01x-xxxx-xxxx"
-                                 aria-describedby="parentPhoneValidationFeedback" />
-                              <div id="parentPhoneValidationFeedback" className="invalid-feedback">
+                                 value={values.parentPhone}
+                                 onChange={handleChange}
+                                 isInvalid={!!errors.parentPhone} />
+                              <Form.Control.Feedback type='invalid'>
                                  {errors.parentPhone}
-                              </div>
-                           </div>
-                           <div className="mb-3 col-md-6">
-                              <label
-                                 htmlFor='parentEmail'
-                                 className="form-label">Parent E-mail</label>
-                              <Field
-                                 className={`form-control ${!!errors.parentEmail && touched.parentEmail ? "is-invalid" : null}`}
-                                 id="parentEmail"
+                              </Form.Control.Feedback>
+                           </Form.Group>
+                           <Form.Group
+                              as={Col}
+                              md="6"
+                              className="mb-3"
+                              controlId='parentEmail'>
+                              <Form.Label>Parent E-mail</Form.Label>
+                              <Form.Control
                                  name="parentEmail"
                                  type="email"
                                  placeholder="me@example.com"
-                                 aria-describedby="parentEmailValidationFeedback" />
-                              <div id="parentEmailValidationFeedback" className="invalid-feedback">
+                                 value={values.parentEmail}
+                                 onChange={handleChange}
+                                 isInvalid={!!errors.parentEmail} />
+                              <Form.Control.Feedback type='invalid'>
                                  {errors.parentEmail}
-                              </div>
-                           </div>
-                        </div>
+                              </Form.Control.Feedback>
+                           </Form.Group>
+                        </Row>
+                        <Row className='align-items-start mb-3'>
+                           <Form.Group
+                              as={Col}
+                              className="mb-3"
+                              controlId='parentCity'>
+                              <Form.Label>City</Form.Label>
+                              <Form.Control
+                                 name="parentCity"
+                                 type="text"
+                                 placeholder="Current city"
+                                 value={values.parentCity}
+                                 onChange={handleChange}
+                                 isInvalid={!!errors.parentCity} />
+                              <Form.Control.Feedback type='invalid'>
+                                 {errors.parentEmail}
+                              </Form.Control.Feedback>
+                           </Form.Group>
+                        </Row>
                      </div>
                      <div className='student-section'>
                         <h4 className="mb-4">Student Info:</h4>
@@ -171,64 +184,78 @@ function RegisterForm()
                                  return (
                                     students.map((_, index) => (
                                        <Fragment key={index}>
-                                          <div className="row align-items-center align-items-md-start">
-                                             <div className="mb-3 col-md-7" >
-                                                <label
-                                                   htmlFor={`student${index}Name`}
-                                                   className="form-label">Student {index > 0 ? `(${index + 1})` : null} First Name</label>
+                                          <Row className="align-items-center align-items-md-start">
+                                             <Form.Group
+                                                as={Col}
+                                                md="6"
+                                                className="mb-3">
+                                                <Form.Label htmlFor={`student${index}Name`}>
+                                                   Student {index > 0 ? `(${index + 1})` : null} First Name
+                                                </Form.Label>
                                                 <Field
-                                                   className="form-control"
+                                                   className={`form-control`}
                                                    id={`student${index}Name`}
                                                    type="text"
                                                    name={`students[${index}].name`}
-                                                   placeholder="Enter Student Name"
-                                                   aria-describedby={`student${index}NameValidationFeedback`} />
-                                                <div
-                                                   id={`student${index}NameValidationFeedback`}
-                                                   className="invalid-feedback">
-                                                   {errors.parentFirstName}
-                                                </div>
-                                             </div>
-                                             <div className="mb-3 col-md-4" >
-                                                <label
-                                                   htmlFor={`student${index}Age`}
-                                                   className="form-label">Student {index > 0 ? `(${index + 1})` : null} Age</label>
+                                                   placeholder="Student Name"
+                                                />
+                                                <ErrorMessage
+                                                   component="div"
+                                                   className='error-feedback text-danger'
+                                                   name={`students[${index}].name`}
+                                                   id={`student${index}Name`}
+                                                   style={{fontSize: "14px", marginTop: "4px"}}
+                                                />
+                                             </Form.Group>
+                                             <Form.Group
+                                                as={Col}
+                                                md="4"
+                                                className="mb-3"
+                                                controlId={`student${index}Age`}>
+                                                <Form.Label>
+                                                   Student {index > 0 ? `(${index + 1})` : null} Age
+                                                </Form.Label>
                                                 <Field
-                                                   className="form-control"
+                                                   className={`form-control`}
                                                    id={`student${index}Age`}
                                                    type="number"
                                                    name={`students[${index}].age`}
-                                                   placeholder="Enter Student Age"
+                                                   placeholder="Student Age" />
+                                                <ErrorMessage
+                                                   component="div"
+                                                   className='error-feedback text-danger'
+                                                   name={`students[${index}].age`}
+                                                   id={`student${index}Age`}
+                                                   style={{fontSize: "14px", marginTop: "4px"}}
                                                 />
-                                             </div>
-                                             <div className='col-md-1 d-flex justify-content-end'>
+                                             </Form.Group>
+                                             <Col md="2" className='d-flex justify-content-end'>
                                                 {
-                                                   index === 0 ?
-                                                      <button
+                                                   index === 0 && students.length < 5 ?
+                                                      <Button
                                                          type='button'
-                                                         className='add-btn text-center d-flex align-items-center justify-content-center'
+                                                         className='add-btn text-center fw-bold d-flex align-items-center justify-content-center'
                                                          disabled={disable}
-                                                         onClick={() =>
-                                                         {
-                                                            handleClick(push({name: '', age: ''}))
-                                                            setClickCount(prevCount => prevCount + 1);
-                                                         }}>
-                                                         <FontAwesomeIcon icon={faPlus} />
-                                                      </button> :
-                                                      <button
-                                                         type='button'
-                                                         className='remove-btn text-center d-flex align-items-center justify-content-center'
-                                                         onClick={() =>
-                                                         {
-                                                            handleClick(remove(index));
-                                                            setClickCount(prevCount => prevCount - 1);
-                                                         }}>
-                                                         <FontAwesomeIcon icon={faMinus} />
-                                                      </button>
+                                                         onClick={() => push({name: '', age: ''})}>
+                                                         Add
+                                                      </Button> :
+                                                      setDisable(false)
                                                 }
-                                             </div>
-                                          </div>
-                                          {index < (students.length - 1) && <hr className='mt-3 mt-md-1 mb-4 mb-md-3 mx-auto w-100' />}
+                                                {
+                                                   index > 0 &&
+                                                   <Button
+                                                      type='button'
+                                                      className='remove-btn text-center d-flex align-items-center justify-content-center'
+                                                      onClick={() => remove(index)}>
+                                                      <FontAwesomeIcon icon={faTrashCan} />
+                                                   </Button>
+                                                }
+                                             </Col>
+                                          </Row>
+                                          {
+                                             index < (students.length - 1) &&
+                                             <hr className='mt-3 mt-md-1 mb-4 mb-md-3 mx-auto w-100' />
+                                          }
                                        </Fragment>
                                     ))
                                  )
@@ -236,13 +263,13 @@ function RegisterForm()
                            }
                         </FieldArray>
                      </div>
-                     <div className="row justify-content-center">
-                        <button
+                     <Row className="justify-content-center">
+                        <Button
                            type="submit"
                            className="submit-btn btn btn-primary mt-3 mb-4 w-50 py-2">
                            Submit
-                        </button>
-                     </div>
+                        </Button>
+                     </Row>
                   </Form>
                )
                }
