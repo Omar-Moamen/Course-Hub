@@ -4,7 +4,7 @@ import './RegisterForm.css';
 import {Formik, Field, FieldArray, ErrorMessage} from "formik";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import * as Yup from 'yup';
-import {faTrashCan} from '@fortawesome/free-regular-svg-icons';
+import {faEye, faEyeSlash, faTrashCan} from '@fortawesome/free-regular-svg-icons';
 
 
 const registerSchema = Yup.object().shape({
@@ -30,6 +30,13 @@ const registerSchema = Yup.object().shape({
       .min(2)
       .max(20, "City name must be maximum 20 characters")
       .required("City is required"),
+   parentPassword: Yup.string()
+      .required("Password is required")
+      .min(8, "Password should be at least 8 characters")
+      .matches(/\d/, "Password must contain a number")
+      .matches(/[a-z]/, "Password must contain a lowercase letter")
+      .matches(/[A-Z]/, "Password must contain an uppercase letter")
+      .matches(/\W/, "Password must contain a special character"),
    students: Yup
       .array(Yup
          .object({
@@ -49,12 +56,15 @@ const registerSchema = Yup.object().shape({
 function RegisterForm()
 {
    const [disable, setDisable] = useState(false)
+   const [showPassword, setShowPassword] = useState(false);
 
    const initialValues = {
       parentFirstName: '',
       parentLastName: '',
       parentPhone: '',
       parentEmail: '',
+      parentCity: '',
+      parentPassword: '',
       students: [{name: '', age: '', },
       ],
    }
@@ -65,8 +75,8 @@ function RegisterForm()
    }
 
    return (
-      <div className="register-form position-relative">
-         <div className="container justify-content-center d-flex align-items-center">
+      <div className="register-form pt-5 position-relative">
+         <div className="container pt-5 justify-content-center d-flex align-items-center">
             <Formik
                initialValues={initialValues}
                onSubmit={onSubmit}
@@ -162,12 +172,37 @@ function RegisterForm()
                               <Form.Control
                                  name="parentCity"
                                  type="text"
-                                 placeholder="Current city"
+                                 placeholder="Current City"
                                  value={values.parentCity}
                                  onChange={handleChange}
                                  isInvalid={!!errors.parentCity} />
                               <Form.Control.Feedback type='invalid'>
-                                 {errors.parentEmail}
+                                 {errors.parentCity}
+                              </Form.Control.Feedback>
+                           </Form.Group>
+                        </Row>
+                        <Row className='align-items-start mb-3'>
+                           <Form.Group
+                              as={Col}
+                              className="mb-3 position-relative"
+                              controlId='parentPassword'
+                           >
+                              <Form.Label>Create Password</Form.Label>
+                              <Form.Control
+                                 name="parentPassword"
+                                 type={showPassword ? "text" : "password"}
+                                 placeholder="Enter A Strong Password"
+                                 value={values.parentPassword}
+                                 onChange={handleChange}
+                                 isInvalid={!!errors.parentPassword} />
+                              <span
+                                 className='password-toggler position-absolute'
+                                 onClick={() => setShowPassword(!showPassword)}>
+                                 <FontAwesomeIcon
+                                    icon={showPassword ? faEyeSlash : faEye} />
+                              </span>
+                              <Form.Control.Feedback type='invalid'>
+                                 {errors.parentPassword}
                               </Form.Control.Feedback>
                            </Form.Group>
                         </Row>

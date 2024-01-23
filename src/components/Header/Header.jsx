@@ -1,51 +1,70 @@
 import {Container, Nav, Navbar} from "react-bootstrap";
-import {useRef} from "react";
+import {useEffect, useState} from "react";
 import './Header.css';
 import {Link, NavLink, useLocation} from "react-router-dom";
+import {faBars} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-function Header()
+export default function Header()
 {
    // Get the location pathname to control mainNav classes & styles
    const {pathname} = useLocation();
-   const navRef = useRef();
+   const [showNavbar, setShowNavbar] = useState(false);
+   const [screenSize, setScreenSize] = useState(window.innerWidth);
+   const [toggler, setToggler] = useState(false);
 
-   // Show Navbar while scrolling down 
+
+   useEffect(() =>
+   {
+      window.addEventListener('resize', () => setScreenSize(window.innerWidth))
+      return () => window.addEventListener('resize', setScreenSize(window.innerWidth))
+   }, [screenSize])
+
    const scrollHandler = () =>
    {
       window.addEventListener("scroll", () =>
       {
-         let scrollTop = document.documentElement.scrollTop;
-         if ((scrollTop !== 0 && navRef && pathname === "/") || pathname !== "/")
+         let scrollTop = window.scrollY;
+         if (scrollTop > 0)
          {
-            navRef.current.classList.add('bg-light', 'text-black', 'alt-nav-hover', 'main-nav-shadow');
+            setShowNavbar(true)
          }
          else
          {
-            navRef.current.classList.remove('bg-light');
-            navRef.current.classList.remove('text-black');
-            navRef.current.classList.remove('alt-nav-hover');
-            navRef.current.classList.remove('main-nav-shadow');
+            setShowNavbar(false)
          }
       })
    }
-   scrollHandler();
-
+   scrollHandler()
 
    return (
-      <Navbar id="mainNav"
-         className={`${pathname !== '/' ? "text-black alt-nav-hover main-nav-shadow" : null} fixed-top py-3`}
-         ref={navRef}
+      <Navbar
+         id="mainNav"
+         className={`
+         ${showNavbar || screenSize < 992 || pathname !== "/" ?
+               "bg-light text-black alt-nav-hover main-shadow" :
+               "bg-transparent nav-color"} fixed-top py-3`}
          expand="lg">
-         <Container className="px-4 px-lg-5">
+         <Container className={`${screenSize < 992 ? "bg-light" : null} px-4 px-lg-5`}>
             <Link to={'/'} className="navbar-brand">Logo</Link>
-            <Navbar.Toggle aria-controls="navbarScroll" />
-            <Navbar.Collapse id="navbarScroll">
+            <Navbar.Toggle
+               className={`${toggler ? "rotate-bars" : ""} border-0 position-relative rounded-0`}
+               aria-controls="basic-navbar-nav"
+               onClick={() => setToggler(!toggler)}>
+               <span></span>
+               <span></span>
+               <span></span>
+            </Navbar.Toggle>
+            <Navbar.Collapse
+               id="basic-navbar-nav"
+               className={`${screenSize < 992 ? "bg-light px-2 w-100" : null}`}
+            >
                <Nav
-                  className="ms-auto gap-4 my-2 my-lg-0 fw-bold mw-100"
+                  className={`${screenSize < 992 ? "text-black-50" : null} ms-auto gap-4 fw-bold py-4 mw-100`}
                >
-                  <NavLink to="/">Home</NavLink>
+                  <NavLink to="/">About</NavLink>
                   <NavLink to="#action2">Services</NavLink>
-                  <NavLink to="#action3">About</NavLink>
+                  <NavLink to="#action3">Portfolio</NavLink>
                   <NavLink to="#action4">Contact</NavLink>
                </Nav>
             </Navbar.Collapse>
@@ -53,5 +72,3 @@ function Header()
       </Navbar>
    )
 }
-
-export default Header;

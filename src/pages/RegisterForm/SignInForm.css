@@ -20,6 +20,19 @@
    min-height: 300px;
 }
 
+.sign-in-form .register-link {
+   transition: var(--mainTransition);
+   -webkit-transition: var(--mainTransition);
+   -moz-transition: var(--mainTransition);
+   -ms-transition: var(--mainTransition);
+   -o-transition: var(--mainTransition);
+}
+
+.sign-in-form .register-link:hover {
+   text-decoration: underline !important;
+   color: #777 !important;
+}
+
 .sign-in-form form .sign-in-btn {
    background-color: var(--orangeColor);
    border-color: var(--orangeColor);

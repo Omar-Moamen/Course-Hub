@@ -1,7 +1,3 @@
-.register-form {
-   top: 150px;
-}
-
 .register-form form {
    border-color: var(--orangeColor);
    box-shadow: var(--mainShadow);
@@ -100,6 +96,25 @@
    .register-form hr {
       margin-top: 10px;
    }
+}
+
+.register-form form .password-toggler {
+   width: 18px;
+   height: 24px;
+   top: 39px;
+   right: 45px;
+   color: #999;
+   cursor: pointer;
+   z-index: 1000;
+   transition: var(--mainTransition);
+   -webkit-transition: var(--mainTransition);
+   -moz-transition: var(--mainTransition);
+   -ms-transition: var(--mainTransition);
+   -o-transition: var(--mainTransition);
+}
+
+.register-form form .password-toggler:hover {
+   color: #777;
 }
 
 .register-form form .submit-btn {

@@ -13,7 +13,7 @@ const signInSchema = Yup.object().shape({
    signInPassword: Yup
       .string()
       .min(8, "Your password must be at least 8 character")
-      .required("Please enter you password"),
+      .required("Please enter your password"),
 })
 
 function SignInForm()
@@ -77,10 +77,12 @@ function SignInForm()
                         </Form.Group>
                      </Row>
                      <Row>
-                        <p
-                           className="text-black-50 text-center fs-6">
-                           already have an account?
-                        </p>
+                        <Col sm="12" className='d-flex justify-content-center'>
+                           <Link to={'register'}
+                              className="register-link text-black-50 text-decoration-none text-center py-3 fs-6">
+                              Don't have an account?
+                           </Link>
+                        </Col>
                         <Col md="6">
                            <Button
                               type="submit"
@@ -100,7 +102,7 @@ function SignInForm()
                )}
             </Formik>
          </Container>
-      </div>
+      </div >
    )
 }
 

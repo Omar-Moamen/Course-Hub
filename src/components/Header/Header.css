@@ -1,6 +1,6 @@
 #mainNav {
-   color: #ffffffb3;
    width: 100%;
+   min-height: 72px !important;
    font-weight: bold;
    transition: var(--mainTransition);
    -webkit-transition: var(--mainTransition);
@@ -9,7 +9,17 @@
    -o-transition: var(--mainTransition);
 }
 
-#mainNav.main-nav-shadow {
+@media(min-width: 992px) {
+   #mainNav {
+      height: 72px;
+   }
+}
+
+#mainNav.nav-color {
+   color: var(--whiteColor);
+}
+
+#mainNav.main-shadow {
    box-shadow: var(--mainShadow);
 }
 
@@ -30,7 +40,6 @@
    color: var(--orangeColor) !important;
 }
 
-
 #mainNav a {
    text-decoration: none;
    transition: none !important;
@@ -38,4 +47,70 @@
    -moz-transition: none !important;
    -ms-transition: none !important;
    -o-transition: none !important;
+}
+
+#mainNav a:hover {
+   transition: var(--mainTransition) !important;
+   -webkit-transition: var(--mainTransition) !important;
+   -moz-transition: var(--mainTransition) !important;
+   -ms-transition: var(--mainTransition) !important;
+   -o-transition: var(--mainTransition) !important;
+}
+
+#mainNav .navbar-toggler {
+   box-shadow: none;
+   width: 26px;
+   height: 14px;
+}
+
+#mainNav .navbar-toggler span {
+   width: 100%;
+   height: 2px;
+   background-color: black;
+   position: absolute;
+   left: 0;
+   z-index: 1000;
+   transition: all var(--mainTransition) ease;
+   -moz-transition: all var(--mainTransition) ease;
+   -ms-transition: all var(--mainTransition) ease;
+   -o-transition: all var(--mainTransition) ease;
+   -webkit-transition: all var(--mainTransition) ease;
+}
+
+#mainNav .navbar-toggler span:first-child {
+   top: 0;
+}
+
+#mainNav .navbar-toggler span:nth-child(2) {
+   top: 6px;
+}
+
+#mainNav .navbar-toggler span:last-child {
+   top: 12px
+}
+
+#mainNav .navbar-toggler.rotate-bars span:nth-child(2) {
+   opacity: 0;
+}
+
+#mainNav .navbar-toggler.rotate-bars span:first-child,
+#mainNav .navbar-toggler.rotate-bars span:last-child {
+   top: 6px;
+   background-color: var(--orangeColor);
+}
+
+#mainNav .navbar-toggler.rotate-bars span:first-child {
+   transform: rotate(45deg);
+   -webkit-transform: rotate(45deg);
+   -moz-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+   -o-transform: rotate(45deg);
+}
+
+#mainNav .navbar-toggler.rotate-bars span:last-child {
+   transform: rotate(-45deg);
+   -webkit-transform: rotate(-45deg);
+   -moz-transform: rotate(-45deg);
+   -ms-transform: rotate(-45deg);
+   -o-transform: rotate(-45deg);
 }
