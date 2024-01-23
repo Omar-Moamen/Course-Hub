@@ -40,6 +40,10 @@
    color: var(--orangeColor) !important;
 }
 
+#mainNav .navbar-nav {
+   width: fit-content;
+}
+
 #mainNav a {
    text-decoration: none;
    transition: none !important;
