@@ -29,8 +29,8 @@ function SignInForm()
    }
 
    return (
-      <div className="sign-in-form position-relative">
-         <Container className="justify-content-center d-flex align-items-center">
+      <div className="sign-in-form d-flex align-items-center">
+         <Container className="d-flex justify-content-center align-items-center">
             <Formik
                initialValues={initialValues}
                onSubmit={onSubmit}
@@ -39,7 +39,7 @@ function SignInForm()
                {({handleChange, handleSubmit, values, errors, touched}) =>
                (
                   <Form
-                     className="py-4 py-md-5 px-4 px-md-5 border-1 rounded-2"
+                     className="py-4 py-md-5 px-4 px-md-5 border-1 rounded-2 bg-white"
                      onSubmit={handleSubmit}>
                      <Row className="align-items-center mb-3">
                         <Form.Group

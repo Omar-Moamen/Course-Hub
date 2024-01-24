@@ -1,16 +1,54 @@
+.register-form {
+   padding-top: 105px;
+   min-height: 100vh;
+}
+
+.register-form::before {
+   content: '';
+   position: fixed;
+   width: 300%;
+   height: 100%;
+   top: 50%;
+   left: 50%;
+   background-color: var(--orangeColor);
+   border-radius: 50%;
+   transform: translateX(-50%) skew(0, -10deg);
+   z-index: -1;
+   animation: waving 2s ease-in-out infinite alternate;
+   -webkit-transform: translateX(-50%) skew(0, -10deg);
+   -moz-transform: translateX(-50%) skew(0, -10deg);
+   -ms-transform: translateX(-50%) skew(0, -10deg);
+   -o-transform: translateX(-50%) skew(0, -10deg);
+   -webkit-border-radius: 50%;
+   -moz-border-radius: 50%;
+   -ms-border-radius: 50%;
+   -o-border-radius: 50%;
+   -webkit-animation: waving 10s ease-in-out infinite alternate;
+}
+
+@media(min-width: 992px) {
+   .register-form .container {
+      padding-bottom: 35px;
+   }
+}
+
 .register-form form {
    border-color: var(--orangeColor);
    box-shadow: var(--mainShadow);
 }
 
-@media(max-width: 576px) {
-   .register-form form {
-      width: 100% !important;
+.register-form form h4 {
+   color: var(--orangeColor)
+}
+
+@media (min-width: 768px) {
+   .register-form form .row {
+      height: 90.5px !important;
    }
 }
 
-.register-form form h4 {
-   color: var(--orangeColor)
+.register-form form input {
+   height: 35px;
 }
 
 .register-form form input::placeholder {
@@ -19,8 +57,9 @@
    font-weight: 300;
 }
 
-.register-form>.container {
-   min-height: 300px;
+.register-form form .invalid-feedback,
+.register-form form .error-feedback {
+   font-size: 13px !important;
 }
 
 .register-form form .add-btn,
@@ -132,3 +171,24 @@
       width: 100% !important;
    }
 }
+
+/* Start keyframes */
+@keyframes waving {
+   from {
+      transform: translateX(-50%) skew(0, -10deg);
+      -webkit-transform: translateX(-50%) skew(0, -10deg);
+      -moz-transform: translateX(-50%) skew(0, -10deg);
+      -ms-transform: translateX(-50%) skew(0, -10deg);
+      -o-transform: translateX(-50%) skew(0, -10deg);
+   }
+
+   to {
+      transform: translateX(-30%) skew(10deg, 0);
+      -webkit-transform: translateX(-30%) skew(10deg, 0);
+      -moz-transform: translateX(-30%) skew(10deg, 0);
+      -ms-transform: translateX(-30%) skew(10deg, 0);
+      -o-transform: translateX(-30%) skew(10deg, 0);
+   }
+}
+
+/* End keyframes */

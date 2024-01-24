@@ -5,23 +5,24 @@ import {Link, NavLink, useLocation} from "react-router-dom";
 
 export default function Header()
 {
-   // Get the location pathname to control mainNav classes & styles
+
    const {pathname} = useLocation();
    const [showNavbar, setShowNavbar] = useState(false);
    const [screenSize, setScreenSize] = useState(window.innerWidth);
    const [toggler, setToggler] = useState(false);
 
+   // Funcs
+   const resizeHandler = () =>
+   {
+      setScreenSize(window.innerWidth);
+   }
 
+   // Effects
    useEffect(() =>
    {
-      window.addEventListener('resize', () => setScreenSize(window.innerWidth))
-   }, [screenSize])
-
-   const scrollHandler = () =>
-   {
-      window.addEventListener("scroll", () =>
+      const scrollHandler = () => 
       {
-         let scrollTop = window.scrollY;
+         let scrollTop = document.documentElement.scrollTop;
          if (scrollTop > 0)
          {
             setShowNavbar(true)
@@ -30,9 +31,18 @@ export default function Header()
          {
             setShowNavbar(false)
          }
-      })
-   }
-   scrollHandler()
+      }
+      window.addEventListener('scroll', scrollHandler);
+
+      return () => window.removeEventListener('scroll', scrollHandler);
+   }, [])
+
+   useEffect(() =>
+   {
+      window.addEventListener('resize', resizeHandler);
+
+      return () => window.removeEventListener('resize', resizeHandler);
+   }, [screenSize])
 
    return (
       <Navbar

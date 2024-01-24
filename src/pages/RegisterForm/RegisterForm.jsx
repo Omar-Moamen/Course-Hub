@@ -1,5 +1,5 @@
 import {Fragment, useState} from 'react';
-import {Button, Col, Form, Row} from 'react-bootstrap';
+import {Button, Col, Container, Form, Row} from 'react-bootstrap';
 import './RegisterForm.css';
 import {Formik, Field, FieldArray, ErrorMessage} from "formik";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -75,8 +75,8 @@ function RegisterForm()
    }
 
    return (
-      <div className="register-form pt-5 position-relative">
-         <div className="container pt-5 justify-content-center d-flex align-items-center">
+      <div className="register-form d-flex align-items-center">
+         <Container className="d-flex justify-content-center align-items-center">
             <Formik
                initialValues={initialValues}
                onSubmit={onSubmit}
@@ -84,15 +84,15 @@ function RegisterForm()
             >
                {({handleSubmit, handleChange, values, errors, touched}) => (
                   <Form
-                     className="w-75 px-4 border-1 rounded-2"
+                     className="px-4 border-1 rounded-2 bg-white"
                      onSubmit={handleSubmit}>
                      <div className='parent-section'>
-                        <h4 className="mt-4 mb-4">Parent Info:</h4>
-                        <Row className="align-items-start">
+                        <h4 className="mb-2 mt-3">Parent Info:</h4>
+                        <Row className="align-items-start mb-lg-3">
                            <Form.Group
                               as={Col}
-                              md="6"
-                              className="mb-3"
+                              md="3"
+                              className="mb-3 mb-lg-0"
                               controlId="parentFirstName">
                               <Form.Label>First Name</Form.Label>
                               <Form.Control
@@ -110,8 +110,8 @@ function RegisterForm()
                            </Form.Group>
                            <Form.Group
                               as={Col}
-                              md="6"
-                              className="mb-3"
+                              md="3"
+                              className="mb-3 mb-lg-0"
                               controlId="parentLastName">
                               <Form.Label>Last Name</Form.Label>
                               <Form.Control
@@ -126,12 +126,29 @@ function RegisterForm()
                                  {errors.parentLastName}
                               </Form.Control.Feedback>
                            </Form.Group>
-                        </Row>
-                        <Row className='align-items-start'>
                            <Form.Group
                               as={Col}
                               md="6"
-                              className="mb-3"
+                              className="mb-3 mb-lg-0"
+                              controlId='parentEmail'>
+                              <Form.Label>Parent E-mail</Form.Label>
+                              <Form.Control
+                                 name="parentEmail"
+                                 type="email"
+                                 placeholder="me@example.com"
+                                 value={values.parentEmail}
+                                 onChange={handleChange}
+                                 isInvalid={!!errors.parentEmail} />
+                              <Form.Control.Feedback type='invalid'>
+                                 {errors.parentEmail}
+                              </Form.Control.Feedback>
+                           </Form.Group>
+                        </Row>
+                        <Row className='align-items-start mb-lg-3'>
+                           <Form.Group
+                              as={Col}
+                              md="6"
+                              className='mb-3 mb-lg-0'
                               controlId='parentPhone'>
                               <Form.Label>Phone Number</Form.Label>
                               <Form.Control
@@ -148,25 +165,7 @@ function RegisterForm()
                            <Form.Group
                               as={Col}
                               md="6"
-                              className="mb-3"
-                              controlId='parentEmail'>
-                              <Form.Label>Parent E-mail</Form.Label>
-                              <Form.Control
-                                 name="parentEmail"
-                                 type="email"
-                                 placeholder="me@example.com"
-                                 value={values.parentEmail}
-                                 onChange={handleChange}
-                                 isInvalid={!!errors.parentEmail} />
-                              <Form.Control.Feedback type='invalid'>
-                                 {errors.parentEmail}
-                              </Form.Control.Feedback>
-                           </Form.Group>
-                        </Row>
-                        <Row className='align-items-start mb-3'>
-                           <Form.Group
-                              as={Col}
-                              className="mb-3"
+                              className='mb-3 mb-lg-0'
                               controlId='parentCity'>
                               <Form.Label>City</Form.Label>
                               <Form.Control
@@ -184,7 +183,7 @@ function RegisterForm()
                         <Row className='align-items-start mb-3'>
                            <Form.Group
                               as={Col}
-                              className="mb-3 position-relative"
+                              className="position-relative"
                               controlId='parentPassword'
                            >
                               <Form.Label>Create Password</Form.Label>
@@ -208,7 +207,7 @@ function RegisterForm()
                         </Row>
                      </div>
                      <div className='student-section'>
-                        <h4 className="mb-4">Student Info:</h4>
+                        <h4 className="mb-2">Student Info:</h4>
                         <FieldArray name='students'>
                            {
                               // fieldArrayProps is a built in props in formik FieldArray
@@ -309,7 +308,7 @@ function RegisterForm()
                )
                }
             </Formik>
-         </div>
+         </Container>
       </div>
    )
 }

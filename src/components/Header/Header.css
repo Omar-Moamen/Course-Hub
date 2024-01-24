@@ -1,6 +1,6 @@
 #mainNav {
    width: 100%;
-   min-height: 72px !important;
+   height: 72px !important;
    font-weight: bold;
    transition: var(--mainTransition);
    -webkit-transition: var(--mainTransition);
