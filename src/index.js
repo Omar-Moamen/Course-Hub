@@ -8,6 +8,8 @@ import RootLayout from './pages/RootLayout/RootLayout';
 import RegisterForm from './pages/RegisterForm/RegisterForm';
 import Landing from './pages/Landing/Landing';
 import SignInForm from './pages/RegisterForm/SignInForm';
+import {Provider} from 'react-redux';
+import store from './store/store';
 
 const router = createBrowserRouter([
   {
@@ -24,7 +26,7 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <RouterProvider router={router}>
-    <App />
-  </RouterProvider>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

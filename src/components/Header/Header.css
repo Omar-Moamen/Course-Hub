@@ -19,8 +19,8 @@
    color: var(--whiteColor);
 }
 
-#mainNav.main-shadow {
-   box-shadow: var(--mainShadow);
+.main-shadow {
+   box-shadow: var(--mainShadow) !important;
 }
 
 #mainNav .navbar-brand {

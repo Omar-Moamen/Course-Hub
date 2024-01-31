@@ -37,6 +37,12 @@
    box-shadow: var(--mainShadow);
 }
 
+@media (min-width: 992px) {
+   .register-form form {
+      width: 75%;
+   }
+}
+
 .register-form form h4 {
    color: var(--orangeColor)
 }
@@ -90,7 +96,7 @@
 
 .register-form form .remove-btn {
    background-color: transparent;
-
+   justify-self: flex-end;
 }
 
 .register-form form .remove-btn svg {
@@ -140,9 +146,10 @@
 .register-form form .password-toggler {
    width: 18px;
    height: 24px;
-   top: 39px;
+   font-size: 14px;
+   top: 40px;
    right: 45px;
-   color: #999;
+   color: #aaa;
    cursor: pointer;
    z-index: 1000;
    transition: var(--mainTransition);
@@ -153,7 +160,7 @@
 }
 
 .register-form form .password-toggler:hover {
-   color: #777;
+   color: #999;
 }
 
 .register-form form .submit-btn {
@@ -172,7 +179,7 @@
    }
 }
 
-/* Start keyframes */
+/* keyframes */
 @keyframes waving {
    from {
       transform: translateX(-50%) skew(0, -10deg);
@@ -190,5 +197,3 @@
       -o-transform: translateX(-30%) skew(10deg, 0);
    }
 }
-
-/* End keyframes */

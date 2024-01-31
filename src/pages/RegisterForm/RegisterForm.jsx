@@ -88,7 +88,7 @@ function RegisterForm()
                      onSubmit={handleSubmit}>
                      <div className='parent-section'>
                         <h4 className="mb-2 mt-3">Parent Info:</h4>
-                        <Row className="align-items-start mb-lg-3">
+                        <Row className="align-items-start mb-md-3">
                            <Form.Group
                               as={Col}
                               md="3"
@@ -144,7 +144,7 @@ function RegisterForm()
                               </Form.Control.Feedback>
                            </Form.Group>
                         </Row>
-                        <Row className='align-items-start mb-lg-3'>
+                        <Row className='align-items-start mb-md-3'>
                            <Form.Group
                               as={Col}
                               md="6"
@@ -190,7 +190,7 @@ function RegisterForm()
                               <Form.Control
                                  name="parentPassword"
                                  type={showPassword ? "text" : "password"}
-                                 placeholder="Enter A Strong Password"
+                                 placeholder="Enter Strong Password"
                                  value={values.parentPassword}
                                  onChange={handleChange}
                                  isInvalid={!!errors.parentPassword} />
@@ -208,6 +208,7 @@ function RegisterForm()
                      </div>
                      <div className='student-section'>
                         <h4 className="mb-2">Student Info:</h4>
+                        {/* FieldArray to make input fields dynamic */}
                         <FieldArray name='students'>
                            {
                               // fieldArrayProps is a built in props in formik FieldArray
@@ -263,26 +264,28 @@ function RegisterForm()
                                                    style={{fontSize: "14px", marginTop: "4px"}}
                                                 />
                                              </Form.Group>
-                                             <Col md="2" className='d-flex justify-content-end'>
+                                             <Col
+                                                md="2"
+                                                className='d-grid h-100 justify-content-end'>
                                                 {
-                                                   index === 0 && students.length < 5 ?
+                                                   index > 0 &&
+                                                   <Button
+                                                      type='button'
+                                                      className='remove-btn text-center d-flex align-items-center justify-content-center align-self-start'
+                                                      onClick={() => remove(index)}>
+                                                      <FontAwesomeIcon icon={faTrashCan} />
+                                                   </Button>
+                                                }
+                                                {
+                                                   index === (students.length - 1) && students.length < 5 ?
                                                       <Button
                                                          type='button'
-                                                         className='add-btn text-center fw-bold d-flex align-items-center justify-content-center'
+                                                         className='add-btn text-center fw-bold d-flex align-items-center justify-content-center align-self-end'
                                                          disabled={disable}
                                                          onClick={() => push({name: '', age: ''})}>
                                                          Add
                                                       </Button> :
                                                       setDisable(false)
-                                                }
-                                                {
-                                                   index > 0 &&
-                                                   <Button
-                                                      type='button'
-                                                      className='remove-btn text-center d-flex align-items-center justify-content-center'
-                                                      onClick={() => remove(index)}>
-                                                      <FontAwesomeIcon icon={faTrashCan} />
-                                                   </Button>
                                                 }
                                              </Col>
                                           </Row>

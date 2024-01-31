@@ -64,20 +64,22 @@ export default function Header()
                <span></span>
                <span></span>
             </Navbar.Toggle>
-            <Navbar.Collapse
-               id="basic-navbar-nav"
-               className={`${screenSize < 992 ? "bg-light" : null}`}
-            >
+         </Container>
+         <Navbar.Collapse
+            id="basic-navbar-nav"
+            className={`${screenSize < 992 ? "bg-light main-shadow" : null}`}
+         >
+            <Container>
                <Nav
-                  className={`${screenSize < 992 ? "text-black-50" : null} me-auto me-lg-0 ms-lg-auto gap-4 fw-bold py-4`}
+                  className={`${screenSize < 992 ? "text-black-50" : null} px-3 me-auto me-lg-0 ms-lg-auto gap-4 fw-bold py-4`}
                >
                   <NavLink to="/">About</NavLink>
                   <NavLink to="#action2">Services</NavLink>
                   <NavLink to="#action3">Portfolio</NavLink>
                   <NavLink to="#action4">Contact</NavLink>
                </Nav>
-            </Navbar.Collapse>
-         </Container>
+            </Container>
+         </Navbar.Collapse>
       </Navbar>
    )
 }
