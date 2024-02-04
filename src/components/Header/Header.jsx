@@ -11,7 +11,7 @@ export default function Header()
    const [screenSize, setScreenSize] = useState(window.innerWidth);
    const [toggler, setToggler] = useState(false);
 
-   // Funcs
+   // Functions
    const resizeHandler = () =>
    {
       setScreenSize(window.innerWidth);

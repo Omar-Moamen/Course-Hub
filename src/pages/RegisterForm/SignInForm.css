@@ -1,5 +1,5 @@
 .sign-in-form {
-   height: calc(100vh - 150px);
+   height: calc(100vh - 72px);
 }
 
 .sign-in-form::before {
@@ -25,9 +25,17 @@
    -webkit-animation: waving 10s ease-in-out infinite alternate;
 }
 
+.sign-in-form>.container {
+   min-height: 300px;
+}
+
 .sign-in-form form {
    border-color: var(--orangeColor);
    box-shadow: var(--mainShadow);
+}
+
+.sign-in-form form .col {
+   height: 93px
 }
 
 .sign-in-form form h4 {
@@ -36,11 +44,35 @@
 
 .sign-in-form form input::placeholder {
    opacity: 0.6;
+   font-size: 14px;
    font-weight: 300;
 }
 
-.sign-in-form>.container {
-   min-height: 300px;
+.sign-in-form form .password-toggler {
+   font-size: 14px;
+   top: calc(50% + 4px);
+   right: 43px;
+   color: #aaa;
+   cursor: pointer;
+   z-index: 1000;
+   transform: translateY(-50%);
+   transition: var(--mainTransition);
+   -webkit-transform: translateY(-50%);
+   -moz-transform: translateY(-50%);
+   -ms-transform: translateY(-50%);
+   -o-transform: translateY(-50%);
+   -webkit-transition: var(--mainTransition);
+   -moz-transition: var(--mainTransition);
+   -ms-transition: var(--mainTransition);
+   -o-transition: var(--mainTransition);
+}
+
+.sign-in-form form .password-toggler:hover {
+   color: #999;
+}
+
+.sign-in-form form .invalid-feedback {
+   font-size: 13px;
 }
 
 .sign-in-form .register-link {

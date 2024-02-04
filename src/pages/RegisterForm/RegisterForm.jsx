@@ -5,8 +5,11 @@ import {Formik, Field, FieldArray, ErrorMessage} from "formik";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import * as Yup from 'yup';
 import {faEye, faEyeSlash, faTrashCan} from '@fortawesome/free-regular-svg-icons';
+import {useDispatch} from 'react-redux';
+import {addUser} from '../../store/userSlice';
+import {useNavigate} from 'react-router-dom';
 
-
+// Start Register validation schema
 const registerSchema = Yup.object().shape({
    parentFirstName: Yup
       .string()
@@ -15,9 +18,14 @@ const registerSchema = Yup.object().shape({
       .required("First name is required"),
    parentLastName: Yup
       .string()
-      .min(2)
+      .min(2, "Last name should be at least 2 characters")
       .trim("First name shouldn't have spaces")
       .required("Last name is required"),
+   fatherName: Yup
+      .string()
+      .min(2, "Father name should be at least 2 characters")
+      .trim("First name shouldn't have spaces")
+      .required("Father name is required"),
    parentPhone: Yup
       .number()
       .required("Phone number is required"),
@@ -44,12 +52,12 @@ const registerSchema = Yup.object().shape({
                .string()
                .trim("First name shouldn't have spaces")
                .required("Student name is required"),
-            age: Yup
-               .number()
-               .max(18, "18 is the maximum permitted age")
-               .required("Age is a required")
+            birthDate: Yup
+               .date()
+               .required("Birth date is required")
          })).min(1).max(4)
 })
+// End Register validation schema
 
 
 // Start Component
@@ -58,29 +66,51 @@ function RegisterForm()
    const [disable, setDisable] = useState(false)
    const [showPassword, setShowPassword] = useState(false);
 
+   const dispatch = useDispatch();
+   const navigate = useNavigate();
+
    const initialValues = {
       parentFirstName: '',
       parentLastName: '',
+      fatherName: '',
       parentPhone: '',
       parentEmail: '',
       parentCity: '',
       parentPassword: '',
-      students: [{name: '', age: '', },
+      students: [{name: '', birthDate: '', },
       ],
    }
 
+   const enableReinitialize = true;
+
    const onSubmit = (values) =>
    {
-      console.log(values);
+      let userCredentials = {
+         parentFirstName: values.parentFirstName,
+         parentLastName: values.parentLastName,
+         fatherName: values.fatherName,
+         parentPhone: values.parentPhone,
+         parentEmail: values.parentEmail,
+         parentCity: values.parentCity,
+         parentPassword: values.parentPassword,
+         students: values.students,
+      }
+
+      dispatch(addUser(userCredentials))
+         .unwrap()
+         .then(navigate('/'))
    }
 
    return (
-      <div className="register-form d-flex align-items-center">
+      <div className="register-form d-flex align-items-center position-relative">
+         <div className='dots position-absolute dots-up d-none d-xl-block' />
+         <div className='dots position-absolute dots-down d-none d-xl-block' />
          <Container className="d-flex justify-content-center align-items-center">
             <Formik
                initialValues={initialValues}
                onSubmit={onSubmit}
                validationSchema={registerSchema}
+               enableReinitialize={enableReinitialize}
             >
                {({handleSubmit, handleChange, values, errors, touched}) => (
                   <Form
@@ -90,11 +120,11 @@ function RegisterForm()
                         <h4 className="mb-2 mt-3">Parent Info:</h4>
                         <Row className="align-items-start mb-md-3">
                            <Form.Group
+                              className='mb-1 mb-md-0'
                               as={Col}
                               md="3"
-                              className="mb-3 mb-lg-0"
                               controlId="parentFirstName">
-                              <Form.Label>First Name</Form.Label>
+                              <Form.Label>First name</Form.Label>
                               <Form.Control
                                  className={`form-control`}
                                  name="parentFirstName"
@@ -109,11 +139,11 @@ function RegisterForm()
                               </Form.Control.Feedback>
                            </Form.Group>
                            <Form.Group
+                              className='mb-1 mb-md-0'
                               as={Col}
                               md="3"
-                              className="mb-3 mb-lg-0"
                               controlId="parentLastName">
-                              <Form.Label>Last Name</Form.Label>
+                              <Form.Label>Last name</Form.Label>
                               <Form.Control
                                  name="parentLastName"
                                  type="text"
@@ -127,11 +157,11 @@ function RegisterForm()
                               </Form.Control.Feedback>
                            </Form.Group>
                            <Form.Group
+                              className='mb-1 mb-md-0'
                               as={Col}
                               md="6"
-                              className="mb-3 mb-lg-0"
                               controlId='parentEmail'>
-                              <Form.Label>Parent E-mail</Form.Label>
+                              <Form.Label>Parent e-mail</Form.Label>
                               <Form.Control
                                  name="parentEmail"
                                  type="email"
@@ -146,11 +176,28 @@ function RegisterForm()
                         </Row>
                         <Row className='align-items-start mb-md-3'>
                            <Form.Group
+                              className='mb-1 mb-md-0'
                               as={Col}
                               md="6"
-                              className='mb-3 mb-lg-0'
+                              controlId='fatherName'>
+                              <Form.Label>Father name</Form.Label>
+                              <Form.Control
+                                 name="fatherName"
+                                 type="text"
+                                 placeholder="Father Name"
+                                 value={values.fatherName}
+                                 onChange={handleChange}
+                                 isInvalid={!!errors.fatherName} />
+                              <Form.Control.Feedback type='invalid'>
+                                 {errors.fatherName}
+                              </Form.Control.Feedback>
+                           </Form.Group>
+                           <Form.Group
+                              className='mb-1 mb-md-0'
+                              as={Col}
+                              md="6"
                               controlId='parentPhone'>
-                              <Form.Label>Phone Number</Form.Label>
+                              <Form.Label>Phone number</Form.Label>
                               <Form.Control
                                  name="parentPhone"
                                  type="text"
@@ -162,10 +209,12 @@ function RegisterForm()
                                  {errors.parentPhone}
                               </Form.Control.Feedback>
                            </Form.Group>
+                        </Row>
+                        <Row className='align-items-start mb-2 mb-md-3'>
                            <Form.Group
+                              className='mb-1 mb-md-0'
                               as={Col}
                               md="6"
-                              className='mb-3 mb-lg-0'
                               controlId='parentCity'>
                               <Form.Label>City</Form.Label>
                               <Form.Control
@@ -179,14 +228,13 @@ function RegisterForm()
                                  {errors.parentCity}
                               </Form.Control.Feedback>
                            </Form.Group>
-                        </Row>
-                        <Row className='align-items-start mb-3'>
                            <Form.Group
+                              className='position-relative mb-1 mb-md-0'
                               as={Col}
-                              className="position-relative"
+                              md="6"
                               controlId='parentPassword'
                            >
-                              <Form.Label>Create Password</Form.Label>
+                              <Form.Label>Create password</Form.Label>
                               <Form.Control
                                  name="parentPassword"
                                  type={showPassword ? "text" : "password"}
@@ -208,7 +256,6 @@ function RegisterForm()
                      </div>
                      <div className='student-section'>
                         <h4 className="mb-2">Student Info:</h4>
-                        {/* FieldArray to make input fields dynamic */}
                         <FieldArray name='students'>
                            {
                               // fieldArrayProps is a built in props in formik FieldArray
@@ -219,13 +266,17 @@ function RegisterForm()
                                  return (
                                     students.map((_, index) => (
                                        <Fragment key={index}>
-                                          <Row className="align-items-center align-items-md-start">
+                                          <Row className="
+                                          align-items-center 
+                                          align-items-md-start
+                                          mb-md-3">
                                              <Form.Group
+                                                className='mb-1 mb-md-0'
                                                 as={Col}
                                                 md="6"
-                                                className="mb-3">
+                                             >
                                                 <Form.Label htmlFor={`student${index}Name`}>
-                                                   Student {index > 0 ? `(${index + 1})` : null} First Name
+                                                   Student {index > 0 ? `(${index + 1})` : null} First name
                                                 </Form.Label>
                                                 <Field
                                                    className={`form-control`}
@@ -239,39 +290,55 @@ function RegisterForm()
                                                    className='error-feedback text-danger'
                                                    name={`students[${index}].name`}
                                                    id={`student${index}Name`}
-                                                   style={{fontSize: "14px", marginTop: "4px"}}
+                                                   style={{
+                                                      fontSize: "14px",
+                                                      marginTop: "4px"
+                                                   }}
                                                 />
                                              </Form.Group>
                                              <Form.Group
                                                 as={Col}
                                                 md="4"
-                                                className="mb-3"
-                                                controlId={`student${index}Age`}>
+                                                controlId={`student${index}BirthDate`}>
                                                 <Form.Label>
-                                                   Student {index > 0 ? `(${index + 1})` : null} Age
+                                                   Student {index > 0 ? `(${index + 1})` : null} Birth date
                                                 </Form.Label>
                                                 <Field
                                                    className={`form-control`}
-                                                   id={`student${index}Age`}
-                                                   type="number"
-                                                   name={`students[${index}].age`}
+                                                   id={`student${index}BirthDate`}
+                                                   type="date"
+                                                   name={`students[${index}].birthDate`}
                                                    placeholder="Student Age" />
                                                 <ErrorMessage
                                                    component="div"
                                                    className='error-feedback text-danger'
-                                                   name={`students[${index}].age`}
-                                                   id={`student${index}Age`}
-                                                   style={{fontSize: "14px", marginTop: "4px"}}
+                                                   name={`students[${index}].birthDate`}
+                                                   id={`student${index}BirthDate`}
+                                                   style={{
+                                                      fontSize: "14px",
+                                                      marginTop: "4px",
+                                                   }}
                                                 />
                                              </Form.Group>
                                              <Col
                                                 md="2"
-                                                className='d-grid h-100 justify-content-end'>
+                                                className="
+                                                d-grid 
+                                                h-100 
+                                                justify-content-md-end">
                                                 {
                                                    index > 0 &&
                                                    <Button
                                                       type='button'
-                                                      className='remove-btn text-center d-flex align-items-center justify-content-center align-self-start'
+                                                      className="
+                                                         remove-btn
+                                                         text-center 
+                                                         d-flex 
+                                                         align-items-center 
+                                                         justify-content-center 
+                                                         align-self-start
+                                                         mt-2 mt-md-0
+                                                         mb-2 mb-md-0"
                                                       onClick={() => remove(index)}>
                                                       <FontAwesomeIcon icon={faTrashCan} />
                                                    </Button>
@@ -280,9 +347,19 @@ function RegisterForm()
                                                    index === (students.length - 1) && students.length < 5 ?
                                                       <Button
                                                          type='button'
-                                                         className='add-btn text-center fw-bold d-flex align-items-center justify-content-center align-self-end'
+                                                         className="
+                                                            add-btn
+                                                            text-center
+                                                            fw-bold
+                                                            d-flex
+                                                            align-items-center 
+                                                            justify-content-center 
+                                                            align-self-end
+                                                            mt-2 mt-md-0"
                                                          disabled={disable}
-                                                         onClick={() => push({name: '', age: ''})}>
+                                                         onClick={
+                                                            () => push({name: '', age: ''})
+                                                         }>
                                                          Add
                                                       </Button> :
                                                       setDisable(false)
@@ -291,7 +368,11 @@ function RegisterForm()
                                           </Row>
                                           {
                                              index < (students.length - 1) &&
-                                             <hr className='mt-3 mt-md-1 mb-4 mb-md-3 mx-auto w-100' />
+                                             <hr className="
+                                             mt-3 mt-md-1 
+                                             mb-4 mb-md-3 
+                                             mx-auto
+                                             w-100" />
                                           }
                                        </Fragment>
                                     ))

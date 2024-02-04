@@ -1,6 +1,6 @@
 .register-form {
-   padding-top: 105px;
-   min-height: 100vh;
+   padding-top: 140px;
+   min-height: calc(100vh - 72px);
 }
 
 .register-form::before {
@@ -26,10 +26,26 @@
    -webkit-animation: waving 10s ease-in-out infinite alternate;
 }
 
-@media(min-width: 992px) {
-   .register-form .container {
-      padding-bottom: 35px;
-   }
+.register-form .dots {
+   background-image: url("../../assets/img/dots.png");
+   width: 420px;
+   height: 384px;
+   z-index: -2;
+   background-repeat: space;
+}
+
+.dots-up {
+   top: 110px;
+   right: 50px;
+}
+
+.dots-down {
+   top: 380px;
+   left: 50px;
+}
+
+.register-form .container {
+   padding-bottom: 17px;
 }
 
 .register-form form {
@@ -49,12 +65,14 @@
 
 @media (min-width: 768px) {
    .register-form form .row {
-      height: 90.5px !important;
+      height: 93px !important;
    }
 }
 
-.register-form form input {
-   height: 35px;
+.register-form form .col-md-3,
+.register-form form .col-md-4,
+.register-form form .col-md-6 {
+   height: 93px !important;
 }
 
 .register-form form input::placeholder {
@@ -66,6 +84,7 @@
 .register-form form .invalid-feedback,
 .register-form form .error-feedback {
    font-size: 13px !important;
+   margin-bottom: 4px;
 }
 
 .register-form form .add-btn,
@@ -95,6 +114,8 @@
 }
 
 .register-form form .remove-btn {
+   width: 22px;
+   height: 25px;
    background-color: transparent;
    justify-self: flex-end;
 }
@@ -117,19 +138,12 @@
    color: white;
 }
 
-@media(max-width: 576px) {
+@media(max-width: 768px) {
 
    .register-form form .add-btn,
    .register-form form .remove-btn {
       width: 100% !important;
-      height: 30px;
-   }
-}
-
-@media(min-width: 768px) {
-   .register-form form .remove-btn {
-      width: 22px;
-      height: 25px;
+      height: 30px !important;
    }
 }
 
@@ -144,15 +158,18 @@
 }
 
 .register-form form .password-toggler {
-   width: 18px;
-   height: 24px;
    font-size: 14px;
-   top: 40px;
-   right: 45px;
+   top: calc(50% + 4px);
+   right: 43px;
    color: #aaa;
    cursor: pointer;
    z-index: 1000;
+   transform: translateY(-50%);
    transition: var(--mainTransition);
+   -webkit-transform: translateY(-50%);
+   -moz-transform: translateY(-50%);
+   -ms-transform: translateY(-50%);
+   -o-transform: translateY(-50%);
    -webkit-transition: var(--mainTransition);
    -moz-transition: var(--mainTransition);
    -ms-transition: var(--mainTransition);

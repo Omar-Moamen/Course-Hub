@@ -9,12 +9,6 @@
    -o-transition: var(--mainTransition);
 }
 
-@media(min-width: 992px) {
-   #mainNav {
-      height: 72px;
-   }
-}
-
 #mainNav.nav-color {
    color: var(--whiteColor);
 }
