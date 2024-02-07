@@ -1,8 +1,8 @@
-.sign-in-form {
+.login-in-form {
    height: calc(100vh - 72px);
 }
 
-.sign-in-form::before {
+.login-in-form::before {
    content: '';
    position: fixed;
    width: 300%;
@@ -25,30 +25,36 @@
    -webkit-animation: waving 10s ease-in-out infinite alternate;
 }
 
-.sign-in-form>.container {
+.login-in-form>.container {
    min-height: 300px;
 }
 
-.sign-in-form form {
+.login-in-form form {
    border-color: var(--orangeColor);
    box-shadow: var(--mainShadow);
 }
 
-.sign-in-form form .col {
-   height: 93px
+@media(min-width: 768px) {
+   .login-in-form form {
+      min-width: 480px;
+   }
 }
 
-.sign-in-form form h4 {
+.login-in-form form .col {
+   max-height: 93px
+}
+
+.login-in-form form h4 {
    color: var(--orangeColor)
 }
 
-.sign-in-form form input::placeholder {
+.login-in-form form input::placeholder {
    opacity: 0.6;
    font-size: 14px;
    font-weight: 300;
 }
 
-.sign-in-form form .password-toggler {
+.login-in-form form .password-toggler {
    font-size: 14px;
    top: calc(50% + 4px);
    right: 43px;
@@ -56,26 +62,28 @@
    cursor: pointer;
    z-index: 1000;
    transform: translateY(-50%);
-   transition: var(--mainTransition);
+   transition: color var(--mainTransition);
    -webkit-transform: translateY(-50%);
    -moz-transform: translateY(-50%);
    -ms-transform: translateY(-50%);
    -o-transform: translateY(-50%);
-   -webkit-transition: var(--mainTransition);
-   -moz-transition: var(--mainTransition);
-   -ms-transition: var(--mainTransition);
-   -o-transition: var(--mainTransition);
+   -webkit-transition: color var(--mainTransition);
+   -moz-transition: color var(--mainTransition);
+   -ms-transition: color var(--mainTransition);
+   -o-transition: color var(--mainTransition);
 }
 
-.sign-in-form form .password-toggler:hover {
+.login-in-form form .password-toggler:hover {
    color: #999;
 }
 
-.sign-in-form form .invalid-feedback {
+.login-in-form form .invalid-feedback {
    font-size: 13px;
 }
 
-.sign-in-form .register-link {
+.login-in-form .reset-password {
+   font-size: 12px !important;
+   cursor: pointer;
    transition: var(--mainTransition);
    -webkit-transition: var(--mainTransition);
    -moz-transition: var(--mainTransition);
@@ -83,17 +91,16 @@
    -o-transition: var(--mainTransition);
 }
 
-.sign-in-form .register-link:hover {
-   text-decoration: underline !important;
+.login-in-form .reset-password:hover {
    color: #777 !important;
 }
 
-.sign-in-form form .sign-in-btn {
+.login-in-form form .login-in-btn {
    background-color: var(--orangeColor);
    border-color: var(--orangeColor);
 }
 
-.sign-in-form form .sign-in-btn:hover {
+.login-in-form form .login-in-btn:hover {
    background-color: var(--orangeHover);
    border-color: var(--orangeHover);
 }

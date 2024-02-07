@@ -7,9 +7,10 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import RootLayout from './pages/RootLayout/RootLayout';
 import RegisterForm from './pages/RegisterForm/RegisterForm';
 import Landing from './pages/Landing/Landing';
-import SignInForm from './pages/RegisterForm/SignInForm';
+import LoginForm from './pages/RegisterForm/LoginForm';
 import {Provider} from 'react-redux';
 import store from './store/store';
+import {CookiesProvider} from 'react-cookie';
 
 const router = createBrowserRouter([
   {
@@ -17,8 +18,8 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {index: true, element: <Landing />},
-      {path: 'signIn', element: <SignInForm />},
-      {path: 'signIn/register', element: <RegisterForm />}
+      {path: 'login', element: <LoginForm />},
+      {path: 'login/register', element: <RegisterForm />}
     ],
   },
 
@@ -27,6 +28,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <RouterProvider router={router} />
+    <CookiesProvider defaultSetOptions={{path: '/'}}>
+      <RouterProvider router={router} />
+    </CookiesProvider>
   </Provider>
 );

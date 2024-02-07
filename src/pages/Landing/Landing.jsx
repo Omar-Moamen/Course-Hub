@@ -16,7 +16,7 @@ function Landing()
                   <div className='col-lg-8 align-self-sm-start align-self-baseline'>
                      <p className='text-white-50 fs-lg-5 mt-3'>Something Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis,
                         aliquid iure atque magnam delectus ipsa explicabo incidunt recusandae voluptatibus, rerum, hic aliquam</p>
-                     <Link to='signIn' className='btn btn-primary border-0 text-white rounded-pill text-uppercase fw-semibold mt-3' href="#/">Find out more</Link>
+                     <Link to='login' className='btn btn-primary border-0 text-white rounded-pill text-uppercase fw-semibold mt-3' href="#/">Find out more</Link>
                   </div>
                </div>
             </Container>

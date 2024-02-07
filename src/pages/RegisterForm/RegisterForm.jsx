@@ -98,7 +98,7 @@ function RegisterForm()
 
       dispatch(addUser(userCredentials))
          .unwrap()
-         .then(navigate('/'))
+         .then(navigate('/login'))
    }
 
    return (
