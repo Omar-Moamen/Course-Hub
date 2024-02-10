@@ -4,12 +4,12 @@ import {Formik} from 'formik';
 import {Container, Form, Row, Col, Button} from 'react-bootstrap';
 import * as Yup from 'yup';
 import {useDispatch} from 'react-redux';
-import {userLogin} from '../../store/userSlice';
+import {forgetPassword} from '../../store/userSlice';
+import {userLogin} from '../../store/authSlice';
 import {useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-regular-svg-icons';
 import {Modal} from 'react-bootstrap';
-import {useCookies} from 'react-cookie';
 
 // Start Sign in validation schema
 const signInSchema = Yup.object().shape({
@@ -25,11 +25,8 @@ const signInSchema = Yup.object().shape({
 // End Sign in validation schema
 
 // Start Component
-function SignInForm()
+function LoginForm()
 {
-   // Cookie Hook
-   const [cookie, setCookie, removeCookie] = useCookies();
-
    const [showPassword, setShowPassword] = useState(false);
    const [showModal, setShowModal] = useState(false);
 
@@ -40,14 +37,15 @@ function SignInForm()
    const initialValues = {
       signInEmail: '',
       signInPassword: '',
-      resetPassword: '',
+      identifier: '',
    }
 
    const enableReinitialize = true;
 
    const sendResetPassword = (values) =>
    {
-      console.log(values)
+      let identifier = values.identifier
+      dispatch(forgetPassword(identifier))
       setShowModal(false);
    }
 
@@ -65,6 +63,7 @@ function SignInForm()
 
    return (
       <>
+         {/* Start reset password Modal */}
          <Modal
             show={showModal}
             onHide={() => setShowModal(false)}
@@ -80,6 +79,7 @@ function SignInForm()
                   Reset password
                </Modal.Title>
             </Modal.Header>
+            {/* Formik for only reset password form */}
             <Formik
                initialValues={initialValues}
                onSubmit={sendResetPassword}
@@ -97,9 +97,9 @@ function SignInForm()
                               </span>
                            </Form.Label>
                            <Form.Control
-                              name='resetPassword'
+                              name='identifier'
                               type='text'
-                              value={values.resetPassword}
+                              value={values.identifier}
                               onChange={handleChange} />
                         </Modal.Body>
                         <Modal.Footer>
@@ -115,6 +115,7 @@ function SignInForm()
                }
             </Formik>
          </Modal>
+         {/* End reset password Modal */}
          <div className="login-in-form d-flex align-items-center position-relative">
             <Container className="d-flex justify-content-center align-items-center">
                <Formik
@@ -123,7 +124,8 @@ function SignInForm()
                   validationSchema={signInSchema}
                   enableReinitialize={enableReinitialize}
                >
-                  {({handleChange, handleSubmit, values, errors, touched}) =>
+                  {/* Formik Func */}
+                  {({handleChange, handleSubmit, values, errors}) =>
                   (
                      <Form
                         className="py-4 py-md-5 px-4 px-md-5 border-1 rounded-2 bg-white"
@@ -202,7 +204,7 @@ function SignInForm()
                               md="6">
                               <Link
                                  className="register-btn w-100 btn btn-secondary py-2"
-                                 to="register">
+                                 to="/register">
                                  Register
                               </Link>
                            </Col>
@@ -216,4 +218,4 @@ function SignInForm()
    )
 }
 
-export default SignInForm;
+export default LoginForm;

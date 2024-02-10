@@ -1,17 +1,68 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {baseURL, client} from './userSlice'
 
 
-const initialState = {isLoggedIn: true}
+// userLogin asyncThunk
+export const userLogin = createAsyncThunk('auth/userLogin',
+   async (userCredentials, thunkAPI) =>
+   {
+      const {rejectWithValue} = thunkAPI;
+      try
+      {
+         const request = await client.post(`${baseURL}/login`, userCredentials, {
+            withCredentials: true
+         })
+            .then(function (response)
+            {
+               return response
+            })
+            .catch(function (error)
+            {
+               throw new Error(error.response.data)
+            });
+         return request.data;
+      }
+      catch (error)
+      {
+         return rejectWithValue(error.message)
+      }
+   }
+);
+
+const initialState = {user: null, token: null, loading: false, error: null};
+
 const authSlice = createSlice({
    name: 'auth',
    initialState,
-   reducers: {
-      logInOut: (state, _action) =>
-      {
-         state.isLoggedIn = !state.isLoggedIn;
-      }
+   reducers: {},
+   extraReducers: (builder) =>
+   {
+      builder
+         .addCase(userLogin.pending, (state, _) =>
+         {
+            state.loading = true;
+            state.user = null;
+            state.token = null;
+            state.error = null;
+         })
+         .addCase(userLogin.fulfilled, (state, {payload}) =>
+         {
+            state.loading = false;
+            state.user = payload.user;
+            state.token = payload.token;
+            state.error = null;
+            console.log(payload, "fulfilled")
+         })
+         .addCase(userLogin.rejected, (state, {payload}) =>
+         {
+            state.loading = false;
+            state.user = null;
+            state.token = null;
+            state.error = payload;
+            console.log(payload, "error")
+         });
    }
-})
+});
 
 export default authSlice.reducer;
 export const {logInOut} = authSlice.actions;

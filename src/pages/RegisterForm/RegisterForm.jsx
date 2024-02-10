@@ -77,8 +77,7 @@ function RegisterForm()
       parentEmail: '',
       parentCity: '',
       parentPassword: '',
-      students: [{name: '', birthDate: '', },
-      ],
+      students: [{name: '', birthDate: ''},],
    }
 
    const enableReinitialize = true;
@@ -95,7 +94,7 @@ function RegisterForm()
          parentPassword: values.parentPassword,
          students: values.students,
       }
-
+      console.log(userCredentials)
       dispatch(addUser(userCredentials))
          .unwrap()
          .then(navigate('/login'))
@@ -264,73 +263,78 @@ function RegisterForm()
                               {
                                  const {students} = form.values;
                                  return (
-                                    students.map((_, index) => (
-                                       <Fragment key={index}>
-                                          <Row className="
+                                    students && students.length > 0 ?
+                                       students.map((_, index) => (
+                                          <Fragment key={index}>
+                                             <Row className="
                                           align-items-center 
                                           align-items-md-start
                                           mb-md-3">
-                                             <Form.Group
-                                                className='mb-1 mb-md-0'
-                                                as={Col}
-                                                md="6"
-                                             >
-                                                <Form.Label htmlFor={`student${index}Name`}>
-                                                   Student {index > 0 ? `(${index + 1})` : null} First name
-                                                </Form.Label>
-                                                <Field
-                                                   className={`form-control`}
-                                                   id={`student${index}Name`}
-                                                   type="text"
-                                                   name={`students[${index}].name`}
-                                                   placeholder="Student Name"
-                                                />
-                                                <ErrorMessage
-                                                   component="div"
-                                                   className='error-feedback text-danger'
-                                                   name={`students[${index}].name`}
-                                                   id={`student${index}Name`}
-                                                   style={{
-                                                      fontSize: "14px",
-                                                      marginTop: "4px"
-                                                   }}
-                                                />
-                                             </Form.Group>
-                                             <Form.Group
-                                                as={Col}
-                                                md="4"
-                                                controlId={`student${index}BirthDate`}>
-                                                <Form.Label>
-                                                   Student {index > 0 ? `(${index + 1})` : null} Birth date
-                                                </Form.Label>
-                                                <Field
-                                                   className={`form-control`}
-                                                   id={`student${index}BirthDate`}
-                                                   type="date"
-                                                   name={`students[${index}].birthDate`}
-                                                   placeholder="Student Age" />
-                                                <ErrorMessage
-                                                   component="div"
-                                                   className='error-feedback text-danger'
-                                                   name={`students[${index}].birthDate`}
-                                                   id={`student${index}BirthDate`}
-                                                   style={{
-                                                      fontSize: "14px",
-                                                      marginTop: "4px",
-                                                   }}
-                                                />
-                                             </Form.Group>
-                                             <Col
-                                                md="2"
-                                                className="
+                                                <Form.Group
+                                                   className='mb-1 mb-md-0'
+                                                   as={Col}
+                                                   md="6"
+                                                >
+                                                   <Form.Label htmlFor={`student${index}Name`}>
+                                                      Student {index > 0 ? `(${index + 1})` : null} First name
+                                                   </Form.Label>
+                                                   <Field
+                                                      className={`form-control`}
+                                                      id={`student${index}Name`}
+                                                      type="text"
+                                                      name={`students[${index}].name`}
+                                                      value={values.students.name}
+                                                      onChange={handleChange}
+                                                      placeholder="Student Name"
+                                                   />
+                                                   <ErrorMessage
+                                                      component="div"
+                                                      className='error-feedback text-danger'
+                                                      name={`students[${index}].name`}
+                                                      id={`student${index}Name`}
+                                                      style={{
+                                                         fontSize: "14px",
+                                                         marginTop: "4px"
+                                                      }}
+                                                   />
+                                                </Form.Group>
+                                                <Form.Group
+                                                   as={Col}
+                                                   md="4"
+                                                   controlId={`student${index}BirthDate`}>
+                                                   <Form.Label>
+                                                      Student {index > 0 ? `(${index + 1})` : null} Birth date
+                                                   </Form.Label>
+                                                   <Field
+                                                      className={`form-control`}
+                                                      id={`student${index}BirthDate`}
+                                                      type="date"
+                                                      name={`students[${index}].birthDate`}
+                                                      value={values.students.birthDate}
+                                                      onChange={handleChange}
+                                                      placeholder="Student Birth date" />
+                                                   <ErrorMessage
+                                                      component="div"
+                                                      className='error-feedback text-danger'
+                                                      name={`students[${index}].birthDate`}
+                                                      id={`student${index}BirthDate`}
+                                                      style={{
+                                                         fontSize: "14px",
+                                                         marginTop: "4px",
+                                                      }}
+                                                   />
+                                                </Form.Group>
+                                                <Col
+                                                   md="2"
+                                                   className="
                                                 d-grid 
                                                 h-100 
                                                 justify-content-md-end">
-                                                {
-                                                   index > 0 &&
-                                                   <Button
-                                                      type='button'
-                                                      className="
+                                                   {
+                                                      index > 0 &&
+                                                      <Button
+                                                         type='button'
+                                                         className="
                                                          remove-btn
                                                          text-center 
                                                          d-flex 
@@ -339,15 +343,15 @@ function RegisterForm()
                                                          align-self-start
                                                          mt-2 mt-md-0
                                                          mb-2 mb-md-0"
-                                                      onClick={() => remove(index)}>
-                                                      <FontAwesomeIcon icon={faTrashCan} />
-                                                   </Button>
-                                                }
-                                                {
-                                                   index === (students.length - 1) && students.length < 5 ?
-                                                      <Button
-                                                         type='button'
-                                                         className="
+                                                         onClick={() => remove(index)}>
+                                                         <FontAwesomeIcon icon={faTrashCan} />
+                                                      </Button>
+                                                   }
+                                                   {
+                                                      index === (students.length - 1) && students.length < 5 ?
+                                                         <Button
+                                                            type='button'
+                                                            className="
                                                             add-btn
                                                             text-center
                                                             fw-bold
@@ -356,27 +360,27 @@ function RegisterForm()
                                                             justify-content-center 
                                                             align-self-end
                                                             mt-2 mt-md-0"
-                                                         disabled={disable}
-                                                         onClick={
-                                                            () => push({name: '', age: ''})
-                                                         }>
-                                                         Add
-                                                      </Button> :
-                                                      setDisable(false)
-                                                }
-                                             </Col>
-                                          </Row>
-                                          {
-                                             index < (students.length - 1) &&
-                                             <hr className="
+                                                            disabled={disable}
+                                                            onClick={
+                                                               () => push({name: '', birthDate: ''})
+                                                            }>
+                                                            Add
+                                                         </Button> :
+                                                         setDisable(false)
+                                                   }
+                                                </Col>
+                                             </Row>
+                                             {
+                                                index < (students.length - 1) &&
+                                                <hr className="
                                              mt-3 mt-md-1 
                                              mb-4 mb-md-3 
                                              mx-auto
                                              w-100" />
-                                          }
-                                       </Fragment>
-                                    ))
-                                 )
+                                             }
+                                          </Fragment>
+                                       ))
+                                       : null);
                               }
                            }
                         </FieldArray>

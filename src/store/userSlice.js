@@ -3,13 +3,12 @@ import axios from 'axios';
 import {wrapper} from 'axios-cookiejar-support';
 import {CookieJar} from 'tough-cookie';
 
-
-const cookieJar = new CookieJar();
-const client = wrapper(axios.create({
+export const cookieJar = new CookieJar();
+export const client = wrapper(axios.create({
    jar: cookieJar,
    withCredentials: true,
 }))
-const baseUrl = "http://localhost:5000";
+export const baseURL = "http://localhost:5000";
 
 // addUser asyncThunk
 export const addUser = createAsyncThunk('user/addUser',
@@ -18,7 +17,7 @@ export const addUser = createAsyncThunk('user/addUser',
       const {rejectWithValue} = thunkAPI;
       try
       {
-         const request = await client.post(`${baseUrl}/addUser`, userCredentials)
+         const request = await client.post(`${baseURL}/addParent`, userCredentials)
          const data = await request.data;
          return data;
       } catch (error)
@@ -28,24 +27,34 @@ export const addUser = createAsyncThunk('user/addUser',
    }
 );
 
-// userLogin asyncThunk
-export const userLogin = createAsyncThunk('user/userLogin',
+// forgetPassword asyncThunk
+export const forgetPassword = createAsyncThunk('user/forgetPassword',
    async (userCredentials, thunkAPI) =>
    {
       const {rejectWithValue} = thunkAPI;
       try
       {
-         const request = await client.post(`${baseUrl}/userLogin`, userCredentials)
-         const data = await request.data;
-         return data;
-      } catch (error)
+         const request = await client.post(`${baseURL}/forgetPassword`,
+            userCredentials,
+            {
+               withCredentials: true
+            })
+            .then(function (response)
+            {
+               return response
+            })
+            .catch(function (error)
+            {
+               throw new Error(error.response.data)
+            });
+         return request.data;
+      }
+      catch (error)
       {
-         return rejectWithValue(error.message);
+         return rejectWithValue(error.message)
       }
    }
 );
-
-
 
 const initialState = {user: null, loading: false, error: null}
 
@@ -57,43 +66,45 @@ const userSlice = createSlice({
    {
       // addUser
       builder
-         .addCase(addUser.pending, (state, action) =>
+         .addCase(addUser.pending, (state, _) =>
          {
             state.loading = true;
             state.error = null;
             state.user = null;
          })
-         .addCase(addUser.fulfilled, (state, action) =>
+         .addCase(addUser.fulfilled, (state, {payload}) =>
          {
             state.loading = false;
             state.error = null;
-            state.user = action.payload;
+            state.user = payload;
          })
-         .addCase(addUser.rejected, (state, action) =>
+         .addCase(addUser.rejected, (state, {payload}) =>
          {
             state.loading = false;
-            state.error = action.payload;
             state.user = null;
+            state.error = payload;
          })
-      // userLogin
+      // forgetPassword
       builder
-         .addCase(userLogin.pending, (state, action) =>
+         .addCase(forgetPassword.pending, (state, _) =>
          {
             state.loading = true;
             state.error = null;
             state.user = null;
          })
-         .addCase(userLogin.fulfilled, (state, action) =>
+         .addCase(forgetPassword.fulfilled, (state, {payload}) =>
          {
             state.loading = false;
             state.error = null;
-            state.user = action.payload;
+            state.user = payload;
+            console.log(payload, "forgetPass")
          })
-         .addCase(userLogin.rejected, (state, action) =>
+         .addCase(forgetPassword.rejected, (state, {payload}) =>
          {
             state.loading = false;
-            state.error = action.payload;
             state.user = null;
+            state.error = payload;
+            console.log(payload, "forgetPass Error")
          })
    }
 })

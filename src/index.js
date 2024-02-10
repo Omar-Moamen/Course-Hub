@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {index: true, element: <Landing />},
       {path: 'login', element: <LoginForm />},
-      {path: 'login/register', element: <RegisterForm />}
+      {path: 'register', element: <RegisterForm />}
     ],
   },
 
@@ -27,9 +27,11 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={store}>
-    <CookiesProvider defaultSetOptions={{path: '/'}}>
-      <RouterProvider router={router} />
-    </CookiesProvider>
-  </Provider>
+  <React.StrictMode>
+    <Provider store={store}>
+      <CookiesProvider defaultSetOptions={{path: '/'}}>
+        <RouterProvider router={router} />
+      </CookiesProvider>
+    </Provider>
+  </React.StrictMode>
 );
