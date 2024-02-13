@@ -161,8 +161,11 @@ function LoginForm()
                                  value={values.signInPassword}
                                  onChange={handleChange}
                                  isInvalid={!!errors.signInPassword} />
-                              <span
-                                 className='password-toggler position-absolute'
+                              <button
+                                 className='password-toggler 
+                                 position-absolute 
+                                 border-0
+                                 bg-transparent'
                                  style={
                                     {
                                        top: `
@@ -172,7 +175,7 @@ function LoginForm()
                                  onClick={() => setShowPassword(!showPassword)}>
                                  <FontAwesomeIcon
                                     icon={showPassword ? faEyeSlash : faEye} />
-                              </span>
+                              </button>
                               <Form.Control.Feedback type='invalid'>
                                  {errors.signInPassword}
                               </Form.Control.Feedback>

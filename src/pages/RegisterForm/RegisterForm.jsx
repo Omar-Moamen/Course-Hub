@@ -366,7 +366,7 @@ function RegisterForm()
                                                             }>
                                                             Add
                                                          </Button> :
-                                                         setDisable(false)
+                                                         null
                                                    }
                                                 </Col>
                                              </Row>

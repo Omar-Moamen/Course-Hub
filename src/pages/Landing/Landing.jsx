@@ -1,27 +1,199 @@
-import {Container} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import './Landing.css'
 import {Link} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+import skillsImg from '../../assets/imgs/skills.png';
+import successImg from '../../assets/imgs/success.png';
+import profileImg from '../../assets/imgs/profile.png';
+import tackleFuture from '../../assets/imgs/tackle-future.png';
+import teaching from '../../assets/imgs/teaching.png';
+import productDesign from '../../assets/imgs/product-design.png';
 
 function Landing()
 {
+   const {isLoggedIn} = useSelector(state => state.auth);
+
    return (
-      <div className='landing-overlay'>
-         <div className='landing'>
-            <Container className='px-4 h-100'>
-               <div className="row h-100 align-items-center justify-content-center text-center">
-                  <div className="col-lg-8 align-self-end">
-                     <h1 className='text-white text-capitalize mb-3'>Your favorite place to learn programming</h1>
-                     <hr className="divider my-0 mx-auto" />
-                  </div>
-                  <div className='col-lg-8 align-self-sm-start align-self-baseline'>
-                     <p className='text-white-50 fs-lg-5 mt-3'>Something Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis,
-                        aliquid iure atque magnam delectus ipsa explicabo incidunt recusandae voluptatibus, rerum, hic aliquam</p>
-                     <Link to='login' className='btn btn-primary border-0 text-white rounded-pill text-uppercase fw-semibold mt-3' href="#/">Find out more</Link>
-                  </div>
-               </div>
+      <>
+         <div className='main-section-overlay'>
+            <div className='main-section'>
+               <Container className='px-4 h-100'>
+                  <Row className="
+                  h-100 text-center
+                  align-items-center justify-content-center"
+                  >
+                     <Col className="align-self-end" lg="8">
+                        <h1 className='main-header text-white text-capitalize mb-3'>
+                           Your favorite place to learn programming
+                        </h1>
+                     </Col>
+                     <Col className='align-self-sm-start align-self-baseline' lg="8">
+                        <p className='fs-lg-5 mt-5'>
+                           Something Lorem, ipsum dolor sit amet
+                           consectetur adipisicing elit. Reiciendis,
+                           aliquid iure atque magnam delectus ipsa
+                           explicabo incidunt recusandae voluptatibus,
+                           rerum, hic aliquam
+                        </p>
+                        <Link
+                           to={isLoggedIn ? 'home' : 'login'}
+                           className='
+                           btn btn-primary border-0
+                           text-white rounded-pill
+                           text-uppercase fw-semibold mt-3' href="#/">Find out more
+                        </Link>
+                     </Col>
+                  </Row>
+               </Container>
+            </div>
+         </div>
+         {/* Start About Section */}
+         <div id='about' className="about-section">
+            <Container className='px-4 text-center'>
+               <Row className='align-items-center justify-content-center'>
+                  <Col className='' lg='8'>
+                     <h2 className='main-header text-white mb-3'>
+                        We've got what you need!
+                     </h2>
+                  </Col>
+                  <Col className='' lg='8'>
+                     <p className='fs-lg-5 mt-5'>
+                        Something Lorem, ipsum dolor sit amet consectetur
+                        adipisicing elit. Reiciendis, aliquid iure atque magnam
+                        delectus ipsa explicabo incidunt recusandae
+                        voluptatibus, rerum, hic aliquam
+                     </p>
+                     <Link
+                        to={isLoggedIn ? 'home' : 'login'}
+                        className='
+                           btn btn-light border-0
+                           text-black rounded-pill
+                           text-uppercase fw-semibold mt-3' href="#/">Get Started!
+                     </Link>
+                  </Col>
+               </Row>
+            </Container>
+         </div >
+         {/* Start Services Section */}
+         <div className='services-section'>
+            <Container className='px-4 text-center'>
+               <h2 className='main-header text-capitalize mb-5'>Our services</h2>
+               <Row className='align-items-center mt-5 pt-5'>
+                  <Col className='
+                  service-box
+                  text-center
+                  d-flex flex-column 
+                  justify-content-center 
+                  align-items-center
+                  mt-3'
+                     md='6' lg='4'
+                  >
+                     <div className='image-holder'>
+                        <img className='img-fluid' src={skillsImg} alt="Skills" />
+                     </div>
+                     <h6 className='my-3'>Real world skills</h6>
+                     <p className='text-black-50'>
+                        Students learn the same tools which they'll use it in
+                        real world jobs
+                     </p>
+                  </Col>
+                  <Col className='
+                  service-box
+                  text-center
+                  d-flex flex-column 
+                  justify-content-center 
+                  align-items-center
+                  mt-3'
+                     md='6' lg='4'
+                  >
+                     <div className='image-holder'>
+                        <img className='img-fluid' src={successImg} alt="Success" />
+                     </div>
+                     <h6 className='my-3'>Unique Advantage</h6>
+                     <p className='text-black-50'>
+                        Gives them a unique advantage to help get into their desired
+                        school, college or university
+                     </p>
+                  </Col>
+                  <Col className='
+                  service-box
+                  text-center
+                  d-flex flex-column 
+                  justify-content-center 
+                  align-items-center
+                  mt-3'
+                     md='6' lg='4'
+                  >
+                     <div className='image-holder'>
+                        <img className='img-fluid'
+                           src={tackleFuture}
+                           alt="Tackle-Future" />
+                     </div>
+                     <h6 className='my-3'>Tackle the Future</h6>
+                     <p className='text-black-50'>
+                        Students will be on their way to innovate future technologies
+                     </p>
+                  </Col>
+                  <Col className='
+                  service-box
+                  text-center
+                  d-flex flex-column 
+                  justify-content-center 
+                  align-items-center
+                  mt-3'
+                     md='6' lg='4'
+                  >
+                     <div className='image-holder'>
+                        <img className='img-fluid' src={profileImg} alt="Profile" />
+                     </div>
+                     <h6 className='my-3'>Outstanding curriculum</h6>
+                     <p className='text-black-50'>
+                        Our curriculum is designed & developed by university
+                        educators.
+                     </p>
+                  </Col>
+                  <Col className='
+                  service-box
+                  text-center
+                  d-flex flex-column 
+                  justify-content-center 
+                  align-items-center
+                  mt-3'
+                     md='6' lg='4'
+                  >
+                     <div className='image-holder'>
+                        <img className='img-fluid' src={teaching} alt="Teaching" />
+                     </div>
+                     <h6 className='my-3'>High quality teaching</h6>
+                     <p className='text-black-50'>
+                        Parents are certain of high quality teaching and
+                        approves our courses every year.
+                     </p>
+                  </Col>
+                  <Col className='
+                  service-box
+                  text-center
+                  d-flex flex-column 
+                  justify-content-center 
+                  align-items-center
+                  mt-3'
+                     md='6' lg='4'
+                  >
+                     <div className='image-holder'>
+                        <img className='img-fluid'
+                           src={productDesign}
+                           alt="Product-Design"
+                        />
+                     </div>
+                     <h6 className='my-3'>Jaw-Dropping Portfolios</h6>
+                     <p className='text-black-50'>
+                        Kids develop a jaw-dropping portfolio to show off their skills
+                     </p>
+                  </Col>
+               </Row>
             </Container>
          </div>
-      </div>
+      </>
    )
 }
 

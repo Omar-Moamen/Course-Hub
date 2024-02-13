@@ -29,7 +29,7 @@ export const userLogin = createAsyncThunk('auth/userLogin',
    }
 );
 
-const initialState = {user: null, token: null, loading: false, error: null};
+const initialState = {user: null, isLoggedIn: false, loading: false, error: null};
 
 const authSlice = createSlice({
    name: 'auth',
@@ -42,14 +42,12 @@ const authSlice = createSlice({
          {
             state.loading = true;
             state.user = null;
-            state.token = null;
             state.error = null;
          })
          .addCase(userLogin.fulfilled, (state, {payload}) =>
          {
             state.loading = false;
             state.user = payload.user;
-            state.token = payload.token;
             state.error = null;
             console.log(payload, "fulfilled")
          })
@@ -57,7 +55,6 @@ const authSlice = createSlice({
          {
             state.loading = false;
             state.user = null;
-            state.token = null;
             state.error = payload;
             console.log(payload, "error")
          });

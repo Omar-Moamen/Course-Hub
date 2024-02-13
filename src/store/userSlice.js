@@ -29,13 +29,13 @@ export const addUser = createAsyncThunk('user/addUser',
 
 // forgetPassword asyncThunk
 export const forgetPassword = createAsyncThunk('user/forgetPassword',
-   async (userCredentials, thunkAPI) =>
+   async (identifier, thunkAPI) =>
    {
       const {rejectWithValue} = thunkAPI;
       try
       {
          const request = await client.post(`${baseURL}/forgetPassword`,
-            userCredentials,
+            identifier,
             {
                withCredentials: true
             })

@@ -1,0 +1,41 @@
+.settings-box {
+   height: 100vh;
+   width: 200px;
+   top: 0;
+   left: -200px;
+   z-index: 1999;
+   transition: var(--mainTransition);
+   -webkit-transition: var(--mainTransition);
+   -moz-transition: var(--mainTransition);
+   -ms-transition: var(--mainTransition);
+   -o-transition: var(--mainTransition);
+}
+
+.settings-box.opened {
+   left: 0 !important;
+   box-shadow: var(--mainShadow);
+}
+
+.settings-box.opened .settings-toggler {
+   opacity: 1;
+   box-shadow: 0 0 1rem #00000026;
+   clip-path: inset(-1rem -1rem -1rem 0px);
+}
+
+.settings-box .settings-toggler {
+   width: 30px;
+   height: 30px;
+   right: -30px;
+   top: 135px;
+   opacity: .5;
+   cursor: pointer;
+   transition: all var(--mainTransition) ease;
+   -webkit-transition: all var(--mainTransition) ease;
+   -moz-transition: all var(--mainTransition) ease;
+   -ms-transition: all var(--mainTransition) ease;
+   -o-transition: all var(--mainTransition) ease;
+}
+
+.settings-box .settings-toggler:hover {
+   opacity: 1;
+}
