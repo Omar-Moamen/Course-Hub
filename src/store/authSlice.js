@@ -12,11 +12,11 @@ export const userLogin = createAsyncThunk('auth/userLogin',
          const request = await client.post(`${baseURL}/login`, userCredentials, {
             withCredentials: true
          })
-            .then(function (response)
+            .then(response =>
             {
                return response
             })
-            .catch(function (error)
+            .catch(error =>
             {
                throw new Error(error.response.data)
             });
@@ -41,22 +41,22 @@ const authSlice = createSlice({
          .addCase(userLogin.pending, (state, _) =>
          {
             state.loading = true;
-            state.user = null;
             state.error = null;
          })
          .addCase(userLogin.fulfilled, (state, {payload}) =>
          {
             state.loading = false;
-            state.user = payload.user;
+            state.user = payload;
+            state.isLoggedIn = true;
             state.error = null;
-            console.log(payload, "fulfilled")
+            console.log(state.user)
          })
          .addCase(userLogin.rejected, (state, {payload}) =>
          {
             state.loading = false;
             state.user = null;
             state.error = payload;
-            console.log(payload, "error")
+            console.log(payload)
          });
    }
 });

@@ -11,11 +11,13 @@ import LoginForm from './pages/RegisterForm/LoginForm';
 import {Provider} from 'react-redux';
 import store from './store/store';
 import {CookiesProvider} from 'react-cookie';
+import ErrorPage from './pages/ErrorPage/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <RootLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {index: true, element: <Landing />},
       {path: 'login', element: <LoginForm />},

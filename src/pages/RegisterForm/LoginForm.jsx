@@ -3,13 +3,14 @@ import {Link, useNavigate} from "react-router-dom";
 import {Formik} from 'formik';
 import {Container, Form, Row, Col, Button} from 'react-bootstrap';
 import * as Yup from 'yup';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {forgetPassword} from '../../store/userSlice';
 import {userLogin} from '../../store/authSlice';
 import {useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-regular-svg-icons';
 import {Modal} from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 // Start Sign in validation schema
 const signInSchema = Yup.object().shape({
@@ -27,6 +28,8 @@ const signInSchema = Yup.object().shape({
 // Start Component
 function LoginForm()
 {
+   const {loading, error} = useSelector(state => state.auth);
+
    const [showPassword, setShowPassword] = useState(false);
    const [showModal, setShowModal] = useState(false);
 
@@ -44,8 +47,8 @@ function LoginForm()
 
    const sendResetPassword = (values) =>
    {
-      let identifier = values.identifier
-      dispatch(forgetPassword(identifier))
+      let identifier = values.identifier;
+      dispatch(forgetPassword(identifier));
       setShowModal(false);
    }
 
@@ -57,7 +60,15 @@ function LoginForm()
       }
       dispatch(userLogin(userCredentials))
          .unwrap()
-         .then(navigate('/'));
+         .then(() => navigate('/'))
+         .catch(error =>
+         {
+            Swal.fire({
+               icon: "error",
+               title: "Oops...",
+               text: `${error}!`,
+            });
+         })
    }
 
 
@@ -97,6 +108,7 @@ function LoginForm()
                               </span>
                            </Form.Label>
                            <Form.Control
+                              className='reset-password-input'
                               name='identifier'
                               type='text'
                               value={values.identifier}
@@ -166,6 +178,7 @@ function LoginForm()
                                  position-absolute 
                                  border-0
                                  bg-transparent'
+                                 type='button'
                                  style={
                                     {
                                        top: `
@@ -177,7 +190,7 @@ function LoginForm()
                                     icon={showPassword ? faEyeSlash : faEye} />
                               </button>
                               <Form.Control.Feedback type='invalid'>
-                                 {errors.signInPassword}
+                                 {errors.signInPassword ? errors.signInPassword : error}
                               </Form.Control.Feedback>
                            </Form.Group>
                         </Row>

@@ -95,6 +95,11 @@
    color: #777 !important;
 }
 
+/* reset password input field */
+.reset-password-input {
+   margin-bottom: 10px;
+}
+
 .login-in-form form .login-in-btn {
    background-color: var(--orangeColor);
    border-color: var(--orangeColor);

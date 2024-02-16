@@ -27,7 +27,7 @@
 }
 
 .register-form .dots {
-   background-image: url("../../assets/img/dots.png");
+   background-image: url("../../assets/imgs/dots.png");
    width: 420px;
    height: 384px;
    z-index: -2;

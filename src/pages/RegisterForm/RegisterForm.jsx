@@ -8,6 +8,7 @@ import {faEye, faEyeSlash, faTrashCan} from '@fortawesome/free-regular-svg-icons
 import {useDispatch} from 'react-redux';
 import {addUser} from '../../store/userSlice';
 import {useNavigate} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 // Start Register validation schema
 const registerSchema = Yup.object().shape({
@@ -97,7 +98,15 @@ function RegisterForm()
       console.log(userCredentials)
       dispatch(addUser(userCredentials))
          .unwrap()
-         .then(navigate('/login'))
+         .then(() => navigate('/login'))
+         .catch(error =>
+         {
+            Swal.fire({
+               icon: "error",
+               title: "Oops...",
+               text: `${error}!`,
+            });
+         })
    }
 
    return (
@@ -241,12 +250,17 @@ function RegisterForm()
                                  value={values.parentPassword}
                                  onChange={handleChange}
                                  isInvalid={!!errors.parentPassword} />
-                              <span
-                                 className='password-toggler position-absolute'
+                              <button
+                                 className='
+                                 password-toggler
+                                 position-absolute
+                                 bg-transparent
+                                 border-0'
+                                 type='button'
                                  onClick={() => setShowPassword(!showPassword)}>
                                  <FontAwesomeIcon
                                     icon={showPassword ? faEyeSlash : faEye} />
-                              </span>
+                              </button>
                               <Form.Control.Feedback type='invalid'>
                                  {errors.parentPassword}
                               </Form.Control.Feedback>
