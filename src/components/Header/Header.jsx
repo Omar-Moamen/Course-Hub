@@ -26,14 +26,17 @@ export default function Header()
 
    // Effects
 
+   // Show nav-user-info
    useEffect(() =>
    {
       isLoggedIn && user && user.firstName && user.lastName ?
          setShowUserIcon(true) : setShowUserIcon(false)
    }, [isLoggedIn, user])
+
+   // Change mainNav color, backgroundColor and hover styles
    useEffect(() =>
    {
-      const scrollHandler = () => 
+      const mainNavStylesHandler = () =>
       {
          let scrollTop = document.documentElement.scrollTop;
          if (scrollTop > 0)
@@ -45,24 +48,59 @@ export default function Header()
             setShowNavbar(false)
          }
       }
-      window.addEventListener('scroll', scrollHandler);
 
-      return () => window.removeEventListener('scroll', scrollHandler);
-   }, [])
+      window.addEventListener('scroll', mainNavStylesHandler);
 
+      return () => window.removeEventListener('scroll', mainNavStylesHandler);
+   }, []);
+
+   // Switch active links on scrolling
+   useEffect(() =>
+   {
+      const switchActiveLinksHandler = () =>
+      {
+         let currentSection = 'landing';
+         let sectionEls = document.querySelectorAll('.section');
+
+         sectionEls.forEach(sectionEl =>
+         {
+            if (window.scrollY >= (sectionEl.offsetTop - sectionEl.clientHeight / 3))
+            {
+               currentSection = sectionEl.id;
+            }
+         })
+
+         let navLinks = document.querySelectorAll('.nav-link');
+
+         navLinks.forEach(link =>
+         {
+            if (link.href.includes(currentSection))
+            {
+               document.querySelector('.active').classList.remove('active');
+               link.classList.add('active');
+            }
+         })
+      }
+
+      window.addEventListener('scroll', switchActiveLinksHandler);
+
+      return () => window.removeEventListener('scroll', switchActiveLinksHandler);
+   }, []);
+
+   // Change mainNav according to screenSize
    useEffect(() =>
    {
       window.addEventListener('resize', resizeHandler);
 
       return () => window.removeEventListener('resize', resizeHandler);
-   }, [screenSize])
+   }, [screenSize]);
 
    return (
       <Navbar
          id="mainNav"
          className={`
          ${showNavbar || screenSize < 992 || pathname !== "/" ?
-               "bg-light text-black alt-nav-hover main-shadow" :
+               "bg-light text-black alt-nav-hover main-shadow active-hover" :
                "bg-transparent nav-color"} fixed-top px-lg-4`}
          expand="lg"
       >
@@ -94,17 +132,17 @@ export default function Header()
                {
                   pathname === "/" ?
                      <>
-                        <Nav.Link to="/">About</Nav.Link>
-                        <Nav.Link to="#services">Services</Nav.Link>
-                        <Nav.Link to="#portfolio">Portfolio</Nav.Link>
-                        <Nav.Link to="#portfolio">Contact</Nav.Link>
+                        <Nav.Link className="active" href="#landing">About</Nav.Link>
+                        <Nav.Link href="#services">Services</Nav.Link>
+                        <Nav.Link href="#portfolio">Portfolio</Nav.Link>
+                        <Nav.Link href="#contact">Contact</Nav.Link>
                      </>
                      :
                      <>
                         <NavLink className="navbar-link" to="/" end>About</NavLink>
-                        <NavLink className="navbar-link" to="/services">Services</NavLink>
-                        <NavLink className="navbar-link" to="/portfolio">Portfolio</NavLink>
-                        <NavLink className="navbar-link" to="portfolio">Contact</NavLink>
+                        <NavLink className="navbar-link" to="/">Services</NavLink>
+                        <NavLink className="navbar-link" to="/">Portfolio</NavLink>
+                        <NavLink className="navbar-link" to="/">Contact</NavLink>
                      </>
                }
             </Nav>

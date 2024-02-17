@@ -1,4 +1,4 @@
-.main-section-overlay {
+.landing-overlay {
    background-image: linear-gradient(to bottom,
          #5c4d42cc 0%, #5c4d42cc 100%),
       url('../../assets/imgs/bg-masthead.jpg');
@@ -8,7 +8,7 @@
    height: 100vh;
 }
 
-.main-section {
+.landing {
    height: 100vh;
 }
 
@@ -16,12 +16,12 @@
    position: relative;
 }
 
-.main-section .main-header {
+.landing .main-header {
    font-size: 48px;
 }
 
 @media(max-width: 992px) {
-   .main-section .main-header {
+   .landing .main-header {
       font-size: 30px
    }
 }
@@ -39,58 +39,58 @@
    transform: translateX(-50%);
 }
 
-.main-section p {
+.landing p {
    color: var(--whiteColor);
 }
 
-.main-section a {
+.landing a {
    background-color: var(--orangeColor);
    font-size: 14px;
    padding: 18px 34px;
 }
 
-.main-section a:hover {
+.landing a:hover {
 
    background-color: var(--orangeHover);
 }
 
-.about-section {
+.about {
    padding: 8rem 0;
    background-color: var(--orangeColor);
 }
 
-.about-section .main-header::before {
+.about .main-header::before {
    background-color: #fff;
 }
 
-.about-section p {
+.about p {
    color: var(--whiteColor);
 }
 
-.about-section a {
+.about a {
    font-size: 14px;
    padding: 18px 34px;
 }
 
-.about-section a:hover {
+.about a:hover {
    background-color: #e0e0e0;
 }
 
-.services-section {
+.services {
    padding: 8rem 0 3rem 0;
 }
 
-.services-section .image-holder {
+.services .image-holder {
    width: 95px;
    height: 95px;
 }
 
-.services-section h6 {
+.services h6 {
    font-size: 18px;
    color: var(--orangeColor);
 }
 
-.services-section p {
+.services p {
    line-height: 1.6;
    max-width: 300px;
 }

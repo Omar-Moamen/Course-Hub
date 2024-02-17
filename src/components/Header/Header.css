@@ -2,11 +2,11 @@
    width: 100%;
    height: 72px !important;
    font-weight: bold;
-   transition: var(--mainTransition);
-   -webkit-transition: var(--mainTransition);
-   -moz-transition: var(--mainTransition);
-   -ms-transition: var(--mainTransition);
-   -o-transition: var(--mainTransition);
+   transition: background-color var(--mainTransition);
+   -webkit-transition: background-color var(--mainTransition);
+   -moz-transition: background-color var(--mainTransition);
+   -ms-transition: background-color var(--mainTransition);
+   -o-transition: background-color var(--mainTransition);
 }
 
 #mainNav.nav-color {
@@ -24,6 +24,11 @@
 #mainNav a {
    color: inherit !important;
    font-size: 15px;
+   transition: var(--mainTransition) !important;
+   -webkit-transition: var(--mainTransition) !important;
+   -moz-transition: var(--mainTransition) !important;
+   -ms-transition: var(--mainTransition) !important;
+   -o-transition: var(--mainTransition) !important;
 }
 
 #mainNav a.active,
@@ -34,24 +39,6 @@
 #mainNav.alt-nav-hover a.active,
 #mainNav.alt-nav-hover a:hover {
    color: var(--orangeColor) !important;
-}
-
-
-#mainNav a {
-   text-decoration: none;
-   transition: none !important;
-   -webkit-transition: none !important;
-   -moz-transition: none !important;
-   -ms-transition: none !important;
-   -o-transition: none !important;
-}
-
-#mainNav a:hover {
-   transition: var(--mainTransition) !important;
-   -webkit-transition: var(--mainTransition) !important;
-   -moz-transition: var(--mainTransition) !important;
-   -ms-transition: var(--mainTransition) !important;
-   -o-transition: var(--mainTransition) !important;
 }
 
 @media(max-width: 991px) {

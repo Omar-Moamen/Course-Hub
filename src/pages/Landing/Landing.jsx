@@ -15,8 +15,8 @@ function Landing()
 
    return (
       <>
-         <div className='main-section-overlay'>
-            <div className='main-section'>
+         <div className='landing-overlay'>
+            <div id='landing' className='landing section'>
                <Container className='px-4 h-100'>
                   <Row className="
                   h-100 text-center
@@ -48,7 +48,7 @@ function Landing()
             </div>
          </div>
          {/* Start About Section */}
-         <div id='about' className="about-section">
+         <div id='about' className="about section">
             <Container className='px-4 text-center'>
                <Row className='align-items-center justify-content-center'>
                   <Col className='' lg='8'>
@@ -75,7 +75,7 @@ function Landing()
             </Container>
          </div >
          {/* Start Services Section */}
-         <div className='services-section'>
+         <div id='services' className='services section'>
             <Container className='px-4 text-center'>
                <h2 className='main-header text-capitalize mb-5'>Our services</h2>
                <Row className='align-items-center mt-5 pt-5'>
