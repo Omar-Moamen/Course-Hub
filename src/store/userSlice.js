@@ -39,14 +39,16 @@ export const forgetPassword = createAsyncThunk('user/forgetPassword',
             {
                withCredentials: true
             })
-            .then(function (response)
+            .then(response =>
             {
-               return response
+               return response;
             })
-            .catch(function (error)
+            .catch(error =>
             {
-               throw new Error(error.response.data)
+               throw new Error(error.response.data);
             });
+
+         console.log(request)
          return request.data;
       }
       catch (error)
@@ -90,21 +92,17 @@ const userSlice = createSlice({
          {
             state.loading = true;
             state.error = null;
-            state.user = null;
          })
          .addCase(forgetPassword.fulfilled, (state, {payload}) =>
          {
             state.loading = false;
             state.error = null;
-            state.user = payload;
             console.log(payload, "forgetPass")
          })
          .addCase(forgetPassword.rejected, (state, {payload}) =>
          {
             state.loading = false;
-            state.user = null;
             state.error = payload;
-            console.log(payload, "forgetPass Error")
          })
    }
 })

@@ -150,6 +150,7 @@ export default function Header()
                showUserIcon && screenSize > 991 ?
                   <div className="
                         nav-user-info
+                        text-capitalize
                         d-flex
                         flex-column
                         align-items-center

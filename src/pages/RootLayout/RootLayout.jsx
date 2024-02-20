@@ -11,10 +11,7 @@ function RootLayout()
    return (
       <>
          <Header />
-         {
-            isLoggedIn &&
-            <SettingsBox />
-         }
+         <SettingsBox isLoggedIn={isLoggedIn} />
          <Outlet />
       </>
    )

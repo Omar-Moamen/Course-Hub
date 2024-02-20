@@ -64,7 +64,6 @@ const registerSchema = Yup.object().shape({
 // Start Component
 function RegisterForm()
 {
-   const [disable, setDisable] = useState(false)
    const [showPassword, setShowPassword] = useState(false);
 
    const dispatch = useDispatch();
@@ -95,7 +94,9 @@ function RegisterForm()
          parentPassword: values.parentPassword,
          students: values.students,
       }
+
       console.log(userCredentials)
+
       dispatch(addUser(userCredentials))
          .unwrap()
          .then(() => navigate('/login'))
@@ -107,7 +108,7 @@ function RegisterForm()
                text: `${error}!`,
             });
          })
-   }
+   };
 
    return (
       <div className="register-form d-flex align-items-center position-relative">
@@ -374,7 +375,6 @@ function RegisterForm()
                                                             justify-content-center 
                                                             align-self-end
                                                             mt-2 mt-md-0"
-                                                            disabled={disable}
                                                             onClick={
                                                                () => push({name: '', birthDate: ''})
                                                             }>

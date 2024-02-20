@@ -14,11 +14,11 @@ export const userLogin = createAsyncThunk('auth/userLogin',
          })
             .then(response =>
             {
-               return response
+               return response;
             })
             .catch(error =>
             {
-               throw new Error(error.response.data)
+               throw new Error(error.response.data);
             });
          return request.data;
       }

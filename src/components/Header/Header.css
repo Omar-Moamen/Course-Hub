@@ -22,6 +22,7 @@
 }
 
 #mainNav a {
+   text-decoration: none;
    color: inherit !important;
    font-size: 15px;
    transition: var(--mainTransition) !important;

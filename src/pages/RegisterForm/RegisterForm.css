@@ -158,8 +158,8 @@
 }
 
 .register-form form .password-toggler {
-   font-size: 14px;
-   top: calc(50% + 4px);
+   font-size: 13px;
+   top: calc(50% + 5px);
    right: 43px;
    color: #aaa;
    cursor: pointer;

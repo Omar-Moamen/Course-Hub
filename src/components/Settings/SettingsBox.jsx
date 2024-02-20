@@ -3,7 +3,7 @@ import {faGear} from '@fortawesome/free-solid-svg-icons';
 import "./SettingsBox.css";
 import {useState} from "react";
 
-function Settings()
+function Settings({isLoggedIn})
 {
   const [showSettings, setShowSettings] = useState(false);
 
@@ -13,20 +13,25 @@ function Settings()
   }
 
   return (
-    <div className={`settings-box position-fixed bg-body ${showSettings && "opened"}`}>
-      <div className="
+    <>
+      {
+        isLoggedIn &&
+        <div className={`settings-box position-fixed bg-body ${showSettings && "opened"}`}>
+          <div className="
       settings-toggler
       position-absolute
       d-flex
       bg-body
       align-items-center
       justify-content-center"
-        onClick={settingBoxHandler}
-      >
-        <div className=" bg-body"></div>
-        <FontAwesomeIcon icon={faGear} spin={showSettings && true} />
-      </div>
-    </div>
+            onClick={settingBoxHandler}
+          >
+            <div className=" bg-body"></div>
+            <FontAwesomeIcon icon={faGear} spin={showSettings && true} />
+          </div>
+        </div>
+      }
+    </>
   )
 }
 

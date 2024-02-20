@@ -11,6 +11,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-regular-svg-icons';
 import {Modal} from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import PopupModal from '../../components/PopupModal/PopupModal';
 
 // Start Sign in validation schema
 const signInSchema = Yup.object().shape({
@@ -47,9 +48,21 @@ function LoginForm()
 
    const sendResetPassword = (values) =>
    {
-      let identifier = values.identifier;
-      dispatch(forgetPassword(identifier));
-      setShowModal(false);
+      let backupEmail =
+      {
+         identifier: values.identifier
+      };
+      dispatch(forgetPassword(backupEmail))
+         .unwrap()
+         .then(() => setShowModal(false))
+         .catch(error =>
+         {
+            Swal.fire({
+               icon: "error",
+               title: "Oops...",
+               text: `${error}!`,
+            });
+         });
    }
 
    const onSubmit = (values) =>
@@ -69,27 +82,16 @@ function LoginForm()
                text: `${error}!`,
             });
          })
-   }
+   };
 
 
    return (
       <>
          {/* Start reset password Modal */}
-         <Modal
-            show={showModal}
-            onHide={() => setShowModal(false)}
-            size="md"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
+         <PopupModal
+            showModal={showModal}
+            setShowModal={setShowModal}
          >
-            <Modal.Header
-               className='pe-4'
-               closeButton
-            >
-               <Modal.Title id="contained-modal-title-vcenter">
-                  Reset password
-               </Modal.Title>
-            </Modal.Header>
             {/* Formik for only reset password form */}
             <Formik
                initialValues={initialValues}
@@ -126,7 +128,7 @@ function LoginForm()
                )
                }
             </Formik>
-         </Modal>
+         </PopupModal>
          {/* End reset password Modal */}
          <div className="login-in-form d-flex align-items-center position-relative">
             <Container className="d-flex justify-content-center align-items-center">
