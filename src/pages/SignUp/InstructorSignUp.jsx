@@ -29,9 +29,9 @@ const signInSchema = Yup.object().shape({
       .string()
       .email("Make sure to enter valid email")
       .required("Email is required"),
-   age: Yup
-      .number()
-      .required("Age is required"),
+   birthDate: Yup
+      .string()
+      .required("Birth Date is required"),
    city: Yup
       .string()
       .min(2, "City name must be at least 2 characters")
@@ -58,7 +58,7 @@ export default function InstructorSignUp()
    const initialValues = {
       firstName: '',
       lastName: '',
-      age: '',
+      birthDate: '',
       email: '',
       password: '',
       city: '',
@@ -70,11 +70,14 @@ export default function InstructorSignUp()
       let userCredentials = {
          firstName: values.firstName,
          lastName: values.lastName,
-         age: values.age,
+         birthDate: values.birthDate,
          email: values.email,
          password: values.password,
          city: values.city,
       }
+
+      console.log(userCredentials);
+
       dispatch(addInstructor(userCredentials))
          .unwrap()
          .then(() => navigate('/login'))
@@ -98,7 +101,7 @@ export default function InstructorSignUp()
                enableReinitialize={enableReinitialize}
             >
                {/* Formik Func */}
-               {({handleChange, handleSubmit, values, errors, touched}) =>
+               {({handleSubmit, errors, touched}) =>
                (
                   <Form
                      className="py-4 py-md-5 px-4 px-md-5 border-1 rounded-2 bg-white"
@@ -162,19 +165,19 @@ export default function InstructorSignUp()
                            }
                         </div>
                         <div className='col-sm-12 col-md-6 mb-3'>
-                           <label className='mb-2' htmlFor='Age'>Age</label>
+                           <label className='mb-2' htmlFor='BirthDate'>Birth Date</label>
                            <Field
                               className={`form-control 
-                                    ${errors.age && touched.age ?
+                                    ${errors.birthDate && touched.birthDate ?
                                     "border-danger invalid-field" : null}`}
-                              id="Age"
-                              name='age'
-                              type="number"
-                              placeholder="Your Age" />
+                              id="BirthDate"
+                              name='birthDate'
+                              type="date"
+                              placeholder="Your Birth Date" />
                            {
-                              errors.age && touched.age ?
+                              errors.birthDate && touched.birthDate ?
                                  <span className='error-msg text-danger'>
-                                    <ErrorMessage name='age' />
+                                    <ErrorMessage name='birthDate' />
                                  </span>
                                  : null
                            }

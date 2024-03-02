@@ -9,17 +9,24 @@ export const userLogin = createAsyncThunk('auth/userLogin',
       const {rejectWithValue} = thunkAPI;
       try
       {
-         const request = await client.post(`${baseURL}/login`, userCredentials, {
-            withCredentials: true
-         })
-            .then(response =>
-            {
-               return response;
-            })
-            .catch(error =>
-            {
-               throw new Error(error.response.data);
-            });
+         const request = await client.post(`${baseURL}/login`, userCredentials)
+         return request.data;
+      }
+      catch (error)
+      {
+         return rejectWithValue(error.message)
+      }
+   }
+);
+
+// userIsLoggedIn asyncThunk
+export const userIsLoggedIn = createAsyncThunk('auth/userIsLoggedIn',
+   async (userCredentials, thunkAPI) =>
+   {
+      const {rejectWithValue} = thunkAPI;
+      try
+      {
+         const request = await client.get(`${baseURL}/isLoggedIn`, userCredentials)
          return request.data;
       }
       catch (error)
@@ -37,6 +44,7 @@ const authSlice = createSlice({
    reducers: {},
    extraReducers: (builder) =>
    {
+      // userLogin
       builder
          .addCase(userLogin.pending, (state, _) =>
          {
@@ -48,11 +56,30 @@ const authSlice = createSlice({
             state.loading = false;
             state.user = payload;
             state.isLoggedIn = true;
-            console.log(payload)
             state.error = null;
-            console.log(state.user)
+            console.log(payload)
          })
          .addCase(userLogin.rejected, (state, {payload}) =>
+         {
+            state.loading = false;
+            state.user = null;
+            state.error = payload;
+         });
+
+      // userIsLoggedIn
+      builder
+         .addCase(userIsLoggedIn.pending, (state, _) =>
+         {
+            state.loading = true;
+            state.error = null;
+         })
+         .addCase(userIsLoggedIn.fulfilled, (state, {payload}) =>
+         {
+            state.loading = false;
+            state.isLoggedIn = payload;
+            state.error = null;
+         })
+         .addCase(userIsLoggedIn.rejected, (state, {payload}) =>
          {
             state.loading = false;
             state.user = null;

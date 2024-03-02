@@ -1,16 +1,21 @@
+import './Header.css';
 import {Container, Nav, Navbar} from "react-bootstrap";
 import {useEffect, useState} from "react";
-import './Header.css';
 import {Link, NavLink, useLocation} from "react-router-dom";
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useSelector} from "react-redux";
+import useUserData from "../../hooks/use-user-data";
+import {userIsLoggedIn} from "../../store/authSlice";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function Header()
 {
-   // ReduxToolkit selectors
-   const {user, isLoggedIn} = useSelector(state => state.auth);
-   const [showUserIcon, setShowUserIcon] = useState(false);
+   // Get The Current User
+   const {user} = useUserData();
+
+   // selectors
+   const {isLoggedIn} = useSelector(state => state.auth);
+   const dispatch = useDispatch();
 
    const {pathname} = useLocation();
    const [showNavbar, setShowNavbar] = useState(false);
@@ -24,13 +29,10 @@ export default function Header()
    };
 
    // Effects
-
-   // Show nav-user-info
    useEffect(() =>
    {
-      isLoggedIn && user && user.firstName && user.lastName ?
-         setShowUserIcon(true) : setShowUserIcon(false)
-   }, [isLoggedIn, user])
+      dispatch(userIsLoggedIn());
+   }, [dispatch]);
 
    // Change mainNav => [color, backgroundColor, hover styles]
    useEffect(() =>
@@ -162,7 +164,7 @@ export default function Header()
                }
             </Nav>
             {
-               showUserIcon && screenSize > 991 ?
+               isLoggedIn && user && screenSize > 991 ?
                   <div className="
                         nav-user-info
                         text-capitalize
