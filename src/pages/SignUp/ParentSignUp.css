@@ -1,16 +1,16 @@
-.register-form {
+.sign-up-form {
    padding-top: 140px;
    min-height: calc(100vh - 72px);
 }
 
-.register-form::before {
+.sign-up-form::before {
    content: '';
    position: fixed;
    width: 300%;
    height: 100%;
    top: 50%;
    left: 50%;
-   background-color: var(--orangeColor);
+   background-color: var(--mainColor);
    border-radius: 50%;
    transform: translateX(-50%) skew(0, -10deg);
    z-index: -1;
@@ -26,7 +26,7 @@
    -webkit-animation: waving 10s ease-in-out infinite alternate;
 }
 
-.register-form .dots {
+.sign-up-form .dots {
    background-image: url("../../assets/imgs/dots.png");
    width: 420px;
    height: 384px;
@@ -44,51 +44,51 @@
    left: 50px;
 }
 
-.register-form .container {
+.sign-up-form .container {
    padding-bottom: 17px;
 }
 
-.register-form form {
-   border-color: var(--orangeColor);
+.sign-up-form form {
+   border-color: var(--mainColor);
    box-shadow: var(--mainShadow);
 }
 
 @media (min-width: 992px) {
-   .register-form form {
+   .sign-up-form form {
       width: 75%;
    }
 }
 
-.register-form form h4 {
-   color: var(--orangeColor)
+.sign-up-form form h4 {
+   color: var(--mainColor)
 }
 
 @media (min-width: 768px) {
-   .register-form form .row {
+   .sign-up-form form .row {
       height: 93px !important;
    }
 }
 
-.register-form form .col-md-3,
-.register-form form .col-md-4,
-.register-form form .col-md-6 {
+.sign-up-form form .col-md-3,
+.sign-up-form form .col-md-4,
+.sign-up-form form .col-md-6 {
    height: 93px !important;
 }
 
-.register-form form input::placeholder {
+.sign-up-form form input::placeholder {
    opacity: 0.6;
    font-size: 14px;
    font-weight: 300;
 }
 
-.register-form form .invalid-feedback,
-.register-form form .error-feedback {
+.sign-up-form form .invalid-feedback,
+.sign-up-form form .error-feedback {
    font-size: 13px !important;
    margin-bottom: 4px;
 }
 
-.register-form form .add-btn,
-.register-form form .remove-btn {
+.sign-up-form form .add-btn,
+.sign-up-form form .remove-btn {
    border: none;
    transition: .3s;
    border-radius: 4px;
@@ -102,25 +102,25 @@
    -o-transition: .3s;
 }
 
-.register-form form .add-btn {
+.sign-up-form form .add-btn {
    font-size: 13px;
    padding: 4px 20px;
    color: white;
-   background-color: #3aa856;
+   background-color: var(--greenColor);
 }
 
-.register-form form .add-btn:hover {
-   background-color: #257c3b;
+.sign-up-form form .add-btn:hover {
+   background-color: var(--greenHover);
 }
 
-.register-form form .remove-btn {
+.sign-up-form form .remove-btn {
    width: 22px;
    height: 25px;
    background-color: transparent;
    justify-self: flex-end;
 }
 
-.register-form form .remove-btn svg {
+.sign-up-form form .remove-btn svg {
    font-size: 16px;
    color: #9e9e9e;
    transition: .3s;
@@ -130,40 +130,40 @@
    -o-transition: .3s;
 }
 
-.register-form form .remove-btn:hover {
+.sign-up-form form .remove-btn:hover {
    background-color: #ff0000f0;
 }
 
-.register-form form .remove-btn:hover svg {
+.sign-up-form form .remove-btn:hover svg {
    color: white;
 }
 
 @media(max-width: 768px) {
 
-   .register-form form .add-btn,
-   .register-form form .remove-btn {
+   .sign-up-form form .add-btn,
+   .sign-up-form form .remove-btn {
       width: 100% !important;
       height: 30px !important;
    }
 }
 
-.register-form hr {
+.sign-up-form hr {
    color: #9e9e9e;
 }
 
 @media(max-width: 576px) {
-   .register-form hr {
+   .sign-up-form hr {
       margin-top: 10px;
    }
 }
 
-.register-form form .password-toggler {
+.sign-up-form form .password-toggler {
    font-size: 13px;
    top: calc(50% + 5px);
    right: 43px;
    color: #aaa;
    cursor: pointer;
-   z-index: 1000;
+   z-index: 10;
    transform: translateY(-50%);
    transition: var(--mainTransition);
    -webkit-transform: translateY(-50%);
@@ -176,22 +176,22 @@
    -o-transition: var(--mainTransition);
 }
 
-.register-form form .password-toggler:hover {
+.sign-up-form form .password-toggler:hover {
    color: #999;
 }
 
-.register-form form .submit-btn {
-   background-color: var(--orangeColor);
-   border-color: var(--orangeColor);
+.sign-up-form form .submit-btn {
+   background-color: var(--mainColor);
+   border-color: var(--mainColor);
 }
 
-.register-form form .submit-btn:hover {
-   background-color: var(--orangeHover);
-   border-color: var(--orangeHover);
+.sign-up-form form .submit-btn:hover {
+   background-color: var(--mainHover);
+   border-color: var(--mainHover);
 }
 
 @media(max-width: 576px) {
-   .register-form form .submit-btn {
+   .sign-up-form form .submit-btn {
       width: 100% !important;
    }
 }

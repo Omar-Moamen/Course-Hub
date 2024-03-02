@@ -2,12 +2,28 @@
 
 :root {
   --whiteColor: #FFFFFFB3;
-  --orangeColor: #F4623A;
-  --orangeHover: #CF5331;
+  --mainColor: #F4623A;
+  --mainHover: #CF5331;
+  --greenColor: #3aa856;
+  --greenHover: #257c3b;
+  --greyColor: #6c757d;
+  --greyHover: #5c636a;
   --darkColor: #212529;
   --blueColor: #00AEFF;
   --mainTransition: 0.2s;
   --mainShadow: 0 0.5rem 1rem #00000026;
+}
+
+::-webkit-scrollbar {
+  width: 17px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #F6F6F6;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(var(--mainColor), .5);
 }
 
 * {
@@ -20,4 +36,14 @@ body {
   font-family: 'Merriweather Sans', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.invalid-field:focus {
+  box-shadow: 0 0 0 4px #e007073d !important;
+}
+
+.error-msg {
+  display: block;
+  font-size: 13px;
+  margin: 4px 0;
 }

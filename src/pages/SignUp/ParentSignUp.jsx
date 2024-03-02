@@ -1,6 +1,6 @@
 import {Fragment, useState} from 'react';
 import {Button, Col, Container, Form, Row} from 'react-bootstrap';
-import './RegisterForm.css';
+import './ParentSignUp.css';
 import {Formik, Field, FieldArray, ErrorMessage} from "formik";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import * as Yup from 'yup';
@@ -10,8 +10,8 @@ import {addUser} from '../../store/userSlice';
 import {useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 
-// Start Register validation schema
-const registerSchema = Yup.object().shape({
+// Start SignUp validation schema
+const signUPSchema = Yup.object().shape({
    parentFirstName: Yup
       .string()
       .min(2, "First name should be at least 2 characters")
@@ -20,12 +20,12 @@ const registerSchema = Yup.object().shape({
    parentLastName: Yup
       .string()
       .min(2, "Last name should be at least 2 characters")
-      .trim("First name shouldn't have spaces")
+      .trim("Last name shouldn't have spaces")
       .required("Last name is required"),
    fatherName: Yup
       .string()
       .min(2, "Father name should be at least 2 characters")
-      .trim("First name shouldn't have spaces")
+      .trim("Father name shouldn't have spaces")
       .required("Father name is required"),
    parentPhone: Yup
       .number()
@@ -36,7 +36,7 @@ const registerSchema = Yup.object().shape({
       .required("Email is required"),
    parentCity: Yup
       .string()
-      .min(2)
+      .min(2, "City name must be at least 2 characters")
       .max(20, "City name must be maximum 20 characters")
       .required("City is required"),
    parentPassword: Yup.string()
@@ -62,7 +62,7 @@ const registerSchema = Yup.object().shape({
 
 
 // Start Component
-function RegisterForm()
+function ParentSignUp()
 {
    const [showPassword, setShowPassword] = useState(false);
 
@@ -111,14 +111,14 @@ function RegisterForm()
    };
 
    return (
-      <div className="register-form d-flex align-items-center position-relative">
+      <div className="sign-up-form d-flex align-items-center position-relative">
          <div className='dots position-absolute dots-up d-none d-xl-block' />
          <div className='dots position-absolute dots-down d-none d-xl-block' />
          <Container className="d-flex justify-content-center align-items-center">
             <Formik
                initialValues={initialValues}
                onSubmit={onSubmit}
-               validationSchema={registerSchema}
+               validationSchema={signUPSchema}
                enableReinitialize={enableReinitialize}
             >
                {({handleSubmit, handleChange, values, errors, touched}) => (
@@ -415,4 +415,4 @@ function RegisterForm()
    )
 }
 
-export default RegisterForm;
+export default ParentSignUp;

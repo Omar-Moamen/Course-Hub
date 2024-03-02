@@ -1,0 +1,143 @@
+.modal-backdrop {
+   top: 0;
+   left: 0;
+   bottom: 0;
+   right: 0;
+   background-color: rgb(0, 0, 0, .6);
+   z-index: 10000;
+   display: none;
+}
+
+.modal-backdrop.open {
+   display: block;
+}
+
+.custom-modal {
+   width: 800px;
+   height: 500px;
+   padding: 15px 0;
+   background-color: white;
+   z-index: 10000;
+   border-radius: 6px;
+   transform: translate(-50%, -50%) scale(0);
+
+   -webkit-border-radius: 6px;
+   -moz-border-radius: 6px;
+   -ms-border-radius: 6px;
+   -o-border-radius: 6px;
+   -webkit-transform: translate(-50%, -50%) scale(0);
+   -moz-transform: translate(-50%, -50%) scale(0);
+   -ms-transform: translate(-50%, -50%) scale(0);
+   -o-transform: translate(-50%, -50%) scale(0);
+}
+
+@media(max-width: 992px) {
+   .custom-modal {
+      max-width: 70%;
+      max-height: 200px;
+   }
+}
+
+.custom-modal.open {
+   transform: translate(-50%, -50%) scale(1);
+   transition: var(--mainTransition);
+   -webkit-transform: translate(-50%, -50%) scale(1);
+   -moz-transform: translate(-50%, -50%) scale(1);
+   -ms-transform: translate(-50%, -50%) scale(1);
+   -o-transform: translate(-50%, -50%) scale(1);
+}
+
+.custom-modal .instructor-box,
+.custom-modal .parent-box {
+   position: relative;
+   border: 3px solid #ddd;
+   border-radius: 6px;
+   padding: 15px;
+   cursor: pointer;
+   transition: var(--mainTransition);
+   -webkit-transition: var(--mainTransition);
+   -moz-transition: var(--mainTransition);
+   -ms-transition: var(--mainTransition);
+   -o-transition: var(--mainTransition);
+}
+
+@media(max-width: 992px) {
+
+   .custom-modal .instructor-box:hover,
+   .custom-modal .parent-box:hover {
+      color: white;
+   }
+
+   .custom-modal .instructor-box:hover {
+      background-color: var(--greyColor);
+      border-color: var(--greyColor);
+   }
+
+   .custom-modal .parent-box:hover {
+      background-color: var(--mainColor);
+      border-color: var(--mainColor);
+   }
+}
+
+
+
+@media (min-width: 991px) {
+
+   .custom-modal .instructor-box::before,
+   .custom-modal .parent-box::before {
+      content: '';
+      position: absolute;
+      width: calc(100% + 1px);
+      height: calc(100% + 1px);
+      background-color: rgb(0, 0, 0, .1);
+      top: 50%;
+      left: 50%;
+      border-radius: 4px;
+      transform: translate(-50%, -50%) scale(0);
+      transition: var(--mainTransition);
+      -webkit-transform: translate(-50%, -50%) scale(0);
+      -moz-transform: translate(-50%, -50%) scale(0);
+      -ms-transform: translate(-50%, -50%) scale(0);
+      -o-transform: translate(-50%, -50%) scale(0);
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      -webkit-transition: var(--mainTransition);
+      -moz-transition: var(--mainTransition);
+      -ms-transition: var(--mainTransition);
+      -o-transition: var(--mainTransition);
+   }
+
+   .custom-modal .instructor-box:hover::before,
+   .custom-modal .parent-box:hover::before {
+      transform: translate(-50%, -50%) scale(1);
+      -webkit-transform: translate(-50%, -50%) scale(1);
+      -moz-transform: translate(-50%, -50%) scale(1);
+      -ms-transform: translate(-50%, -50%) scale(1);
+      -o-transform: translate(-50%, -50%) scale(1);
+   }
+}
+
+.custom-modal .instructor-img {
+   width: 240px
+}
+
+.custom-modal .parent-child-img {
+   width: 250px
+}
+
+.custom-modal h3 {
+   font-size: 30px;
+}
+
+@media(max-width: 992px) {
+
+   .custom-modal img {
+      display: none;
+   }
+
+   .custom-modal h3 {
+      font-size: 24px;
+   }
+}

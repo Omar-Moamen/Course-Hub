@@ -33,7 +33,7 @@
    width: 60px;
    bottom: -30px;
    left: 50%;
-   background: var(--orangeColor);
+   background: var(--mainColor);
    border: 0.5px solid #000;
    opacity: 1;
    transform: translateX(-50%);
@@ -44,19 +44,19 @@
 }
 
 .landing a {
-   background-color: var(--orangeColor);
+   background-color: var(--mainColor);
    font-size: 14px;
    padding: 18px 34px;
 }
 
 .landing a:hover {
 
-   background-color: var(--orangeHover);
+   background-color: var(--mainHover);
 }
 
 .about {
    padding: 8rem 0;
-   background-color: var(--orangeColor);
+   background-color: var(--mainColor);
 }
 
 .about .main-header::before {
@@ -87,7 +87,7 @@
 
 .services h6 {
    font-size: 18px;
-   color: var(--orangeColor);
+   color: var(--mainColor);
 }
 
 .services p {

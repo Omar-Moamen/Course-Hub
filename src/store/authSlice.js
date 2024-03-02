@@ -48,6 +48,7 @@ const authSlice = createSlice({
             state.loading = false;
             state.user = payload;
             state.isLoggedIn = true;
+            console.log(payload)
             state.error = null;
             console.log(state.user)
          })
@@ -56,7 +57,6 @@ const authSlice = createSlice({
             state.loading = false;
             state.user = null;
             state.error = payload;
-            console.log(payload)
          });
    }
 });

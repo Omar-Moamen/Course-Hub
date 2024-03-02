@@ -9,7 +9,7 @@
    height: 100%;
    top: 50%;
    left: 50%;
-   background-color: var(--orangeColor);
+   background-color: var(--mainColor);
    border-radius: 50%;
    transform: translateX(-50%) skew(0, -10deg);
    z-index: -1;
@@ -30,7 +30,7 @@
 }
 
 .login-in-form form {
-   border-color: var(--orangeColor);
+   border-color: var(--mainColor);
    box-shadow: var(--mainShadow);
 }
 
@@ -45,7 +45,7 @@
 }
 
 .login-in-form form h4 {
-   color: var(--orangeColor)
+   color: var(--mainColor)
 }
 
 .login-in-form form input::placeholder {
@@ -60,7 +60,7 @@
    right: 43px;
    color: #aaa;
    cursor: pointer;
-   z-index: 1000;
+   z-index: 10;
    transform: translateY(-50%);
    transition: color var(--mainTransition);
    -webkit-transform: translateY(-50%);
@@ -101,13 +101,13 @@
 }
 
 .login-in-form form .login-in-btn {
-   background-color: var(--orangeColor);
-   border-color: var(--orangeColor);
+   background-color: var(--mainColor);
+   border-color: var(--mainColor);
 }
 
 .login-in-form form .login-in-btn:hover {
-   background-color: var(--orangeHover);
-   border-color: var(--orangeHover);
+   background-color: var(--mainHover);
+   border-color: var(--mainHover);
 }
 
 @keyframes waving {

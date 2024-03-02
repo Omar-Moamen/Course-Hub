@@ -35,13 +35,13 @@ function Landing()
                            explicabo incidunt recusandae voluptatibus,
                            rerum, hic aliquam
                         </p>
-                        <Link
+                        <a
                            to={isLoggedIn ? 'home' : 'login'}
                            className='
                            btn btn-primary border-0
                            text-white rounded-pill
-                           text-uppercase fw-semibold mt-3' href="#/">Find out more
-                        </Link>
+                           text-uppercase fw-semibold mt-3' href="#about">Find out more
+                        </a>
                      </Col>
                   </Row>
                </Container>
@@ -68,7 +68,7 @@ function Landing()
                         className='
                            btn btn-light border-0
                            text-black rounded-pill
-                           text-uppercase fw-semibold mt-3' href="#/">Get Started!
+                           text-uppercase fw-semibold mt-3'>Get Started!
                      </Link>
                   </Col>
                </Row>

@@ -1,5 +1,5 @@
 import './LoginForm.css';
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {Formik} from 'formik';
 import {Container, Form, Row, Col, Button} from 'react-bootstrap';
 import * as Yup from 'yup';
@@ -12,6 +12,7 @@ import {faEye, faEyeSlash} from '@fortawesome/free-regular-svg-icons';
 import {Modal} from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import PopupModal from '../../components/PopupModal/PopupModal';
+import CustomModal from '../../components/CustomModal/CustomModal';
 
 // Start Sign in validation schema
 const signInSchema = Yup.object().shape({
@@ -33,6 +34,9 @@ function LoginForm()
 
    const [showPassword, setShowPassword] = useState(false);
    const [showModal, setShowModal] = useState(false);
+
+   // To handle register options (instructor | Parent/Student)
+   const [registerOpts, setRegisterOpts] = useState(false);
 
    const dispatch = useDispatch();
    const navigate = useNavigate();
@@ -84,9 +88,9 @@ function LoginForm()
          })
    };
 
-
    return (
       <>
+         <CustomModal show={registerOpts} close={() => setRegisterOpts(false)} />
          {/* Start reset password Modal */}
          <PopupModal
             showModal={showModal}
@@ -102,14 +106,14 @@ function LoginForm()
                      <Form onSubmit={handleSubmit}>
                         <Modal.Body>
                            <Form.Label
+                              htmlFor='UserIdentifier'
+                              className='text-black-50 ms1'
                               style={{fontSize: "14px"}}
                            >
-                              Enter:
-                              <span className='text-black-50 ms-1'>
-                                 Username / Email
-                              </span>
+                              Username / Email
                            </Form.Label>
                            <Form.Control
+                              id='UserIdentifier'
                               className='reset-password-input'
                               name='identifier'
                               type='text'
@@ -220,11 +224,12 @@ function LoginForm()
                            <Col
                               className='mt-md-2'
                               md="6">
-                              <Link
+                              <Button
+                                 type='button'
                                  className="register-btn w-100 btn btn-secondary py-2"
-                                 to="/register">
+                                 onClick={() => setRegisterOpts(true)}>
                                  Register
-                              </Link>
+                              </Button>
                            </Col>
                         </Row>
                      </Form>

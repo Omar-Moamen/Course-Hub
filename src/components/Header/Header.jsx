@@ -21,8 +21,7 @@ export default function Header()
    const resizeHandler = () =>
    {
       setScreenSize(window.innerWidth);
-   }
-
+   };
 
    // Effects
 
@@ -33,7 +32,7 @@ export default function Header()
          setShowUserIcon(true) : setShowUserIcon(false)
    }, [isLoggedIn, user])
 
-   // Change mainNav color, backgroundColor and hover styles
+   // Change mainNav => [color, backgroundColor, hover styles]
    useEffect(() =>
    {
       const mainNavStylesHandler = () =>
@@ -57,27 +56,43 @@ export default function Header()
    // Switch active links on scrolling
    useEffect(() =>
    {
+      // Remove active classes from array of elements
+      const removeActiveClasses = (elsArr) =>
+      {
+         elsArr.forEach(el => el.classList.remove('active'));
+      };
+
       const switchActiveLinksHandler = () =>
       {
          let currentSection = 'landing';
+
+         // Select array of sections to loop on it
          let sectionEls = document.querySelectorAll('.section');
+         let scrollTop = document.documentElement.scrollTop;
 
          sectionEls.forEach(sectionEl =>
          {
-            if (window.scrollY >= (sectionEl.offsetTop - sectionEl.clientHeight / 3))
+            if (scrollTop >= (sectionEl.offsetTop - sectionEl.clientHeight / 3.2))
             {
                currentSection = sectionEl.id;
             }
          })
 
+         // Select array of .nav-link to loop on it to handle active class
          let navLinks = document.querySelectorAll('.nav-link');
 
-         navLinks.forEach(link =>
+         navLinks.forEach(navLink =>
          {
-            if (link.href.includes(currentSection))
+            if (navLink.href.includes(currentSection))
             {
-               document.querySelector('.active').classList.remove('active');
-               link.classList.add('active');
+               // Remove active class from all links
+               removeActiveClasses(navLinks);
+               navLink.classList.add('active');
+            }
+            // 
+            if (scrollTop < 250)
+            {
+               removeActiveClasses(navLinks);
             }
          })
       }
@@ -132,14 +147,14 @@ export default function Header()
                {
                   pathname === "/" ?
                      <>
-                        <Nav.Link className="active" href="#landing">About</Nav.Link>
+                        <Nav.Link href="#about">About</Nav.Link>
                         <Nav.Link href="#services">Services</Nav.Link>
                         <Nav.Link href="#portfolio">Portfolio</Nav.Link>
                         <Nav.Link href="#contact">Contact</Nav.Link>
                      </>
                      :
                      <>
-                        <NavLink className="navbar-link" to="/" end>About</NavLink>
+                        <NavLink className="navbar-link" to="/">About</NavLink>
                         <NavLink className="navbar-link" to="/">Services</NavLink>
                         <NavLink className="navbar-link" to="/">Portfolio</NavLink>
                         <NavLink className="navbar-link" to="/">Contact</NavLink>

@@ -39,7 +39,7 @@
 
 #mainNav.alt-nav-hover a.active,
 #mainNav.alt-nav-hover a:hover {
-   color: var(--orangeColor) !important;
+   color: var(--mainColor) !important;
 }
 
 @media(max-width: 991px) {
@@ -92,7 +92,7 @@
 #mainNav .navbar-toggler.rotate-bars span:first-child,
 #mainNav .navbar-toggler.rotate-bars span:last-child {
    top: 6px;
-   background-color: var(--orangeColor);
+   background-color: var(--mainColor);
 }
 
 #mainNav .navbar-toggler.rotate-bars span:first-child {
