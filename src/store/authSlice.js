@@ -36,6 +36,40 @@ export const userIsLoggedIn = createAsyncThunk('auth/userIsLoggedIn',
    }
 );
 
+// googleAuth asyncThunk
+// export const googleAuth = createAsyncThunk('auth/googleAuth',
+//    async (_, thunkAPI) =>
+//    {
+//       const {rejectWithValue} = thunkAPI;
+//       try
+//       {
+//          const request = await client.get(`${baseURL}/auth/google`)
+//          return request.data;
+//       }
+//       catch (error)
+//       {
+//          return rejectWithValue(error.message)
+//       }
+//    }
+// );
+
+// googleAuth asyncThunk
+export const userLogout = createAsyncThunk('auth/userLogout',
+   async (_, thunkAPI) =>
+   {
+      const {rejectWithValue} = thunkAPI;
+      try
+      {
+         const request = await client.get(`${baseURL}/logout`)
+         return request.data;
+      }
+      catch (error)
+      {
+         return rejectWithValue(error.message)
+      }
+   }
+);
+
 const initialState = {user: null, isLoggedIn: false, loading: false, error: null};
 
 const authSlice = createSlice({
@@ -84,6 +118,25 @@ const authSlice = createSlice({
          {
             state.loading = false;
             state.isLoggedIn = false;
+            state.error = payload;
+         });
+
+      // userLogout
+      builder
+         .addCase(userLogout.pending, (state, _) =>
+         {
+            state.loading = true;
+            state.error = null;
+         })
+         .addCase(userLogout.fulfilled, (state, {payload}) =>
+         {
+            state.loading = false;
+            state.isLoggedIn = payload;
+            state.error = null;
+         })
+         .addCase(userLogout.rejected, (state, {payload}) =>
+         {
+            state.loading = false;
             state.error = payload;
          });
    }

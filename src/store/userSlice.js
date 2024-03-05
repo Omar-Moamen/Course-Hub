@@ -62,7 +62,7 @@ export const forgetPassword = createAsyncThunk('user/forgetPassword',
    }
 );
 
-// forgetPassword asyncThunk
+// getUser asyncThunk
 export const getUser = createAsyncThunk('user/getUser',
    async (_, thunkAPI) =>
    {
@@ -147,7 +147,6 @@ const userSlice = createSlice({
          .addCase(getUser.pending, (state, _) =>
          {
             state.loading = true;
-            state.user = null;
             state.error = null;
          })
          .addCase(getUser.fulfilled, (state, {payload}) =>

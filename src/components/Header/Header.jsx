@@ -4,14 +4,13 @@ import {useEffect, useState} from "react";
 import {Link, NavLink, useLocation} from "react-router-dom";
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import useUserData from "../../hooks/use-user-data";
 import {userIsLoggedIn} from "../../store/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 
-export default function Header()
+export default function Header({userData})
 {
    // Get The Current User
-   const {user} = useUserData();
+   // const {user} = useUserData();
 
    // selectors
    const {isLoggedIn} = useSelector(state => state.auth);
@@ -164,7 +163,7 @@ export default function Header()
                }
             </Nav>
             {
-               isLoggedIn && user && screenSize > 991 ?
+               isLoggedIn && userData && screenSize > 991 ?
                   <div className="
                         nav-user-info
                         text-capitalize
@@ -176,7 +175,7 @@ export default function Header()
                         m-auto"
                   >
                      <FontAwesomeIcon icon={faCircleUser} />
-                     <p className="p-0 m-0">{`${user && user.firstName} ${user.lastName}`}</p>
+                     <p className="p-0 m-0">{`${userData && userData.firstName} ${userData.lastName}`}</p>
                   </div>
                   : null
             }

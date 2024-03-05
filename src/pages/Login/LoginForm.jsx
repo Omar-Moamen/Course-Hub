@@ -6,13 +6,14 @@ import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
 import {forgetPassword} from '../../store/userSlice';
 import {userLogin} from '../../store/authSlice';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-regular-svg-icons';
 import {Modal} from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import PopupModal from '../../components/PopupModal/PopupModal';
 import CustomModal from '../../components/CustomModal/CustomModal';
+import useUserData from '../../hooks/use-user-data';
 
 // Start Sign in validation schema
 const signInSchema = Yup.object().shape({
@@ -31,6 +32,7 @@ const signInSchema = Yup.object().shape({
 function LoginForm()
 {
    const {loading, error} = useSelector(state => state.auth);
+   const {user} = useUserData();
 
    const [showPassword, setShowPassword] = useState(false);
    const [showModal, setShowModal] = useState(false);
@@ -87,6 +89,19 @@ function LoginForm()
             });
          })
    };
+
+   const handleGoogleLogin = () =>
+   {
+      const windowFeatures = "left=500,top=200,width=450,height=500";
+
+      window.open(`http://localhost:5000/auth/google`, '_blank', windowFeatures);
+   }
+
+   console.log(user)
+   // useEffect(() =>
+   // {
+
+   // },[user.isLoggedIn])
 
    return (
       <>
@@ -220,6 +235,7 @@ function LoginForm()
                                  className="login-in-btn btn btn-primary w-100 mb-2 py-2">
                                  Login
                               </Button>
+                              <Button onClick={handleGoogleLogin}>Google</Button>
                            </Col>
                            <Col
                               className='mt-md-2'
