@@ -83,6 +83,7 @@
 
 .login-in-form .reset-password {
    font-size: 12px !important;
+   color: #777;
    cursor: pointer;
    transition: var(--mainTransition);
    -webkit-transition: var(--mainTransition);
@@ -92,7 +93,7 @@
 }
 
 .login-in-form .reset-password:hover {
-   color: #777 !important;
+   color: #444 !important;
 }
 
 /* reset password input field */
@@ -110,6 +111,24 @@
    border-color: var(--mainHover);
 }
 
+.google-btn {
+   background-color: #FAFAFA;
+   color: #444;
+   border: 1px solid #E3E3E3;
+   max-height: 41.6px;
+   transition: var(--mainTransition);
+   -webkit-transition: var(--mainTransition);
+   -moz-transition: var(--mainTransition);
+   -ms-transition: var(--mainTransition);
+   -o-transition: var(--mainTransition);
+}
+
+.google-btn:hover {
+   background-color: #E3E3E3;
+   color: #444;
+}
+
+/* Start keyframes */
 @keyframes waving {
    from {
       transform: translateX(-50%) skew(0, -10deg);

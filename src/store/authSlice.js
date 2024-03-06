@@ -36,24 +36,7 @@ export const userIsLoggedIn = createAsyncThunk('auth/userIsLoggedIn',
    }
 );
 
-// googleAuth asyncThunk
-// export const googleAuth = createAsyncThunk('auth/googleAuth',
-//    async (_, thunkAPI) =>
-//    {
-//       const {rejectWithValue} = thunkAPI;
-//       try
-//       {
-//          const request = await client.get(`${baseURL}/auth/google`)
-//          return request.data;
-//       }
-//       catch (error)
-//       {
-//          return rejectWithValue(error.message)
-//       }
-//    }
-// );
-
-// googleAuth asyncThunk
+// userLogout asyncThunk
 export const userLogout = createAsyncThunk('auth/userLogout',
    async (_, thunkAPI) =>
    {

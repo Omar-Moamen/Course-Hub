@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
 import {forgetPassword} from '../../store/userSlice';
 import {userLogin} from '../../store/authSlice';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-regular-svg-icons';
 import {Modal} from 'react-bootstrap';
@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import PopupModal from '../../components/PopupModal/PopupModal';
 import CustomModal from '../../components/CustomModal/CustomModal';
 import useUserData from '../../hooks/use-user-data';
+import googleLogo from "../../assets/imgs/google-logo.webp"
 
 // Start Sign in validation schema
 const signInSchema = Yup.object().shape({
@@ -96,12 +97,6 @@ function LoginForm()
 
       window.open(`http://localhost:5000/auth/google`, '_blank', windowFeatures);
    }
-
-   console.log(user)
-   // useEffect(() =>
-   // {
-
-   // },[user.isLoggedIn])
 
    return (
       <>
@@ -195,17 +190,18 @@ function LoginForm()
                                  onChange={handleChange}
                                  isInvalid={!!errors.signInPassword} />
                               <button
+                                 type='button'
                                  className='password-toggler 
                                  position-absolute 
                                  border-0
                                  bg-transparent'
-                                 type='button'
                                  style={
                                     {
                                        top: `
                                        ${errors.signInPassword ?
                                              "calc(50% + 4px)" : "calc(50% + 16px)"}`
                                     }}
+                                 aria-label='password-toggler'
                                  onClick={() => setShowPassword(!showPassword)}>
                                  <FontAwesomeIcon
                                     icon={showPassword ? faEyeSlash : faEye} />
@@ -219,7 +215,6 @@ function LoginForm()
                            <Col sm="12" className='mb-3'>
                               <span className="
                               reset-password
-                              text-black-50
                               text-decoration-underline
                               text-md-left
                               "
@@ -227,22 +222,32 @@ function LoginForm()
                                  Reset password
                               </span>
                            </Col>
-                           <Col
-                              className='mt-md-2'
-                              md="6">
+                           <Col className='mt-md-2' md="6">
                               <Button
                                  type="submit"
-                                 className="login-in-btn btn btn-primary w-100 mb-2 py-2">
+                                 className="login-in-btn w-100 mb-2 py-2"
+                                 aria-label='login-btn'>
                                  Login
                               </Button>
-                              <Button onClick={handleGoogleLogin}>Google</Button>
                            </Col>
-                           <Col
-                              className='mt-md-2'
-                              md="6">
+                           <Col className='mt-md-2 mb-2' md="6">
+                              <button
+                                 type='button'
+                                 className='google-btn rounded-2 w-100 py-2'
+                                 aria-label='google-btn'
+                                 onClick={handleGoogleLogin}>
+                                 <img
+                                    src={googleLogo}
+                                    width="22"
+                                    height="22" alt="google-btn" />
+                                 <span className='ps-2'>Login with Google</span>
+                              </button>
+                           </Col>
+                           <Col className='mt-md-2' md="6">
                               <Button
                                  type='button'
                                  className="register-btn w-100 btn btn-secondary py-2"
+                                 aria-label='register-btn'
                                  onClick={() => setRegisterOpts(true)}>
                                  Register
                               </Button>

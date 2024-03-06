@@ -7,7 +7,8 @@ export const cookieJar = new CookieJar();
 export const client = wrapper(axios.create({
    jar: cookieJar,
    withCredentials: true,
-}))
+}));
+
 export const baseURL = "http://localhost:5000";
 
 // addUser asyncThunk
