@@ -44,6 +44,9 @@ function LoginForm()
    const dispatch = useDispatch();
    const navigate = useNavigate();
 
+   const [isClosed, setIsClosed] = useState(false);
+
+
    // Formik
    const initialValues = {
       signInEmail: '',
@@ -91,12 +94,25 @@ function LoginForm()
          })
    };
 
-   const handleGoogleLogin = () =>
+   const handleGoogleLogin = async () =>
    {
       const windowFeatures = "left=500,top=200,width=450,height=500";
 
-      window.open(`http://localhost:5000/auth/google`, '_blank', windowFeatures);
-   }
+      let myWindow = window.open(`http://localhost:5000/auth/google`, '_blank', windowFeatures);
+
+
+      // opener:
+      myWindow.opener.onmessage = function (e) {
+        if (e.data === 'replace your location') {
+     
+     // myWindow.opener.location.reload();
+         window.location.reload();
+        }
+      };
+
+      console.log(isClosed)
+
+      }
 
    return (
       <>
