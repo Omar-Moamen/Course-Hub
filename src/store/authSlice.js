@@ -53,7 +53,7 @@ export const userLogout = createAsyncThunk('auth/userLogout',
    }
 );
 
-const initialState = {user: null, isLoggedIn: false, loading: false, error: null};
+const initialState = {user: null, isLoggedIn: false, error: null};
 
 const authSlice = createSlice({
    name: 'auth',
@@ -65,12 +65,10 @@ const authSlice = createSlice({
       builder
          .addCase(userLogin.pending, (state, _) =>
          {
-            state.loading = true;
             state.error = null;
          })
          .addCase(userLogin.fulfilled, (state, {payload}) =>
          {
-            state.loading = false;
             state.user = payload;
             state.isLoggedIn = true;
             state.error = null;
@@ -78,8 +76,6 @@ const authSlice = createSlice({
          })
          .addCase(userLogin.rejected, (state, {payload}) =>
          {
-            state.loading = false;
-            state.user = null;
             state.error = payload;
          });
 
@@ -87,19 +83,16 @@ const authSlice = createSlice({
       builder
          .addCase(userIsLoggedIn.pending, (state, _) =>
          {
-            state.loading = true;
             state.isLoggedIn = false;
             state.error = null;
          })
          .addCase(userIsLoggedIn.fulfilled, (state, {payload}) =>
          {
-            state.loading = false;
             state.isLoggedIn = payload;
             state.error = null;
          })
          .addCase(userIsLoggedIn.rejected, (state, {payload}) =>
          {
-            state.loading = false;
             state.isLoggedIn = false;
             state.error = payload;
          });
@@ -108,18 +101,15 @@ const authSlice = createSlice({
       builder
          .addCase(userLogout.pending, (state, _) =>
          {
-            state.loading = true;
             state.error = null;
          })
          .addCase(userLogout.fulfilled, (state, {payload}) =>
          {
-            state.loading = false;
             state.isLoggedIn = payload;
             state.error = null;
          })
          .addCase(userLogout.rejected, (state, {payload}) =>
          {
-            state.loading = false;
             state.error = payload;
          });
    }

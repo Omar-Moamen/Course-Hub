@@ -100,19 +100,15 @@ function LoginForm()
 
       let myWindow = window.open(`http://localhost:5000/auth/google`, '_blank', windowFeatures);
 
-
       // opener:
-      myWindow.opener.onmessage = function (e) {
-        if (e.data === 'replace your location') {
-     
-     // myWindow.opener.location.reload();
-         window.location.reload();
-        }
+      myWindow.opener.onmessage = function (e)
+      {
+         if (e.data === 'replace your location')
+         {
+            window.location.reload();
+         }
       };
-
-      console.log(isClosed)
-
-      }
+   }
 
    return (
       <>
