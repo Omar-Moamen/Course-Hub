@@ -11,7 +11,8 @@ import productDesign from '../../assets/imgs/product-design.png';
 
 function Landing()
 {
-   const {isLoggedIn} = useSelector(state => state.auth);
+   // const {isLoggedIn} = useSelector(state => state.auth);
+   const {user} = useSelector(state => state.auth);
 
    return (
       <>
@@ -23,7 +24,7 @@ function Landing()
                   align-items-center justify-content-center"
                   >
                      <Col className="align-self-end" lg="8">
-                        <h1 className='main-header text-white text-capitalize mb-3'>
+                        <h1 className='main-heading text-white text-capitalize mb-3'>
                            Your favorite place to learn programming
                         </h1>
                      </Col>
@@ -35,12 +36,12 @@ function Landing()
                            explicabo incidunt recusandae voluptatibus,
                            rerum, hic aliquam
                         </p>
-                        <a
-                           to={isLoggedIn ? 'home' : 'login'}
-                           className='
+                        <a className='
                            btn btn-primary border-0
                            text-white rounded-pill
-                           text-uppercase fw-semibold mt-3' href="#about">Find out more
+                           text-uppercase fw-semibold mt-3'
+                           href="#about">
+                           Find out more
                         </a>
                      </Col>
                   </Row>
@@ -52,7 +53,7 @@ function Landing()
             <Container className='px-4 text-center'>
                <Row className='align-items-center justify-content-center'>
                   <Col className='' lg='8'>
-                     <h2 className='main-header text-white mb-3'>
+                     <h2 className='main-heading text-white mb-3'>
                         We've got what you need!
                      </h2>
                   </Col>
@@ -64,7 +65,7 @@ function Landing()
                         voluptatibus, rerum, hic aliquam
                      </p>
                      <Link
-                        to={isLoggedIn ? 'home' : 'login'}
+                        to={user ? 'home' : 'login'}
                         className='
                            btn btn-light border-0
                            text-black rounded-pill
@@ -77,7 +78,7 @@ function Landing()
          {/* Start Services Section */}
          <div id='services' className='services section'>
             <Container className='px-4 text-center'>
-               <h2 className='main-header text-capitalize mb-5'>Our services</h2>
+               <h2 className='main-heading text-capitalize mb-5'>Our services</h2>
                <Row className='align-items-center mt-5 pt-5'>
                   <Col className='
                   service-box

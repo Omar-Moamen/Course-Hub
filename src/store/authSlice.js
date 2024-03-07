@@ -36,6 +36,24 @@ export const userIsLoggedIn = createAsyncThunk('auth/userIsLoggedIn',
    }
 );
 
+// getUser asyncThunk
+export const getUser = createAsyncThunk('auth/getUser',
+   async (_, thunkAPI) =>
+   {
+      const {rejectWithValue} = thunkAPI;
+      try
+      {
+         const request = await client.get(`${baseURL}/getCurrentUser`)
+
+         return request.data;
+      }
+      catch (error)
+      {
+         return rejectWithValue(error.message)
+      }
+   }
+);
+
 // userLogout asyncThunk
 export const userLogout = createAsyncThunk('auth/userLogout',
    async (_, thunkAPI) =>
@@ -97,6 +115,25 @@ const authSlice = createSlice({
             state.error = payload;
          });
 
+      // getUser
+      builder
+         .addCase(getUser.pending, (state, _) =>
+         {
+            state.loading = true;
+            state.error = null;
+         })
+         .addCase(getUser.fulfilled, (state, {payload}) =>
+         {
+            state.loading = false;
+            state.user = payload;
+            state.error = null;
+         })
+         .addCase(getUser.rejected, (state, {payload}) =>
+         {
+            state.loading = false;
+            state.error = payload;
+         })
+
       // userLogout
       builder
          .addCase(userLogout.pending, (state, _) =>
@@ -106,6 +143,7 @@ const authSlice = createSlice({
          .addCase(userLogout.fulfilled, (state, {payload}) =>
          {
             state.isLoggedIn = payload;
+            state.user = null;
             state.error = null;
          })
          .addCase(userLogout.rejected, (state, {payload}) =>

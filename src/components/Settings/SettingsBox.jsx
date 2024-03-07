@@ -24,8 +24,6 @@ function Settings({isLoggedIn})
   {
     dispatch(userLogout())
       .unwrap()
-      .then(() => navigate('/'))
-      .then(() => window.location.reload())
       .catch(error =>
       {
         Swal.fire({
@@ -39,7 +37,7 @@ function Settings({isLoggedIn})
   return (
     <>
       {
-        isLoggedIn &&
+
         <div className={`settings-box position-fixed bg-body ${showSettings && "opened"}`}>
           <div className="
       settings-toggler

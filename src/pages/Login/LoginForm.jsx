@@ -15,6 +15,7 @@ import PopupModal from '../../components/PopupModal/PopupModal';
 import CustomModal from '../../components/CustomModal/CustomModal';
 import useUserData from '../../hooks/use-user-data';
 import googleLogo from "../../assets/imgs/google-logo.webp"
+import Loading from '../../components/Loading/Loading';
 
 // Start Sign in validation schema
 const signInSchema = Yup.object().shape({
@@ -43,9 +44,6 @@ function LoginForm()
 
    const dispatch = useDispatch();
    const navigate = useNavigate();
-
-   const [isClosed, setIsClosed] = useState(false);
-
 
    // Formik
    const initialValues = {
@@ -105,6 +103,7 @@ function LoginForm()
       {
          if (e.data === 'replace your location')
          {
+            navigate('/');
             window.location.reload();
          }
       };
@@ -235,12 +234,14 @@ function LoginForm()
                               </span>
                            </Col>
                            <Col className='mt-md-2' md="6">
-                              <Button
-                                 type="submit"
-                                 className="login-in-btn w-100 mb-2 py-2"
-                                 aria-label='login-btn'>
-                                 Login
-                              </Button>
+                              <Loading loading={loading}>
+                                 <Button
+                                    type="submit"
+                                    className="login-in-btn w-100 mb-2 py-2"
+                                    aria-label='login-btn'>
+                                    Login
+                                 </Button>
+                              </Loading>
                            </Col>
                            <Col className='mt-md-2 mb-2' md="6">
                               <button

@@ -1,7 +1,7 @@
 .landing-overlay {
    background-image: linear-gradient(to bottom,
-         #5c4d42cc 0%, #5c4d42cc 100%),
-      url('../../assets/imgs/bg-masthead.jpg');
+         #00000099 0%, #00000099 100%),
+      url('../../assets/imgs/bg-masthead.webp');
    background-size: cover;
    background-repeat: no-repeat;
    background-position: center;
@@ -16,17 +16,17 @@
    position: relative;
 }
 
-.landing .main-header {
+.landing .main-heading {
    font-size: 48px;
 }
 
 @media(max-width: 992px) {
-   .landing .main-header {
+   .landing .main-heading {
       font-size: 30px
    }
 }
 
-.main-header::before {
+.main-heading::before {
    content: '';
    position: absolute;
    height: 4px;

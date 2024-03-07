@@ -5,10 +5,11 @@ export default function withGuard(props)
 {
    function Wrapper(Component)
    {
-      const {isLoggedIn} = useSelector(state => state.auth);
+      const {user} = useSelector(state => state.auth);
       const navigate = useNavigate();
 
-      return isLoggedIn ? <Component {...props} /> : navigate('/');
+      return user ? <Component {...props} /> : navigate('/login');
    }
-   return Wrapper
+
+   return Wrapper;
 }

@@ -63,23 +63,7 @@ export const forgetPassword = createAsyncThunk('user/forgetPassword',
    }
 );
 
-// getUser asyncThunk
-export const getUser = createAsyncThunk('user/getUser',
-   async (_, thunkAPI) =>
-   {
-      const {rejectWithValue} = thunkAPI;
-      try
-      {
-         const request = await client.get(`${baseURL}/getCurrentUser`)
 
-         return request.data;
-      }
-      catch (error)
-      {
-         return rejectWithValue(error.message)
-      }
-   }
-);
 
 const initialState = {user: null, loading: false, error: null}
 
@@ -138,25 +122,6 @@ const userSlice = createSlice({
             state.error = null;
          })
          .addCase(forgetPassword.rejected, (state, {payload}) =>
-         {
-            state.loading = false;
-            state.error = payload;
-         })
-
-      // getUser
-      builder
-         .addCase(getUser.pending, (state, _) =>
-         {
-            state.loading = true;
-            state.error = null;
-         })
-         .addCase(getUser.fulfilled, (state, {payload}) =>
-         {
-            state.loading = false;
-            state.user = payload;
-            state.error = null;
-         })
-         .addCase(getUser.rejected, (state, {payload}) =>
          {
             state.loading = false;
             state.error = payload;
