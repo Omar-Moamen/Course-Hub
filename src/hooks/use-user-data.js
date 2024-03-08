@@ -11,7 +11,6 @@ function useUserData()
    useEffect(() =>
    {
       dispatch(getUser());
-
    }, [dispatch]);
 
    return {user};

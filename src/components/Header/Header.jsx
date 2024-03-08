@@ -4,17 +4,16 @@ import {useEffect, useState} from "react";
 import {Link, NavLink, useLocation} from "react-router-dom";
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {userIsLoggedIn} from "../../store/authSlice";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
+import useUserData from '../../hooks/use-user-data';
 
-export default function Header({userData})
+export default function Header()
 {
-   // Get The Current User
-   // const {user} = useUserData();
+   // Get The current User with custom hook
+   const {user} = useUserData();
 
    // selectors
    const {isLoggedIn} = useSelector(state => state.auth);
-   const dispatch = useDispatch();
 
    const {pathname} = useLocation();
    const [showNavbar, setShowNavbar] = useState(false);
@@ -28,10 +27,6 @@ export default function Header({userData})
    };
 
    // Effects
-   useEffect(() =>
-   {
-      dispatch(userIsLoggedIn());
-   }, [dispatch]);
 
    // Change mainNav => [color, backgroundColor, hover styles]
    useEffect(() =>
@@ -65,7 +60,7 @@ export default function Header({userData})
 
       const switchActiveLinksHandler = () =>
       {
-         let currentSection = 'landing';
+         let currentSection = 'Landing';
 
          // Select array of sections to loop on it
          let sectionEls = document.querySelectorAll('.section');
@@ -148,10 +143,10 @@ export default function Header({userData})
                {
                   pathname === "/" ?
                      <>
-                        <Nav.Link href="#about">About</Nav.Link>
-                        <Nav.Link href="#services">Services</Nav.Link>
-                        <Nav.Link href="#portfolio">Portfolio</Nav.Link>
-                        <Nav.Link href="#contact">Contact</Nav.Link>
+                        <Nav.Link href="#About">About</Nav.Link>
+                        <Nav.Link href="#Services">Services</Nav.Link>
+                        <Nav.Link href="#Portfolio">Portfolio</Nav.Link>
+                        <Nav.Link href="#Contact">Contact</Nav.Link>
                      </>
                      :
                      <>
@@ -163,7 +158,7 @@ export default function Header({userData})
                }
             </Nav>
             {
-               isLoggedIn && userData && screenSize > 991 ?
+               isLoggedIn && user && screenSize > 991 ?
                   <div className="
                         nav-user-info
                         text-capitalize
@@ -175,7 +170,7 @@ export default function Header({userData})
                         m-auto"
                   >
                      <FontAwesomeIcon icon={faCircleUser} />
-                     <p className="p-0 m-0">{`${userData && userData.firstName} ${userData.lastName}`}</p>
+                     <p className="p-0 m-0">{`${user && user.firstName} ${user.lastName}`}</p>
                   </div>
                   : null
             }

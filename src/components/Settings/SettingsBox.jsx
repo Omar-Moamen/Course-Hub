@@ -7,9 +7,13 @@ import {useDispatch} from "react-redux";
 import {userLogout} from "../../store/authSlice";
 import {useNavigate} from "react-router-dom";
 import Swal from "sweetalert2";
+import useUserData from "../../hooks/use-user-data";
 
-function Settings({isLoggedIn})
+function Settings()
 {
+  // Get The current User with custom hook
+  const {user} = useUserData();
+
   const [showSettings, setShowSettings] = useState(false);
 
   const dispatch = useDispatch();
@@ -37,7 +41,7 @@ function Settings({isLoggedIn})
   return (
     <>
       {
-
+        user &&
         <div className={`settings-box position-fixed bg-body ${showSettings && "opened"}`}>
           <div className="
       settings-toggler

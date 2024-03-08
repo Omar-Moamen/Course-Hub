@@ -1,38 +1,24 @@
+import {useState, useEffect} from "react";
 import {Spinner} from "react-bootstrap";
 
-export default function Loading({renderProp, children, loading})
+export default function Loading({render, loading})
 {
-   const elementType = children?.type?.render?.displayName;
+   const [disable, setDisable] = useState(false);
 
-   console.log(elementType);
+   const loader = <Spinner animation="border" role="status">
+      <span className="visually-hidden">Loading...</span>
+   </Spinner>
 
-   const renderHandler = () =>
+   useEffect(() =>
    {
-      if (elementType.toLowerCase() === "button")
-      {
-         return (
-            <>
-               {
-                  loading ? "button loading..." :
-                     children
-               }
-            </>
-         )
-      }
+      loading ? setDisable(true) : setDisable(false);
+   }, [loading])
 
-      // If elementType not Button it will return this =>
-      return (
-         <>
-            {
-               loading ?
-                  <Spinner animation="border" role="status">
-                     <span className="visually-hidden">Loading...</span>
-                  </Spinner> :
-                  children
-            }
-         </>
-      )
-   }
-
-   return renderHandler();
+   return (
+      <>
+         {
+            render(disable, loader)
+         }
+      </>
+   )
 }

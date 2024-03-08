@@ -1,23 +1,25 @@
 import {Col, Container, Row} from 'react-bootstrap';
 import './Landing.css'
 import {Link} from 'react-router-dom';
-import {useSelector} from 'react-redux';
 import skillsImg from '../../assets/imgs/skills.png';
 import successImg from '../../assets/imgs/success.png';
 import profileImg from '../../assets/imgs/profile.png';
 import tackleFuture from '../../assets/imgs/tackle-future.png';
 import teaching from '../../assets/imgs/teaching.png';
 import productDesign from '../../assets/imgs/product-design.png';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faAnglesDown} from '@fortawesome/free-solid-svg-icons';
+import useUserData from '../../hooks/use-user-data';
 
 function Landing()
 {
    // const {isLoggedIn} = useSelector(state => state.auth);
-   const {user} = useSelector(state => state.auth);
+   const {user} = useUserData();
 
    return (
       <>
          <div className='landing-overlay'>
-            <div id='landing' className='landing section'>
+            <div id='Landing' className='landing section'>
                <Container className='px-4 h-100'>
                   <Row className="
                   h-100 text-center
@@ -37,19 +39,22 @@ function Landing()
                            rerum, hic aliquam
                         </p>
                         <a className='
-                           btn btn-primary border-0
+                           btn border-0
                            text-white rounded-pill
                            text-uppercase fw-semibold mt-3'
-                           href="#about">
+                           href="#About">
                            Find out more
                         </a>
                      </Col>
+                     <a className='arrow-icon position-absolute' href='#About'>
+                        <FontAwesomeIcon icon={faAnglesDown} bounce />
+                     </a>
                   </Row>
                </Container>
             </div>
          </div>
          {/* Start About Section */}
-         <div id='about' className="about section">
+         <div id='About' className="about section">
             <Container className='px-4 text-center'>
                <Row className='align-items-center justify-content-center'>
                   <Col className='' lg='8'>
@@ -76,7 +81,7 @@ function Landing()
             </Container>
          </div >
          {/* Start Services Section */}
-         <div id='services' className='services section'>
+         <div id='Services' className='services section'>
             <Container className='px-4 text-center'>
                <h2 className='main-heading text-capitalize mb-5'>Our services</h2>
                <Row className='align-items-center mt-5 pt-5'>

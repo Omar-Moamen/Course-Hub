@@ -19,22 +19,22 @@ export const userLogin = createAsyncThunk('auth/userLogin',
    }
 );
 
-// userIsLoggedIn asyncThunk
-export const userIsLoggedIn = createAsyncThunk('auth/userIsLoggedIn',
-   async (_, thunkAPI) =>
-   {
-      const {rejectWithValue} = thunkAPI;
-      try
-      {
-         const request = await client.get(`${baseURL}/isLoggedIn`)
-         return request.data;
-      }
-      catch (error)
-      {
-         return rejectWithValue(error.message)
-      }
-   }
-);
+// // userIsLoggedIn asyncThunk
+// export const userIsLoggedIn = createAsyncThunk('auth/userIsLoggedIn',
+//    async (_, thunkAPI) =>
+//    {
+//       const {rejectWithValue} = thunkAPI;
+//       try
+//       {
+//          const request = await client.get(`${baseURL}/isLoggedIn`)
+//          return request.data;
+//       }
+//       catch (error)
+//       {
+//          return rejectWithValue(error.message)
+//       }
+//    }
+// );
 
 // getUser asyncThunk
 export const getUser = createAsyncThunk('auth/getUser',
@@ -97,23 +97,23 @@ const authSlice = createSlice({
             state.error = payload;
          });
 
-      // userIsLoggedIn
-      builder
-         .addCase(userIsLoggedIn.pending, (state, _) =>
-         {
-            state.isLoggedIn = false;
-            state.error = null;
-         })
-         .addCase(userIsLoggedIn.fulfilled, (state, {payload}) =>
-         {
-            state.isLoggedIn = payload;
-            state.error = null;
-         })
-         .addCase(userIsLoggedIn.rejected, (state, {payload}) =>
-         {
-            state.isLoggedIn = false;
-            state.error = payload;
-         });
+      // // userIsLoggedIn
+      // builder
+      //    .addCase(userIsLoggedIn.pending, (state, _) =>
+      //    {
+      //       state.isLoggedIn = false;
+      //       state.error = null;
+      //    })
+      //    .addCase(userIsLoggedIn.fulfilled, (state, {payload}) =>
+      //    {
+      //       state.isLoggedIn = payload;
+      //       state.error = null;
+      //    })
+      //    .addCase(userIsLoggedIn.rejected, (state, {payload}) =>
+      //    {
+      //       state.isLoggedIn = false;
+      //       state.error = payload;
+      //    });
 
       // getUser
       builder
