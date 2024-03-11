@@ -2,8 +2,12 @@
 
 :root {
   --whiteColor: #FFFFFFB3;
-  --mainColor: #F4623A;
-  --mainHover: #CF5331;
+  --mainColor: hsl(13, 89%, 59%);
+  /* split hsl values for using hsl func to make the mainColor darker dynamically */
+  --mainColor-h: 13;
+  --mainColor-s: 89%;
+  --mainColor-l: 59%;
+  --mainHover: hsl(var(--mainColor-h), var(--mainColor-s), calc(var(--mainColor-s) - 45%));
   --greenColor: #3aa856;
   --greenHover: #257c3b;
   --greyColor: #6c757d;

@@ -1,8 +1,13 @@
 import {useState, useEffect} from "react";
 import {Spinner} from "react-bootstrap";
+import useUserData from "../../hooks/use-user-data";
 
-export default function Loading({render, loading})
+export default function Loading({children})
 {
+   const {loading} = useUserData();
+
+   console.log(loading);
+
    const [disable, setDisable] = useState(false);
 
    const loader = <Spinner animation="border" role="status">
@@ -17,7 +22,7 @@ export default function Loading({render, loading})
    return (
       <>
          {
-            render(disable, loader)
+            children(disable, loader)
          }
       </>
    )

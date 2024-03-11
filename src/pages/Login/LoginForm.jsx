@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {Formik} from 'formik';
 import {Container, Form, Row, Col, Button} from 'react-bootstrap';
 import * as Yup from 'yup';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {forgetPassword} from '../../store/userSlice';
 import {userLogin} from '../../store/authSlice';
 import {useState} from 'react';
@@ -33,8 +33,7 @@ const signInSchema = Yup.object().shape({
 // Start Component
 function LoginForm()
 {
-   const {loading, error} = useSelector(state => state.auth);
-   const {user} = useUserData();
+   const {user, error} = useUserData();
 
    const [showPassword, setShowPassword] = useState(false);
    const [showModal, setShowModal] = useState(false);
@@ -234,15 +233,19 @@ function LoginForm()
                               </span>
                            </Col>
                            <Col className='mt-md-2' md="6">
-                              <Loading loading={loading} render={(disable, loader) => (
-                                 <Button
-                                    type="submit"
-                                    className="login-in-btn w-100 mb-2 py-2"
-                                    disabled={disable}
-                                    aria-label='login-btn'>
-                                    Login
-                                 </Button>)
-                              } />
+                              <Loading>
+                                 {
+                                    (disable, _) => (
+                                       <Button
+                                          type="submit"
+                                          className="login-in-btn w-100 mb-2 py-2"
+                                          disabled={disable}
+                                          aria-label='login-btn'>
+                                          Login
+                                       </Button>
+                                    )
+                                 }
+                              </Loading>
 
                            </Col>
                            <Col className='mt-md-2 mb-2' md="6">

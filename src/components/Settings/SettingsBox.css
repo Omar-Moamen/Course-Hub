@@ -3,7 +3,7 @@
    width: 200px;
    top: 0;
    left: -200px;
-   z-index: 1999;
+   z-index: 1040;
    transition: var(--mainTransition);
    -webkit-transition: var(--mainTransition);
    -moz-transition: var(--mainTransition);
@@ -44,4 +44,76 @@
 
 .settings-box .settings-toggler:hover {
    opacity: 1;
+}
+
+.settings-box .option-box {
+   background-color: #eee;
+   padding: 10px;
+   margin: 10px;
+   text-align: center;
+}
+
+.settings-box .option-box h4 {
+   font-size: 14px;
+   color: #444;
+   font-weight: bold;
+}
+
+.settings-box .colors-list {
+   margin: 10px 0 0;
+   gap: 7px;
+}
+
+.settings-box .colors-list li {
+   width: 24px;
+   height: 24px;
+   border: 3px solid #eee;
+   opacity: .7;
+   cursor: pointer;
+   border-radius: 50%;
+   transition: all var(--mainTransition);
+   -webkit-transition: all var(--mainTransition);
+   -moz-transition: all var(--mainTransition);
+   -ms-transition: all var(--mainTransition);
+   -o-transition: all var(--mainTransition);
+   -webkit-border-radius: 50%;
+   -moz-border-radius: 50%;
+   -ms-border-radius: 50%;
+   -o-border-radius: 50%;
+}
+
+.settings-box .colors-list li:first-child {
+   background-color: #f46239;
+}
+
+.settings-box .colors-list li:nth-child(2) {
+   background-color: #e92063;
+}
+
+.settings-box .colors-list li:nth-child(3) {
+   background-color: #009485;
+}
+
+.settings-box .colors-list li:nth-child(4) {
+   background-color: #02a6f2;
+}
+
+.settings-box .colors-list li:last-child {
+   background-color: #4cae4f;
+}
+
+.settings-box .colors-list li.active,
+.settings-box .colors-list li:hover {
+   border-color: #fff;
+   opacity: 1;
+}
+
+
+.settings-box #Logout {
+   width: calc(100% - 20px);
+   display: block;
+   margin: 0 auto;
+   font-weight: bold;
+   font-size: 18px;
+   border-radius: 0;
 }

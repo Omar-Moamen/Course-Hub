@@ -4,16 +4,12 @@ import {useEffect, useState} from "react";
 import {Link, NavLink, useLocation} from "react-router-dom";
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {useSelector} from "react-redux";
 import useUserData from '../../hooks/use-user-data';
 
 export default function Header()
 {
    // Get The current User with custom hook
    const {user} = useUserData();
-
-   // selectors
-   const {isLoggedIn} = useSelector(state => state.auth);
 
    const {pathname} = useLocation();
    const [showNavbar, setShowNavbar] = useState(false);
@@ -158,7 +154,7 @@ export default function Header()
                }
             </Nav>
             {
-               isLoggedIn && user && screenSize > 991 ?
+               user && screenSize > 991 ?
                   <div className="
                         nav-user-info
                         text-capitalize

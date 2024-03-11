@@ -5,7 +5,6 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 import RootLayout from './pages/RootLayout/RootLayout';
-import Landing from './pages/Landing/Landing';
 import LoginForm from './pages/Login/LoginForm';
 import {Provider} from 'react-redux';
 import store from './store/store';
@@ -13,6 +12,7 @@ import {CookiesProvider} from 'react-cookie';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ParentSignUp from './pages/SignUp/ParentSignUp';
 import InstructorSignUp from './pages/SignUp/InstructorSignUp';
+import Index from './pages/Index';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
-      {index: true, element: <Landing />},
+      {index: true, element: <Index />},
       {path: 'login', element: <LoginForm />},
       {path: 'parent-signup', element: <ParentSignUp />},
       {path: 'instructor-signup', element: <InstructorSignUp />}
