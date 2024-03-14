@@ -3,12 +3,9 @@ import {faGear} from '@fortawesome/free-solid-svg-icons';
 import "./SettingsBox.css";
 import {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {userLogout} from "../../store/authSlice";
-import {useNavigate} from "react-router-dom";
 import Swal from "sweetalert2";
-import useUserData from "../../hooks/use-user-data";
-import Loading from "../Loading/Loading";
 import useLocalStorage from "../../hooks/use-local-storage";
 
 function Settings()
@@ -17,12 +14,11 @@ function Settings()
   const [hover, setHover] = useLocalStorage("main_hover");
 
   // Get The current User with custom hook
-  const {user} = useUserData();
+  const {user, authLoading} = useSelector(state => state.auth);
 
   const [showSettings, setShowSettings] = useState(false);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const settingBoxHandler = () =>
   {
@@ -43,13 +39,6 @@ function Settings()
       })
   };
 
-  // Using localStorage to set the colors
-  if (color && hover)
-  {
-    document.documentElement.style.setProperty('--mainColor', color);
-    document.documentElement.style.setProperty('--mainHover', hover);
-  }
-
   const setColorHandler = (e) =>
   {
     let currentEl = e.target;
@@ -62,6 +51,23 @@ function Settings()
 
     setHover(currentEl.dataset.hover);
   }
+
+  // Effects
+  useEffect(() =>
+  {
+    // Using localStorage to set the colors
+    if (color && hover)
+    {
+      document.documentElement.style.setProperty('--mainColor', color);
+      document.documentElement.style.setProperty('--mainHover', hover);
+    }
+  }, [color, hover])
+
+  useEffect(() =>
+  {
+    const colorsOptions = document.querySelectorAll('.colors-list li');
+    console.log(colorsOptions)
+  }, [])
 
   return (
     <>
@@ -96,19 +102,13 @@ function Settings()
               <li className="color" data-color="#4cae4f" data-hover="#409142" onClick={setColorHandler}></li>
             </ul>
           </div>
-
-          <Loading>
-            {(disable, _) => (
-              <Button
-                id="Logout"
-                variant="danger"
-                disabled={disable}
-                onClick={handleUserLogOut}>
-                Logout
-              </Button>
-            )
-            }
-          </Loading>
+          <Button
+            id="Logout"
+            variant="danger"
+            disabled={!!authLoading}
+            onClick={handleUserLogOut}>
+            Logout
+          </Button>
         </div>
       }
     </>

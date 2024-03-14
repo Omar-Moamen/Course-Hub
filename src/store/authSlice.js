@@ -26,8 +26,9 @@ export const userIsLoggedIn = createAsyncThunk('auth/userIsLoggedIn',
       const {rejectWithValue} = thunkAPI;
       try
       {
-         const request = await client.get(`${baseURL}/isLoggedIn`)
-         return request.data;
+         const request = await client.get(`${baseURL}/isLoggedIn`);
+         const data = await request.data;
+         return data;
       }
       catch (error)
       {
@@ -44,8 +45,8 @@ export const getUser = createAsyncThunk('auth/getUser',
       try
       {
          const request = await client.get(`${baseURL}/getCurrentUser`)
-
-         return request.data;
+         const data = await request.data;
+         return data;
       }
       catch (error)
       {
@@ -71,7 +72,7 @@ export const userLogout = createAsyncThunk('auth/userLogout',
    }
 );
 
-const initialState = {user: null, isLoggedIn: false, error: null};
+const initialState = {user: null, authLoading: false, isLoggedIn: false, error: null};
 
 const authSlice = createSlice({
    name: 'auth',
@@ -83,21 +84,18 @@ const authSlice = createSlice({
       builder
          .addCase(userLogin.pending, (state, _) =>
          {
-            state.loading = true;
+            state.authLoading = true;
             state.error = null;
          })
          .addCase(userLogin.fulfilled, (state, {payload}) =>
          {
             state.user = payload;
-            state.isLoggedIn = state.user ? true : false;
-            state.loading = false;
+            state.authLoading = false;
             state.error = null;
-            console.log(payload)
          })
          .addCase(userLogin.rejected, (state, {payload}) =>
          {
-            state.isLoggedIn = false;
-            state.loading = false;
+            state.authLoading = false;
             state.error = payload;
          });
 
@@ -105,18 +103,18 @@ const authSlice = createSlice({
       builder
          .addCase(userIsLoggedIn.pending, (state, _) =>
          {
-            state.loading = true;
+            state.authLoading = true;
             state.error = null;
          })
          .addCase(userIsLoggedIn.fulfilled, (state, {payload}) =>
          {
+            state.authLoading = false;
             state.isLoggedIn = payload;
-            state.loading = false;
             state.error = null;
          })
          .addCase(userIsLoggedIn.rejected, (state, {payload}) =>
          {
-            state.loading = false;
+            state.authLoading = false
             state.error = payload;
          });
 
@@ -124,18 +122,18 @@ const authSlice = createSlice({
       builder
          .addCase(getUser.pending, (state, _) =>
          {
-            state.loading = true;
+            state.authLoading = true;
             state.error = null;
          })
          .addCase(getUser.fulfilled, (state, {payload}) =>
          {
-            state.loading = false;
+            state.authLoading = false;
             state.user = payload;
             state.error = null;
          })
          .addCase(getUser.rejected, (state, {payload}) =>
          {
-            state.loading = false;
+            state.authLoading = false;
             state.error = payload;
          })
 
@@ -143,23 +141,22 @@ const authSlice = createSlice({
       builder
          .addCase(userLogout.pending, (state, _) =>
          {
-            state.loading = true;
+            state.authLoading = true;
             state.error = null;
          })
          .addCase(userLogout.fulfilled, (state, {payload}) =>
          {
             state.user = null;
             state.isLoggedIn = false;
-            state.loading = false;
+            state.authLoading = false;
             state.error = null;
          })
          .addCase(userLogout.rejected, (state, {payload}) =>
          {
-            state.loading = false;
+            state.authLoading = false;
             state.error = payload;
          });
    }
 });
 
 export default authSlice.reducer;
-export const {logInOut} = authSlice.actions;

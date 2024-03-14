@@ -1,12 +1,10 @@
 import {useState, useEffect} from "react";
 import {Spinner} from "react-bootstrap";
-import useUserData from "../../hooks/use-user-data";
+import {useSelector} from "react-redux";
 
 export default function Loading({children})
 {
-   const {loading} = useUserData();
-
-   console.log(loading);
+   const {authLoading} = useSelector(state => state.auth);
 
    const [disable, setDisable] = useState(false);
 
@@ -16,8 +14,9 @@ export default function Loading({children})
 
    useEffect(() =>
    {
-      loading ? setDisable(true) : setDisable(false);
-   }, [loading])
+      console.log(authLoading);
+      authLoading ? setDisable(true) : setDisable(false);
+   }, [authLoading])
 
    return (
       <>

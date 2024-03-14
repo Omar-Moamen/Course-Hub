@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {Formik} from 'formik';
 import {Container, Form, Row, Col, Button} from 'react-bootstrap';
 import * as Yup from 'yup';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {forgetPassword} from '../../store/userSlice';
 import {userLogin} from '../../store/authSlice';
 import {useState} from 'react';
@@ -13,7 +13,6 @@ import {Modal} from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import PopupModal from '../../components/PopupModal/PopupModal';
 import CustomModal from '../../components/CustomModal/CustomModal';
-import useUserData from '../../hooks/use-user-data';
 import googleLogo from "../../assets/imgs/google-logo.webp"
 import Loading from '../../components/Loading/Loading';
 
@@ -33,7 +32,7 @@ const signInSchema = Yup.object().shape({
 // Start Component
 function LoginForm()
 {
-   const {user, error} = useUserData();
+   const {user, authLoading, error} = useSelector(state => state.auth);
 
    const [showPassword, setShowPassword] = useState(false);
    const [showModal, setShowModal] = useState(false);
@@ -233,20 +232,13 @@ function LoginForm()
                               </span>
                            </Col>
                            <Col className='mt-md-2' md="6">
-                              <Loading>
-                                 {
-                                    (disable, _) => (
-                                       <Button
-                                          type="submit"
-                                          className="login-in-btn w-100 mb-2 py-2"
-                                          disabled={disable}
-                                          aria-label='login-btn'>
-                                          Login
-                                       </Button>
-                                    )
-                                 }
-                              </Loading>
-
+                              <Button
+                                 type="submit"
+                                 className="login-in-btn w-100 mb-2 py-2"
+                                 disabled={!!authLoading}
+                                 aria-label='login-btn'>
+                                 Login
+                              </Button>
                            </Col>
                            <Col className='mt-md-2 mb-2' md="6">
                               <button

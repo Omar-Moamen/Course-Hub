@@ -65,7 +65,7 @@ export const forgetPassword = createAsyncThunk('user/forgetPassword',
 
 
 
-const initialState = {user: null, loading: false, error: null}
+const initialState = {loading: false, error: null}
 
 const userSlice = createSlice({
    name: 'user',
@@ -80,7 +80,7 @@ const userSlice = createSlice({
             state.loading = true;
             state.error = null;
          })
-         .addCase(addUser.fulfilled, (state, {payload}) =>
+         .addCase(addUser.fulfilled, (state, _) =>
          {
             state.loading = false;
             state.error = null;

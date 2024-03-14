@@ -5,6 +5,7 @@ import {Link, NavLink, useLocation} from "react-router-dom";
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import useUserData from '../../hooks/use-user-data';
+import {removeActiveClasses} from '../../util/removeActiveClasses';
 
 export default function Header()
 {
@@ -48,12 +49,6 @@ export default function Header()
    // Switch active links on scrolling
    useEffect(() =>
    {
-      // Remove active classes from array of elements
-      const removeActiveClasses = (elsArr) =>
-      {
-         elsArr.forEach(el => el.classList.remove('active'));
-      };
-
       const switchActiveLinksHandler = () =>
       {
          let currentSection = 'Landing';

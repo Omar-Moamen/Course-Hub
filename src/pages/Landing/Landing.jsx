@@ -9,12 +9,11 @@ import teaching from '../../assets/imgs/teaching.png';
 import productDesign from '../../assets/imgs/product-design.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAnglesDown} from '@fortawesome/free-solid-svg-icons';
-import useUserData from '../../hooks/use-user-data';
+import {useSelector} from 'react-redux';
 
 function Landing()
 {
-   // const {isLoggedIn} = useSelector(state => state.auth);
-   const {user} = useUserData();
+   const {user} = useSelector(state => state.auth);
 
    return (
       <>

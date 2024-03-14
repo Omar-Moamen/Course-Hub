@@ -4,17 +4,20 @@ import {useEffect} from "react";
 
 function useUserData()
 {
-
+   const {user, authLoading, isLoggedIn, error} = useSelector(state => state.auth);
    const dispatch = useDispatch();
-   const {user, isLoggedIn, loading, error} = useSelector(state => state.auth);
+
 
    useEffect(() =>
    {
       dispatch(userIsLoggedIn());
+
       isLoggedIn && dispatch(getUser());
+
+      console.log('test')
    }, [isLoggedIn, dispatch]);
 
-   return {user, loading, error};
+   return {user, authLoading, error};
 }
 
 export default useUserData;
