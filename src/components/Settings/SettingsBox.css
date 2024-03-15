@@ -3,7 +3,7 @@
    width: 200px;
    top: 0;
    left: -200px;
-   z-index: 1040;
+   z-index: 1030;
    transition: var(--mainTransition);
    -webkit-transition: var(--mainTransition);
    -moz-transition: var(--mainTransition);
@@ -11,8 +11,17 @@
    -o-transition: var(--mainTransition);
 }
 
+@media (max-width: 992px) {
+   .settings-box {
+      height: calc(100vh - 72px);
+      top: auto;
+      bottom: 0;
+      z-index: 1024;
+   }
+}
+
 .settings-box.opened {
-   left: 0 !important;
+   left: 0;
    border: 1px solid #eee;
    /* Instead of the border 
    box-shadow: var(--mainShadow); */

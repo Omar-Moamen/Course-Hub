@@ -1,12 +1,13 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGear} from '@fortawesome/free-solid-svg-icons';
 import "./SettingsBox.css";
+import {faGear} from '@fortawesome/free-solid-svg-icons';
 import {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {userLogout} from "../../store/authSlice";
 import Swal from "sweetalert2";
 import useLocalStorage from "../../hooks/use-local-storage";
+import {removeActiveClasses} from "../../util/removeActiveClasses";
 
 function Settings()
 {
@@ -39,40 +40,57 @@ function Settings()
       })
   };
 
-  const setColorHandler = (e) =>
-  {
-    let currentEl = e.target;
-
-    document.documentElement.style.setProperty("--mainColor", currentEl.dataset.color);
-
-    setColor(currentEl.dataset.color);
-
-    document.documentElement.style.setProperty("--mainHover", currentEl.dataset.hover);
-
-    setHover(currentEl.dataset.hover);
-  }
 
   // Effects
   useEffect(() =>
   {
+    const colorEls = document.querySelectorAll('.settings-box .colors-list li');
     // Using localStorage to set the colors
     if (color && hover)
     {
       document.documentElement.style.setProperty('--mainColor', color);
       document.documentElement.style.setProperty('--mainHover', hover);
+
+      colorEls.forEach(el =>
+      {
+        if (el.dataset.color === color)
+        {
+          removeActiveClasses(colorEls);
+          el.classList.add('active');
+        }
+      })
     }
   }, [color, hover])
 
   useEffect(() =>
   {
-    const colorsOptions = document.querySelectorAll('.colors-list li');
-    console.log(colorsOptions)
-  }, [])
+    const colorsEls = document.querySelectorAll('.settings-box .colors-list li');
+    colorsEls.forEach(el =>
+    {
+      el.addEventListener('click', (ev) =>
+      {
+        let currentEl = ev.target;
+
+        removeActiveClasses(colorsEls);
+
+        currentEl.classList.add('active');
+
+        document.documentElement.style.setProperty("--mainColor", currentEl.dataset.color);
+
+        setColor(currentEl.dataset.color);
+
+        document.documentElement.style.setProperty("--mainHover", currentEl.dataset.hover);
+
+        setHover(currentEl.dataset.hover);
+
+      })
+    })
+
+  }, [setColor, setHover])
 
   return (
     <>
       {
-        user &&
         <div className={`settings-box position-fixed bg-body ${showSettings && "opened"}`}>
           <div className="
       settings-toggler
@@ -94,21 +112,23 @@ function Settings()
                 className="color"
                 data-color="hsl(13, 89%, 59%)"
                 data-hover="hsl(var(--mainColor-h), var(--mainColor-s), calc(var(--mainColor-s) - 45%))"
-                onClick={setColorHandler}
+
               ></li>
-              <li className="color" data-color="#e92063" data-hover="#cb1b56" onClick={setColorHandler}></li>
-              <li className="color" data-color="#009485" data-hover="#027a6e" onClick={setColorHandler}></li>
-              <li className="color" data-color="#02a6f2" data-hover="#0286c3" onClick={setColorHandler}></li>
-              <li className="color" data-color="#4cae4f" data-hover="#409142" onClick={setColorHandler}></li>
+              <li className="color" data-color="#e92063" data-hover="#cb1b56" ></li>
+              <li className="color" data-color="#009485" data-hover="#027a6e" ></li>
+              <li className="color" data-color="#02a6f2" data-hover="#0286c3" ></li>
+              <li className="color" data-color="#4cae4f" data-hover="#409142"></li>
             </ul>
           </div>
-          <Button
-            id="Logout"
-            variant="danger"
-            disabled={!!authLoading}
-            onClick={handleUserLogOut}>
-            Logout
-          </Button>
+          {user &&
+            <Button
+              id="Logout"
+              variant="danger"
+              disabled={!!authLoading}
+              onClick={handleUserLogOut}>
+              Logout
+            </Button>
+          }
         </div>
       }
     </>

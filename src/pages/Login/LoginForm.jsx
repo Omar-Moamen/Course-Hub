@@ -109,165 +109,175 @@ function LoginForm()
 
    return (
       <>
-         <CustomModal show={registerOpts} close={() => setRegisterOpts(false)} />
-         {/* Start reset password Modal */}
-         <PopupModal
-            showModal={showModal}
-            setShowModal={setShowModal}
-         >
-            {/* Formik for only reset password form */}
-            <Formik
-               initialValues={initialValues}
-               onSubmit={sendResetPassword}
-               enableReinitialize={enableReinitialize}>
-               {({handleChange, handleSubmit, values}) => (
-                  <>
-                     <Form onSubmit={handleSubmit}>
-                        <Modal.Body>
-                           <Form.Label
-                              htmlFor='UserIdentifier'
-                              className='text-black-50 ms1'
-                              style={{fontSize: "14px"}}
-                           >
-                              Username / Email
-                           </Form.Label>
-                           <Form.Control
-                              id='UserIdentifier'
-                              className='reset-password-input'
-                              name='identifier'
-                              type='text'
-                              value={values.identifier}
-                              onChange={handleChange} />
-                        </Modal.Body>
-                        <Modal.Footer>
-                           <Button
-                              type='submit'
-                              style={{fontSize: '14px'}}>
-                              Send to email
-                           </Button>
-                        </Modal.Footer>
-                     </Form>
-                  </>
-               )
-               }
-            </Formik>
-         </PopupModal>
-         {/* End reset password Modal */}
-         <div className="login-in-form d-flex align-items-center position-relative">
-            <Container className="d-flex justify-content-center align-items-center">
-               <Formik
-                  initialValues={initialValues}
-                  onSubmit={onSubmit}
-                  validationSchema={signInSchema}
-                  enableReinitialize={enableReinitialize}
+         {
+            !user &&
+            <>
+               <CustomModal show={registerOpts} close={() => setRegisterOpts(false)} />
+
+               <PopupModal
+                  showModal={showModal}
+                  setShowModal={setShowModal}
                >
-                  {/* Formik Func */}
-                  {({handleChange, handleSubmit, values, errors}) =>
-                  (
-                     <Form
-                        className="py-4 py-md-5 px-4 px-md-5 border-1 rounded-2 bg-white"
-                        onSubmit={handleSubmit}>
-                        <Row className="align-items-center mb-1">
-                           <Form.Group
-                              className='mb-3'
-                              as={Col}
-                              controlId='signInEmail'>
-                              <Form.Label>Username / Email</Form.Label>
-                              <Form.Control
-                                 name='signInEmail'
-                                 type="text"
-                                 placeholder="Username / Email"
-                                 value={values.email}
-                                 onChange={handleChange}
-                                 isInvalid={!!errors.signInEmail} />
-                              <Form.Control.Feedback type='invalid'>
-                                 {errors.signInEmail}
-                              </Form.Control.Feedback>
-                           </Form.Group>
-                        </Row>
-                        <Row>
-                           <Form.Group
-                              as={Col}
-                              className="position-relative"
-                              controlId='signInPassword'>
-                              <Form.Label>Password</Form.Label>
-                              <Form.Control
-                                 name='signInPassword'
-                                 type={showPassword ? "text" : "password"}
-                                 placeholder="Your Password"
-                                 value={values.signInPassword}
-                                 onChange={handleChange}
-                                 isInvalid={!!errors.signInPassword} />
-                              <button
-                                 type='button'
-                                 className='password-toggler 
+
+                  <Formik
+                     initialValues={initialValues}
+                     onSubmit={sendResetPassword}
+                     enableReinitialize={enableReinitialize}>
+                     {({handleChange, handleSubmit, values}) => (
+                        <>
+                           <Form onSubmit={handleSubmit}>
+                              <Modal.Body>
+                                 <Form.Label
+                                    htmlFor='UserIdentifier'
+                                    className='text-black-50 ms1'
+                                    style={{fontSize: "14px"}}
+                                 >
+                                    Username / Email
+                                 </Form.Label>
+                                 <Form.Control
+                                    id='UserIdentifier'
+                                    className='reset-password-input'
+                                    name='identifier'
+                                    type='text'
+                                    value={values.identifier}
+                                    onChange={handleChange} />
+                              </Modal.Body>
+                              <Modal.Footer>
+                                 <Button
+                                    type='submit'
+                                    style={{fontSize: '14px'}}>
+                                    Send to email
+                                 </Button>
+                              </Modal.Footer>
+                           </Form>
+                        </>
+                     )
+                     }
+                  </Formik>
+               </PopupModal>
+               {/* End reset password Modal */}
+               <div className="login-in-form d-flex align-items-center position-relative">
+                  <Container className="d-flex justify-content-center align-items-center">
+                     <Formik
+                        initialValues={initialValues}
+                        onSubmit={onSubmit}
+                        validationSchema={signInSchema}
+                        enableReinitialize={enableReinitialize}
+                     >
+                        {/* Formik Func */}
+                        {({handleChange, handleSubmit, values, errors}) =>
+                        (
+                           <Form
+                              className="py-4 py-md-5 px-4 px-md-5 border-1 rounded-2 bg-white"
+                              onSubmit={handleSubmit}>
+                              <Row className="align-items-center mb-1">
+                                 <Form.Group
+                                    className='mb-3'
+                                    as={Col}
+                                    controlId='signInEmail'>
+                                    <Form.Label>Username / Email</Form.Label>
+                                    <Form.Control
+                                       name='signInEmail'
+                                       type="text"
+                                       placeholder="Username / Email"
+                                       value={values.email}
+                                       onChange={handleChange}
+                                       isInvalid={!!errors.signInEmail} />
+                                    <Form.Control.Feedback type='invalid'>
+                                       {errors.signInEmail}
+                                    </Form.Control.Feedback>
+                                 </Form.Group>
+                              </Row>
+                              <Row>
+                                 <Form.Group
+                                    as={Col}
+                                    className="position-relative"
+                                    controlId='signInPassword'>
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control
+                                       name='signInPassword'
+                                       type={showPassword ? "text" : "password"}
+                                       placeholder="Your Password"
+                                       value={values.signInPassword}
+                                       onChange={handleChange}
+                                       isInvalid={!!errors.signInPassword} />
+                                    <button
+                                       type='button'
+                                       className='password-toggler 
                                  position-absolute 
                                  border-0
                                  bg-transparent'
-                                 style={
-                                    {
-                                       top: `
+                                       style={
+                                          {
+                                             top: `
                                        ${errors.signInPassword ?
-                                             "calc(50% + 4px)" : "calc(50% + 16px)"}`
-                                    }}
-                                 aria-label='password-toggler'
-                                 onClick={() => setShowPassword(!showPassword)}>
-                                 <FontAwesomeIcon
-                                    icon={showPassword ? faEyeSlash : faEye} />
-                              </button>
-                              <Form.Control.Feedback type='invalid'>
-                                 {errors.signInPassword ? errors.signInPassword : error}
-                              </Form.Control.Feedback>
-                           </Form.Group>
-                        </Row>
-                        <Row>
-                           <Col sm="12" className='mb-3'>
-                              <span className="
+                                                   "calc(50% + 4px)" : "calc(50% + 16px)"}`
+                                          }}
+                                       aria-label='password-toggler'
+                                       onClick={() => setShowPassword(!showPassword)}>
+                                       <FontAwesomeIcon
+                                          icon={showPassword ? faEyeSlash : faEye} />
+                                    </button>
+                                    <Form.Control.Feedback type='invalid'>
+                                       {errors.signInPassword ? errors.signInPassword : error}
+                                    </Form.Control.Feedback>
+                                 </Form.Group>
+                              </Row>
+                              <Row>
+                                 <Col sm="12" className='mb-3'>
+                                    <span className="
                               reset-password
                               text-decoration-underline
                               text-md-left
                               "
-                                 onClick={() => setShowModal(true)}>
-                                 Reset password
-                              </span>
-                           </Col>
-                           <Col className='mt-md-2' md="6">
-                              <Button
-                                 type="submit"
-                                 className="login-in-btn w-100 mb-2 py-2"
-                                 disabled={!!authLoading}
-                                 aria-label='login-btn'>
-                                 Login
-                              </Button>
-                           </Col>
-                           <Col className='mt-md-2 mb-2' md="6">
-                              <button
-                                 type='button'
-                                 className='google-btn rounded-2 w-100 py-2'
-                                 aria-label='google-btn'
-                                 onClick={handleGoogleLogin}>
-                                 <img
-                                    src={googleLogo}
-                                    width="22"
-                                    height="22" alt="google-btn" />
-                                 <span className='ps-2'>Login with Google</span>
-                              </button>
-                           </Col>
-                           <Col className='mt-md-2' md="6">
-                              <Button
-                                 type='button'
-                                 className="register-btn w-100 btn btn-secondary py-2"
-                                 aria-label='register-btn'
-                                 onClick={() => setRegisterOpts(true)}>
-                                 Register
-                              </Button>
-                           </Col>
-                        </Row>
-                     </Form>
-                  )}
-               </Formik>
-            </Container>
-         </div >
+                                       onClick={() => setShowModal(true)}>
+                                       Reset password
+                                    </span>
+                                 </Col>
+                                 <Col className='mt-md-2' md="6">
+                                    <Loading>
+                                       {
+                                          (disable, _) => (
+                                             <Button
+                                                type="submit"
+                                                className="login-in-btn w-100 mb-2 py-2"
+                                                disabled={disable}
+                                                aria-label='login-btn'>
+                                                Login
+                                             </Button>)
+                                       }
+                                    </Loading>
+                                 </Col>
+                                 <Col className='mt-md-2 mb-2' md="6">
+                                    <button
+                                       type='button'
+                                       className='google-btn rounded-2 w-100 py-2'
+                                       aria-label='google-btn'
+                                       onClick={handleGoogleLogin}>
+                                       <img
+                                          src={googleLogo}
+                                          width="22"
+                                          height="22" alt="google-btn" />
+                                       <span className='ps-2'>Login with Google</span>
+                                    </button>
+                                 </Col>
+                                 <Col className='mt-md-2' md="6">
+                                    <Button
+                                       type='button'
+                                       className="register-btn w-100 btn btn-secondary py-2"
+                                       aria-label='register-btn'
+                                       onClick={() => setRegisterOpts(true)}>
+                                       Register
+                                    </Button>
+                                 </Col>
+                              </Row>
+                           </Form>
+                        )}
+                     </Formik>
+                  </Container>
+               </div >
+            </>
+         }
       </>
    )
 }

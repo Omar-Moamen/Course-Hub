@@ -1,23 +1,20 @@
 import {useDispatch, useSelector} from "react-redux";
-import {getUser, userIsLoggedIn} from "../store/authSlice";
+import {getUser} from "../store/authSlice";
 import {useEffect} from "react";
 
 function useUserData()
 {
-   const {user, authLoading, isLoggedIn, error} = useSelector(state => state.auth);
+   const {user} = useSelector(state => state.auth);
    const dispatch = useDispatch();
-
 
    useEffect(() =>
    {
-      dispatch(userIsLoggedIn());
-
-      isLoggedIn && dispatch(getUser());
-
       console.log('test')
-   }, [isLoggedIn, dispatch]);
 
-   return {user, authLoading, error};
+      dispatch(getUser());
+   }, [dispatch]);
+
+   return {user};
 }
 
 export default useUserData;

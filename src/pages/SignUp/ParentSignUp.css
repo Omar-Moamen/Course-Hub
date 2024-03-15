@@ -65,14 +65,14 @@
 
 @media (min-width: 768px) {
    .sign-up-form form .row {
-      height: 93px !important;
+      height: 93px;
    }
 }
 
 .sign-up-form form .col-md-3,
 .sign-up-form form .col-md-4,
 .sign-up-form form .col-md-6 {
-   height: 93px !important;
+   height: 93px;
 }
 
 .sign-up-form form input::placeholder {
@@ -83,7 +83,7 @@
 
 .sign-up-form form .invalid-feedback,
 .sign-up-form form .error-feedback {
-   font-size: 13px !important;
+   font-size: 13px;
    margin-bottom: 4px;
 }
 
@@ -142,8 +142,8 @@
 
    .sign-up-form form .add-btn,
    .sign-up-form form .remove-btn {
-      width: 100% !important;
-      height: 30px !important;
+      width: 100%;
+      height: 30px;
    }
 }
 

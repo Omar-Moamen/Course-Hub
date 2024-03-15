@@ -1,22 +1,20 @@
-import {useState, useEffect} from "react";
 import {Spinner} from "react-bootstrap";
 import {useSelector} from "react-redux";
 
 export default function Loading({children})
 {
    const {authLoading} = useSelector(state => state.auth);
+   const disable = authLoading ? true : false;
+   const loader = authLoading ?
+      <Spinner
+         className="position-absolute top-50 start-50"
+         animation="border" role="status"
+         style={{marginTop: "-1rem", marginLeft: "-1rem"}}>
+         <span className="visually-hidden">Loading...</span>
+      </Spinner> : null
 
-   const [disable, setDisable] = useState(false);
-
-   const loader = <Spinner animation="border" role="status">
-      <span className="visually-hidden">Loading...</span>
-   </Spinner>
-
-   useEffect(() =>
-   {
-      console.log(authLoading);
-      authLoading ? setDisable(true) : setDisable(false);
-   }, [authLoading])
+   console.log('Loading Component')
+   console.log(authLoading)
 
    return (
       <>

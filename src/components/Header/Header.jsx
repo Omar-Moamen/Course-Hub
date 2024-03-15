@@ -1,17 +1,17 @@
 import './Header.css';
 import {Container, Nav, Navbar} from "react-bootstrap";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link, NavLink, useLocation} from "react-router-dom";
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import useUserData from '../../hooks/use-user-data';
 import {removeActiveClasses} from '../../util/removeActiveClasses';
 
-export default function Header()
+function Header()
 {
    // Get The current User with custom hook
    const {user} = useUserData();
-
+   console.log("header")
    const {pathname} = useLocation();
    const [showNavbar, setShowNavbar] = useState(false);
    const [screenSize, setScreenSize] = useState(window.innerWidth);
@@ -136,7 +136,7 @@ export default function Header()
                      <>
                         <Nav.Link href="#About">About</Nav.Link>
                         <Nav.Link href="#Services">Services</Nav.Link>
-                        <Nav.Link href="#Portfolio">Portfolio</Nav.Link>
+                        <Nav.Link href="#Portfolio">Courses</Nav.Link>
                         <Nav.Link href="#Contact">Contact</Nav.Link>
                      </>
                      :
@@ -169,3 +169,5 @@ export default function Header()
       </Navbar>
    )
 }
+
+export default React.memo(Header)

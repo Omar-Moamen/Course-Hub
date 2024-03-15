@@ -19,23 +19,23 @@ export const userLogin = createAsyncThunk('auth/userLogin',
    }
 );
 
-// userIsLoggedIn asyncThunk
-export const userIsLoggedIn = createAsyncThunk('auth/userIsLoggedIn',
-   async (_, thunkAPI) =>
-   {
-      const {rejectWithValue} = thunkAPI;
-      try
-      {
-         const request = await client.get(`${baseURL}/isLoggedIn`);
-         const data = await request.data;
-         return data;
-      }
-      catch (error)
-      {
-         return rejectWithValue(error.message)
-      }
-   }
-);
+// // userIsLoggedIn asyncThunk
+// export const userIsLoggedIn = createAsyncThunk('auth/userIsLoggedIn',
+//    async (_, thunkAPI) =>
+//    {
+//       const {rejectWithValue} = thunkAPI;
+//       try
+//       {
+//          const request = await client.get(`${baseURL}/isLoggedIn`);
+//          const data = await request.data;
+//          return data;
+//       }
+//       catch (error)
+//       {
+//          return rejectWithValue(error.message)
+//       }
+//    }
+// );
 
 // getUser asyncThunk
 export const getUser = createAsyncThunk('auth/getUser',
@@ -72,7 +72,7 @@ export const userLogout = createAsyncThunk('auth/userLogout',
    }
 );
 
-const initialState = {user: null, authLoading: false, isLoggedIn: false, error: null};
+const initialState = {user: null, authLoading: false, error: null};
 
 const authSlice = createSlice({
    name: 'auth',
@@ -96,25 +96,6 @@ const authSlice = createSlice({
          .addCase(userLogin.rejected, (state, {payload}) =>
          {
             state.authLoading = false;
-            state.error = payload;
-         });
-
-      // userIsLoggedIn
-      builder
-         .addCase(userIsLoggedIn.pending, (state, _) =>
-         {
-            state.authLoading = true;
-            state.error = null;
-         })
-         .addCase(userIsLoggedIn.fulfilled, (state, {payload}) =>
-         {
-            state.authLoading = false;
-            state.isLoggedIn = payload;
-            state.error = null;
-         })
-         .addCase(userIsLoggedIn.rejected, (state, {payload}) =>
-         {
-            state.authLoading = false
             state.error = payload;
          });
 
@@ -147,7 +128,6 @@ const authSlice = createSlice({
          .addCase(userLogout.fulfilled, (state, {payload}) =>
          {
             state.user = null;
-            state.isLoggedIn = false;
             state.authLoading = false;
             state.error = null;
          })
