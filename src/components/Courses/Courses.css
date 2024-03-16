@@ -1,0 +1,39 @@
+#Courses .courses-container {
+   margin-top: 100px;
+   align-items: center;
+}
+
+#Courses .course-box .image-holder {
+   border: 1px solid #EEE;
+}
+
+#Courses .course-info .course-title {
+   font-weight: bold;
+   margin: 15px 0 5px;
+   font-size: 17px;
+}
+
+#Courses .course-info .author {
+   font-size: 12px;
+   opacity: .8;
+   margin: 8px 0 4px;
+}
+
+#Courses .course-rating .ratio {
+   font-size: 15px;
+   font-weight: bold;
+   margin-right: 5px;
+}
+
+#Courses .course-rating .stars-wrapper svg {
+   color: #aa6d29;
+   width: 14px;
+   height: 14px;
+}
+
+#Courses .course-rating .reviews {
+   font-size: 12px;
+   margin-left: 8px;
+   font-weight: lighter;
+   opacity: .8;
+}

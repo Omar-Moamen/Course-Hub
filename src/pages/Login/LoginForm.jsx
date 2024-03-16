@@ -14,7 +14,6 @@ import Swal from 'sweetalert2';
 import PopupModal from '../../components/PopupModal/PopupModal';
 import CustomModal from '../../components/CustomModal/CustomModal';
 import googleLogo from "../../assets/imgs/google-logo.webp"
-import Loading from '../../components/Loading/Loading';
 
 // Start Sign in validation schema
 const signInSchema = Yup.object().shape({
@@ -235,18 +234,13 @@ function LoginForm()
                                     </span>
                                  </Col>
                                  <Col className='mt-md-2' md="6">
-                                    <Loading>
-                                       {
-                                          (disable, _) => (
-                                             <Button
-                                                type="submit"
-                                                className="login-in-btn w-100 mb-2 py-2"
-                                                disabled={disable}
-                                                aria-label='login-btn'>
-                                                Login
-                                             </Button>)
-                                       }
-                                    </Loading>
+                                    <Button
+                                       type="submit"
+                                       className="login-in-btn w-100 mb-2 py-2"
+                                       disabled={authLoading}
+                                       aria-label='login-btn'>
+                                       Login
+                                    </Button>
                                  </Col>
                                  <Col className='mt-md-2 mb-2' md="6">
                                     <button

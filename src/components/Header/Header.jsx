@@ -136,7 +136,7 @@ function Header()
                      <>
                         <Nav.Link href="#About">About</Nav.Link>
                         <Nav.Link href="#Services">Services</Nav.Link>
-                        <Nav.Link href="#Portfolio">Courses</Nav.Link>
+                        <Nav.Link href="#Courses">Courses</Nav.Link>
                         <Nav.Link href="#Contact">Contact</Nav.Link>
                      </>
                      :

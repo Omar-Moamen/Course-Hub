@@ -1,4 +1,4 @@
-import {Col, Container, Row} from 'react-bootstrap';
+import {Col, Container, Row, Spinner} from 'react-bootstrap';
 import './Landing.css'
 import {Link} from 'react-router-dom';
 import skillsImg from '../../assets/imgs/skills.png';
@@ -9,7 +9,10 @@ import teaching from '../../assets/imgs/teaching.png';
 import productDesign from '../../assets/imgs/product-design.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAnglesDown} from '@fortawesome/free-solid-svg-icons';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import React, {useEffect} from 'react';
+import {getCourses} from '../../store/coursesSlice';
+import Courses from '../../components/Courses/Courses';
 
 function Landing()
 {
@@ -202,10 +205,11 @@ function Landing()
          <div id='Courses' className='courses section'>
             <Container className='px-4 text-center'>
                <h2 className='main-heading text-capitalize mb-5'>Our Courses</h2>
+               <Courses />
             </Container>
          </div>
       </>
    )
 }
 
-export default Landing;
+export default React.memo(Landing);
