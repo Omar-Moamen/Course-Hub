@@ -59,7 +59,7 @@ function Header()
 
          sectionEls.forEach(sectionEl =>
          {
-            if (scrollTop >= (sectionEl.offsetTop - sectionEl.clientHeight / 3.2))
+            if (scrollTop >= (sectionEl.offsetTop - sectionEl.clientHeight / 3))
             {
                currentSection = sectionEl.id;
             }

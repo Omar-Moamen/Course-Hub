@@ -18,7 +18,7 @@ export const getCourses = createAsyncThunk('courses/getCourses',
    })
 
 
-const initialState = {courses: null, coursesLoading: false};
+const initialState = {coursesData: [], coursesLoading: false};
 
 const coursesSlice = createSlice({
    name: 'courses',
@@ -35,8 +35,7 @@ const coursesSlice = createSlice({
          .addCase(getCourses.fulfilled, (state, {payload}) =>
          {
             state.loading = false;
-            state.courses = payload;
-            console.log(state.courses);
+            state.coursesData = payload;
             state.error = null;
          })
          .addCase(getCourses.rejected, (state, {payload}) =>

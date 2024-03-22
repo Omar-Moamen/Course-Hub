@@ -1,9 +1,25 @@
-#Courses .courses-container {
+#Courses .carousel-wrapper {
    margin-top: 100px;
-   align-items: center;
 }
 
-#Courses .course-box .image-holder {
+#Courses .course-card {
+   max-width: 218px;
+   margin: auto;
+}
+
+@media(max-width: 767px) {
+   #Courses .course-card {
+      max-width: 240px;
+   }
+}
+
+@media(min-width: 1200px) {
+   #Courses .course-card {
+      max-width: 240px;
+   }
+}
+
+#Courses .course-card .image-holder {
    border: 1px solid #EEE;
 }
 
@@ -36,4 +52,63 @@
    margin-left: 8px;
    font-weight: lighter;
    opacity: .8;
+}
+
+#Courses .course-price {
+   font-size: 15px;
+   font-weight: bold;
+   margin-top: 5px;
+}
+
+#Courses .course-badge {
+   font-size: 12px;
+   background-color: #eceba2;
+   color: #444;
+   width: fit-content;
+   padding: 2px 5px;
+   font-weight: bold;
+   margin-top: 8px;
+}
+
+.courses-carousel button[class*="left"],
+.courses-carousel button[class*="right"] {
+   width: 40px;
+   height: 40px;
+   padding: 0;
+   top: 43px;
+   background-color: #2D2F31;
+   transition: none;
+   -webkit-transition: none;
+   -moz-transition: none;
+   -ms-transition: none;
+   -o-transition: none;
+}
+
+.courses-carousel button[class*="left"]:hover,
+.courses-carousel button[class*="right"]:hover {
+   background-color: #474a4e;
+}
+
+.courses-carousel button[class*="left"]::before,
+.courses-carousel button[class*="right"]::before {
+   font-size: 17px;
+   font-weight: bold;
+}
+
+.courses-carousel button[class*="left"] {
+   left: -20px;
+}
+
+.courses-carousel button[class*="right"] {
+   right: -20px;
+}
+
+@media(max-width: 567px) {
+   .courses-carousel button[class*="left"] {
+      left: 0;
+   }
+
+   .courses-carousel button[class*="right"] {
+      right: 0;
+   }
 }

@@ -2,14 +2,19 @@ import './Courses.css'
 import {useDispatch, useSelector} from "react-redux";
 import {getCourses} from "../../store/coursesSlice";
 import {useEffect} from "react";
-import {Col, Row} from "react-bootstrap";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faStar as solidStart, faStarHalfStroke} from '@fortawesome/free-solid-svg-icons';
-import {faStar as regStar, } from '@fortawesome/free-regular-svg-icons';
+import Course from './Course';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 function Courses()
 {
-   const {courses, loading} = useSelector(state => state.courses);
+   const {coursesData, loading} = useSelector(state => state.courses);
+
+   const courses = coursesData && coursesData.map(course => (
+      <Course key={course.academyCourseId} data={course} />)
+   );
+
+   console.log(courses)
 
    const dispatch = useDispatch();
 
@@ -17,31 +22,40 @@ function Courses()
    {
       console.log('coursesTest')
       dispatch(getCourses());
-   }, [dispatch])
+   }, [dispatch]);
+
+   const responsive = {
+      superLargeDesktop: {
+         // the naming can be any, depends on you.
+         breakpoint: {max: 4000, min: 1200},
+         items: 5,
+         slidesToSlide: 3,
+      },
+      desktop: {
+         breakpoint: {max: 1200, min: 991},
+         items: 4,
+         slidesToSlide: 2,
+      },
+      tablet: {
+         breakpoint: {max: 991, min: 767},
+         items: 3,
+      },
+      mobile: {
+         breakpoint: {max: 767, min: 0},
+         items: 1
+      }
+   };
 
    return (
-      <Row className='courses-container'>
-         <Col className="course-box text-start" md="3">
-            <div className="image-holder">
-               <img className="img-fluid" src="https://place-hold.it/253x120" alt="scratch" />
-            </div>
-            <div className="course-info">
-               <h6 className="course-title">Scratch</h6>
-               <p className="author">John Doe</p>
-               <div className="course-rating">
-                  <span className="ratio">4.5</span>
-                  <div className='stars-wrapper d-inline'>
-                     <span className="stars"><FontAwesomeIcon icon={solidStart} /></span>
-                     <span className="stars"><FontAwesomeIcon icon={solidStart} /></span>
-                     <span className="stars"><FontAwesomeIcon icon={solidStart} /></span>
-                     <span className="stars"><FontAwesomeIcon icon={solidStart} /></span>
-                     <span className='stars'><FontAwesomeIcon icon={faStarHalfStroke} /></span>
-                  </div>
-                  <span className="reviews">(150,000)</span>
-               </div>
-            </div>
-         </Col>
-      </Row>
+      <div className='carousel-wrapper position-relative'>
+         <Carousel
+            className='courses-carousel position-static'
+            responsive={responsive}
+            draggable={false}
+         >
+            {courses}
+         </Carousel>
+      </div>
    )
 }
 

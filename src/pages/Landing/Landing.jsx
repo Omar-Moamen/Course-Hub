@@ -203,7 +203,7 @@ function Landing()
          </div>
          {/* Start Services Section */}
          <div id='Courses' className='courses section'>
-            <Container className='px-4 text-center'>
+            <Container className='text-center'>
                <h2 className='main-heading text-capitalize mb-5'>Our Courses</h2>
                <Courses />
             </Container>

@@ -78,7 +78,7 @@
 
 /* Start About */
 .about {
-   padding: 8rem 0;
+   padding: calc(var(--sectionPadding) * 1.5) 0;
    background-color: var(--mainColor);
 }
 
@@ -100,7 +100,8 @@
 }
 
 .services {
-   padding: 8rem 0 3rem 0;
+   padding: var(--sectionPadding) 0;
+   background-color: #f7f9fa;
 }
 
 .services .image-holder {
@@ -116,4 +117,8 @@
 .services p {
    line-height: 1.6;
    max-width: 300px;
+}
+
+.courses {
+   padding: var(--sectionPadding) 0;
 }

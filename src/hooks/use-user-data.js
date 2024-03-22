@@ -9,8 +9,6 @@ function useUserData()
 
    useEffect(() =>
    {
-      console.log('test')
-
       dispatch(getUser());
    }, [dispatch]);
 

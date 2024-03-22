@@ -16,7 +16,7 @@
   --blueColor: #00AEFF;
   --mainTransition: 0.2s;
   --mainShadow: 0 0.5rem 1rem #00000026;
-  height: 5000px;
+  --sectionPadding: 80px;
 }
 
 ::-webkit-scrollbar {
