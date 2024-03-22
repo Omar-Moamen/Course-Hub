@@ -4,10 +4,11 @@ import {faStar as regStar, } from '@fortawesome/free-regular-svg-icons';
 
 function Course({data})
 {
+   let url = "http://localhost:5000/cardImages/"
    return (
       <div className="course-card text-start">
          <div className="image-holder">
-            <img className="img-fluid" src="https://i.ytimg.com/vi/HCrzlV7nMCk/maxresdefault.jpg" alt={data.courseName} />
+            <img className="img-fluid" src = {url + data.courseName+".jpg"}   alt={data.courseName} />
          </div>
          <div className="course-info">
             <h6 className="course-title text-capitalize">{data.courseName}</h6>
@@ -22,7 +23,7 @@ function Course({data})
                </div>
                <span className="reviews">(150,000)</span>
             </div>
-            <span className='course-price d-block text-uppercase'>Egp 1,499.99</span>
+            <span className='course-price d-block text-uppercase'>{data.coursePrice}</span>
             <span className='course-badge d-block'>Bestseller</span>
          </div>
       </div>
