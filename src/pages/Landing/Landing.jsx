@@ -1,4 +1,4 @@
-import {Col, Container, Row, Spinner} from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import './Landing.css'
 import {Link} from 'react-router-dom';
 import skillsImg from '../../assets/imgs/skills.png';
@@ -9,9 +9,8 @@ import teaching from '../../assets/imgs/teaching.png';
 import productDesign from '../../assets/imgs/product-design.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAnglesDown} from '@fortawesome/free-solid-svg-icons';
-import {useDispatch, useSelector} from 'react-redux';
-import React, {useEffect} from 'react';
-import {getCourses} from '../../store/coursesSlice';
+import {useSelector} from 'react-redux';
+import React from 'react';
 import Courses from '../../components/Courses/Courses';
 
 function Landing()
