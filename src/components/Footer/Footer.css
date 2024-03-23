@@ -29,10 +29,38 @@
    text-decoration: underline;
 }
 
-#mainFooter .footer-logo a {
-   text-decoration: none;
-   color: #FFF;
-   font-size: 22px;
+#mainFooter .social-icons li {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   width: 38px;
+   height: 38px;
+   border: 1px solid #FFF;
+   transition: var(--mainTransition);
+   -webkit-transition: var(--mainTransition);
+   -moz-transition: var(--mainTransition);
+   -ms-transition: var(--mainTransition);
+   -o-transition: var(--mainTransition);
+}
+
+#mainFooter .social-icons svg {
+   font-size: 18px;
+}
+
+#mainFooter .social-icons .facebook-icon:hover {
+   background-color: #2C64F6;
+   border-color: #2C64F6;
+}
+
+#mainFooter .social-icons .x-icon:hover {
+   background-color: #000;
+   border-color: #000;
+}
+
+#mainFooter .social-icons .linkedin-icon:hover {
+   background-color: #2d64bc;
+   border-color: #2d64bc;
 }
 
 #mainFooter .links-and-language .language-btn {
@@ -41,6 +69,7 @@
    padding: 7px 16px;
    border: 1px solid #FFF;
    min-width: 125px;
+   height: 38px;
    text-align: start;
    font-size: 15px;
 }
@@ -48,4 +77,25 @@
 #mainFooter .links-and-language .language-btn span {
    margin-left: 6px;
    font-weight: lighter;
+}
+
+#mainFooter .logo-and-copyright .footer-logo {
+   width: fit-content;
+}
+
+#mainFooter .logo-and-copyright .footer-logo a {
+   text-decoration: none;
+   color: #FFF;
+   font-size: 22px;
+}
+
+#mainFooter .logo-and-copyright .copyright {
+   color: #FFF;
+   font-size: 12px;
+   font-weight: lighter;
+   width: fit-content;
+}
+
+#mainFooter .logo-and-copyright .copyright span {
+   color: var(--mainColor);
 }

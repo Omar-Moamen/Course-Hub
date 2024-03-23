@@ -1,7 +1,7 @@
 import './Courses.css'
 import {useDispatch, useSelector} from "react-redux";
 import {getCourses} from "../../store/coursesSlice";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import Course from './Course';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -59,4 +59,4 @@ function Courses()
    )
 }
 
-export default Courses;
+export default React.memo(Courses);

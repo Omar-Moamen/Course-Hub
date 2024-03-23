@@ -8,7 +8,7 @@ function Course({data})
    return (
       <div className="course-card text-start">
          <div className="image-holder">
-            <img className="img-fluid" src = {url + data.courseName+".jpg"}   alt={data.courseName} />
+            <img className="img-fluid" src={url + data.courseName + ".jpg"} alt={`${data.courseName}`} />
          </div>
          <div className="course-info">
             <h6 className="course-title text-capitalize">{data.courseName}</h6>

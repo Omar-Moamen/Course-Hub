@@ -1,5 +1,5 @@
-import {Col, Container, Row} from 'react-bootstrap';
 import './Landing.css'
+import {Col, Container, Row} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import skillsImg from '../../assets/imgs/skills.png';
 import successImg from '../../assets/imgs/success.png';
@@ -10,7 +10,6 @@ import productDesign from '../../assets/imgs/product-design.png';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAnglesDown} from '@fortawesome/free-solid-svg-icons';
 import {useSelector} from 'react-redux';
-import React from 'react';
 import Courses from '../../components/Courses/Courses';
 
 function Landing()
@@ -48,7 +47,7 @@ function Landing()
                         </a>
                      </Col>
                      <a className='arrow-icon position-absolute' href='#About'>
-                        <FontAwesomeIcon icon={faAnglesDown} bounce />
+                        <FontAwesomeIcon icon={faAnglesDown} />
                      </a>
                   </Row>
                </Container>
@@ -211,4 +210,4 @@ function Landing()
    )
 }
 
-export default React.memo(Landing);
+export default Landing;

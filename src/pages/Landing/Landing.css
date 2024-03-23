@@ -67,6 +67,8 @@
    color: var(--mainColor);
    width: 40px;
    height: 40px;
+   animation: bouncing 1.5s infinite;
+   -webkit-animation: bouncing 1.5s infinite;
 }
 
 @media(max-width: 567px) {
@@ -121,4 +123,23 @@
 
 .courses {
    padding: var(--sectionPadding) 0;
+}
+
+
+@keyframes bouncing {
+
+   0%,
+   10%,
+   20%,
+   50%,
+   80%,
+   100% {
+      transform: translateY(0);
+   }
+
+   40%,
+   60% {
+      transform: translateY(-15px);
+   }
+
 }
