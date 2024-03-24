@@ -6,6 +6,12 @@
    margin-bottom: var(--sectionPadding);
 }
 
+@media(max-width: 567px) {
+   #mainFooter .links-and-language {
+      margin-bottom: calc(var(--sectionPadding) / 2);
+   }
+}
+
 #mainFooter .nav-list {
    margin: 0;
 }

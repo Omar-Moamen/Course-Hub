@@ -93,12 +93,12 @@ function Settings()
       {
         <div className={`settings-box position-fixed bg-body ${showSettings && "opened"}`}>
           <div className="
-      settings-toggler
-      position-absolute
-      d-flex
-      bg-body
-      align-items-center
-      justify-content-center"
+                settings-toggler
+                position-absolute
+                d-flex
+                bg-body
+                align-items-center
+                justify-content-center"
             onClick={settingBoxHandler}
           >
             <div className=" bg-body"></div>
@@ -121,13 +121,23 @@ function Settings()
             </ul>
           </div>
           {user &&
-            <Button
-              id="Logout"
-              variant="danger"
-              disabled={!!authLoading}
-              onClick={handleUserLogOut}>
-              Logout
-            </Button>
+            <>
+              <Button
+                id="profileBtn"
+                type="button"
+                variant="secondary"
+                disabled={!!authLoading}
+              >
+                Profile
+              </Button>
+              <Button
+                id="logoutBtn"
+                variant="danger"
+                disabled={!!authLoading}
+                onClick={handleUserLogOut}>
+                Logout
+              </Button>
+            </>
           }
         </div>
       }

@@ -1,6 +1,6 @@
 import './Header.css';
 import {Container, Nav, Navbar} from "react-bootstrap";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Link, NavLink, useLocation} from "react-router-dom";
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -16,12 +16,6 @@ function Header()
    const [showNavbar, setShowNavbar] = useState(false);
    const [screenSize, setScreenSize] = useState(window.innerWidth);
    const [toggler, setToggler] = useState(false);
-
-   // Functions
-   const resizeHandler = () =>
-   {
-      setScreenSize(window.innerWidth);
-   };
 
    // Effects
 
@@ -92,6 +86,8 @@ function Header()
    // Change mainNav according to screenSize
    useEffect(() =>
    {
+      const resizeHandler = () => setScreenSize(window.innerWidth);
+
       window.addEventListener('resize', resizeHandler);
 
       return () => window.removeEventListener('resize', resizeHandler);
