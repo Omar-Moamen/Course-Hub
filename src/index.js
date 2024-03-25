@@ -12,6 +12,7 @@ import ParentSignUp from './pages/SignUp/ParentSignUp';
 import InstructorSignUp from './pages/SignUp/InstructorSignUp';
 import Index from './pages/Index';
 import ActivatePage from './pages/ActivatePage/ActivatePage';
+import {HelmetProvider} from 'react-helmet-async';
 
 const router = createBrowserRouter([
   {
@@ -32,8 +33,10 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <HelmetProvider>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>
 );

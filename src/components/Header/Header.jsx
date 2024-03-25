@@ -1,6 +1,6 @@
 import './Header.css';
 import {Container, Nav, Navbar} from "react-bootstrap";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link, NavLink, useLocation} from "react-router-dom";
 import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -94,59 +94,61 @@ function Header()
    }, [screenSize]);
 
    return (
-      <Navbar
-         id="mainNav"
-         className={`
+      <>
+         {
+            <Navbar
+               id="mainNav"
+               className={`
          ${showNavbar || screenSize < 992 || pathname !== "/" ?
-               "bg-light text-black alt-nav-hover main-shadow active-hover" :
-               "bg-transparent nav-color"} fixed-top px-lg-4`}
-         expand="lg"
-      >
-         <Container className={`${screenSize < 992 ? "bg-light" : null} px-4 px-lg-5 h-100`}>
-            <Link to={'/'} className="navbar-brand ms-3 ms-lg-0">Logo</Link>
-            <Navbar.Toggle
-               className={
-                  `${toggler ? "rotate-bars" : ""}
-                  border-0 position-relative rounded-0 me-3 me-lg-0`
-               }
-               aria-controls="basic-navbar-nav"
-               onClick={() => setToggler(!toggler)}
+                     "bg-light text-black alt-nav-hover main-shadow active-hover" :
+                     "bg-transparent nav-color"} fixed-top px-lg-4`}
+               expand="lg"
             >
-               <span></span>
-               <span></span>
-               <span></span>
-            </Navbar.Toggle>
-         </Container>
-         <Navbar.Collapse
-            id="basic-navbar-nav"
-            className={`${screenSize < 992 ? "bg-light main-shadow" : null}`}
-         >
-            <Nav
-               className={
-                  `${screenSize < 992 ? "text-black-50" : null}
+               <Container className={`${screenSize < 992 ? "bg-light" : null} px-4 px-lg-5 h-100`}>
+                  <Link to={'/'} className="navbar-brand ms-3 ms-lg-0">Logo</Link>
+                  <Navbar.Toggle
+                     className={
+                        `${toggler ? "rotate-bars" : ""}
+                  border-0 position-relative rounded-0 me-3 me-lg-0`
+                     }
+                     aria-controls="basic-navbar-nav"
+                     onClick={() => setToggler(!toggler)}
+                  >
+                     <span></span>
+                     <span></span>
+                     <span></span>
+                  </Navbar.Toggle>
+               </Container>
+               <Navbar.Collapse
+                  id="basic-navbar-nav"
+                  className={`${screenSize < 992 ? "bg-light main-shadow" : null}`}
+               >
+                  <Nav
+                     className={
+                        `${screenSize < 992 ? "text-black-50" : null}
                      me-auto me-lg-3 ms-lg-auto gap-4 fw-bold py-4 py-lg-0
                      align-items-center`}
-            >
-               {
-                  pathname === "/" ?
-                     <>
-                        <Nav.Link href="#About">About</Nav.Link>
-                        <Nav.Link href="#Services">Services</Nav.Link>
-                        <Nav.Link href="#Courses">Courses</Nav.Link>
-                        <Nav.Link href="#Contact">Contact</Nav.Link>
-                     </>
-                     :
-                     <>
-                        <NavLink className="navbar-link" to="/">About</NavLink>
-                        <NavLink className="navbar-link" to="/">Services</NavLink>
-                        <NavLink className="navbar-link" to="/">Portfolio</NavLink>
-                        <NavLink className="navbar-link" to="/">Contact</NavLink>
-                     </>
-               }
-            </Nav>
-            {
-               user && screenSize > 991 ?
-                  <div className="
+                  >
+                     {
+                        pathname === "/" ?
+                           <>
+                              <Nav.Link href="#About">About</Nav.Link>
+                              <Nav.Link href="#Services">Services</Nav.Link>
+                              <Nav.Link href="#Courses">Courses</Nav.Link>
+                              <Nav.Link href="#Contact">Contact</Nav.Link>
+                           </>
+                           :
+                           <>
+                              <NavLink className="navbar-link" to="/">About</NavLink>
+                              <NavLink className="navbar-link" to="/">Services</NavLink>
+                              <NavLink className="navbar-link" to="/">Portfolio</NavLink>
+                              <NavLink className="navbar-link" to="/">Contact</NavLink>
+                           </>
+                     }
+                  </Nav>
+                  {
+                     user && screenSize > 991 ?
+                        <div className="
                         nav-user-info
                         text-capitalize
                         d-flex
@@ -155,14 +157,16 @@ function Header()
                         ps-lg-5
                         pe-lg-3
                         m-auto"
-                  >
-                     <FontAwesomeIcon icon={faCircleUser} />
-                     <p className="p-0 m-0">{`${user && user.firstName} ${user.lastName}`}</p>
-                  </div>
-                  : null
-            }
-         </Navbar.Collapse>
-      </Navbar>
+                        >
+                           <FontAwesomeIcon icon={faCircleUser} />
+                           <p className="p-0 m-0">{`${user && user.firstName} ${user.lastName}`}</p>
+                        </div>
+                        : null
+                  }
+               </Navbar.Collapse>
+            </Navbar>
+         }
+      </>
    )
 }
 

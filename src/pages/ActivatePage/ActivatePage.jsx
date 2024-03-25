@@ -1,6 +1,7 @@
 
 function ActivatePage()
 {
+
    return (
       <div className="position-absolute start-50 translate-middle-x"
          style={{top: "25%"}}

@@ -78,7 +78,7 @@ function LoginForm()
       }
       dispatch(userLogin(userCredentials))
          .unwrap()
-         .then(() => navigate('/'))
+         .then(() => navigate('/', {replace: true}))
          .catch(error =>
          {
             Swal.fire({
@@ -100,7 +100,7 @@ function LoginForm()
       {
          if (e.data === 'replace your location')
          {
-            navigate('/');
+            navigate('/', {replace: true});
             window.location.reload();
          }
       };

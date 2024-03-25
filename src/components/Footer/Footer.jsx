@@ -5,18 +5,22 @@ import {faGlobe} from '@fortawesome/free-solid-svg-icons';
 import {faFacebookF, faLinkedinIn, faXTwitter} from '@fortawesome/free-brands-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import Moment from 'react-moment';
+import {useSelector} from 'react-redux';
 
 function Footer()
 {
    const {pathname} = useLocation();
+   const {user} = useSelector(state => state.auth);
 
    return (
       <>
          {
-            pathname === "/login" ||
+            (user?.role === "instructor" && user?.activated === 0) ||
+               pathname === "/login" ||
                pathname === "/instructor-signup" ||
                pathname === "/parent-signup" ||
                pathname === "/activate" ? null :
+
                <footer id='mainFooter' className="main-footer py-4 px-5">
                   <Row className='links-and-language'>
                      <Col className='mb-2 mb-md-0 order-1' md="2">
