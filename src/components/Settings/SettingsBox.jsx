@@ -120,7 +120,7 @@ function Settings()
               <li className="color" data-color="#4cae4f" data-hover="#409142"></li>
             </ul>
           </div>
-          {user &&
+          {user && 
             <>
               <Button
                 id="profileBtn"
@@ -137,6 +137,40 @@ function Settings()
                 onClick={handleUserLogOut}>
                 Logout
               </Button>
+              <Button
+                id="accountSettingsBtn"
+                type="button"
+                variant="secondary"
+                disabled={!!authLoading}
+              >
+                Account Settings
+              </Button>
+            </>
+          }
+          {user && user.role == "instructor" &&
+            <>
+            <Button
+                id="myCoursesBtn"
+                type="button"
+                variant="secondary"
+                disabled={!!authLoading}
+              >
+                myCourses
+              </Button>
+             
+            </>
+          }
+          {user && user.role == "parent" &&
+            <>
+            <Button
+                id="myChidrenBtn"
+                type="button"
+                variant="secondary"
+                disabled={!!authLoading}
+              >
+                My Chidren
+              </Button>
+             
             </>
           }
         </div>
