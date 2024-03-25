@@ -20,6 +20,7 @@
 }
 
 #Courses .course-card .image-holder {
+   width: 218px;
    border: 1px solid #EEE;
 }
 

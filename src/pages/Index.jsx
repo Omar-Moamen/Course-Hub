@@ -1,3 +1,4 @@
+import withGuard from '../util/withGuard'
 import Landing from './Landing/Landing'
 
 function Index()
@@ -10,4 +11,4 @@ function Index()
    )
 }
 
-export default Index
+export default withGuard(Index);

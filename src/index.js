@@ -11,6 +11,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import ParentSignUp from './pages/SignUp/ParentSignUp';
 import InstructorSignUp from './pages/SignUp/InstructorSignUp';
 import Index from './pages/Index';
+import ActivatePage from './pages/ActivatePage/ActivatePage';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
       {index: true, element: <Index />},
       {path: 'login', element: <LoginForm />},
       {path: 'parent-signup', element: <ParentSignUp />},
-      {path: 'instructor-signup', element: <InstructorSignUp />}
+      {path: 'instructor-signup', element: <InstructorSignUp />},
+      {path: 'activate', element: <ActivatePage />},
     ],
   },
 
