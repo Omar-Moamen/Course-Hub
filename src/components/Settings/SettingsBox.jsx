@@ -4,6 +4,7 @@ import {faGear} from '@fortawesome/free-solid-svg-icons';
 import {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
+import {useNavigate} from 'react-router-dom';
 import {userLogout} from "../../store/authSlice";
 import Swal from "sweetalert2";
 import useLocalStorage from "../../hooks/use-local-storage";
@@ -20,6 +21,7 @@ function Settings()
   const [showSettings, setShowSettings] = useState(false);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const settingBoxHandler = () =>
   {
@@ -30,6 +32,11 @@ function Settings()
   {
     dispatch(userLogout())
       .unwrap()
+      .then(() =>
+      {
+        navigate('/', {replace: true})
+        setShowSettings(false);
+      })
       .catch(error =>
       {
         Swal.fire({
@@ -120,7 +127,7 @@ function Settings()
               <li className="color" data-color="#4cae4f" data-hover="#409142"></li>
             </ul>
           </div>
-          {user && 
+          {user &&
             <>
               <Button
                 id="profileBtn"
@@ -131,13 +138,6 @@ function Settings()
                 Profile
               </Button>
               <Button
-                id="logoutBtn"
-                variant="danger"
-                disabled={!!authLoading}
-                onClick={handleUserLogOut}>
-                Logout
-              </Button>
-              <Button
                 id="accountSettingsBtn"
                 type="button"
                 variant="secondary"
@@ -145,11 +145,10 @@ function Settings()
               >
                 Account Settings
               </Button>
-            </>
-          }
-          {user && user.role == "instructor" &&
+            </>}
+          {user && user.role === "instructor" &&
             <>
-            <Button
+              <Button
                 id="myCoursesBtn"
                 type="button"
                 variant="secondary"
@@ -157,35 +156,31 @@ function Settings()
               >
                 myCourses
               </Button>
-             
+
             </>
           }
-          {user && user.role == "parent" &&
+          {user && user.role === "parent" &&
             <>
-            <Button
-                id="myChidrenBtn"
+              <Button
+                id="myChildrenBtn"
                 type="button"
                 variant="secondary"
                 disabled={!!authLoading}
               >
-                My Chidren
+                My Children
               </Button>
-             
             </>
           }
-          {user && user.role == "student" &&
-            <>
+          {user &&
             <Button
-                id="myCoursesBtn"
-                type="button"
-                variant="secondary"
-                disabled={!!authLoading}
-              >
-                myCourses
-              </Button>
-             
-            </>
+              id="logoutBtn"
+              variant="danger"
+              disabled={!!authLoading}
+              onClick={handleUserLogOut}>
+              Logout
+            </Button>
           }
+
         </div>
       }
     </>

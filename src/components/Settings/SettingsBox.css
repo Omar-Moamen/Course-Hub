@@ -124,22 +124,19 @@
    font-weight: bold;
    font-size: 18px;
    border-radius: 0;
-   position: absolute;
-   top: 195px;
-   left: 50%;
-   transform: translateX(-50%);
 }
 
-.settings-box #profileBtn {
+.settings-box #profileBtn,
+.settings-box #accountSettingsBtn,
+.settings-box #myCoursesBtn,
+.settings-box #myChildrenBtn {
    width: calc(100% - 20px);
    height: 40.6px;
+   display: block;
+   margin: 0 auto 10px;
    font-weight: bold;
    font-size: 18px;
    border-radius: 0;
-   position: absolute;
-   top: 95px;
-   left: 50%;
-   transform: translateX(-50%);
 }
 
 .settings-box #accountSettingsBtn {
@@ -148,10 +145,6 @@
    font-weight: bold;
    font-size: 18px;
    border-radius: 0;
-   position: absolute;
-   top: 145px;
-   left: 50%;
-   transform: translateX(-50%);
 }
 
 .settings-box #logoutBtn {
@@ -169,14 +162,3 @@
 /*
 parent
 */
-.settings-box #myChidrenBtn {
-   width: calc(100% - 20px);
-   height: 40.6px;
-   font-weight: bold;
-   font-size: 18px;
-   border-radius: 0;
-   position: absolute;
-   top: 195px;
-   left: 50%;
-   transform: translateX(-50%);
-}
