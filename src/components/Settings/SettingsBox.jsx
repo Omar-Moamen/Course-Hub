@@ -173,6 +173,19 @@ function Settings()
              
             </>
           }
+          {user && user.role == "student" &&
+            <>
+            <Button
+                id="myCoursesBtn"
+                type="button"
+                variant="secondary"
+                disabled={!!authLoading}
+              >
+                myCourses
+              </Button>
+             
+            </>
+          }
         </div>
       }
     </>
