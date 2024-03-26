@@ -91,19 +91,19 @@ function LoginForm()
 
    const handleGoogleLogin = async () =>
    {
-      const windowFeatures = "left=500,top=200,width=450,height=500";
+      // const windowFeatures = "left=500,top=200,width=450,height=500";
 
-      let myWindow = window.open(`http://localhost:5000/auth/google`, '_blank', windowFeatures);
+      window.open(`http://localhost:5000/auth/google`, '_self');
 
-      // opener:
-      myWindow.opener.onmessage = function (e)
-      {
-         if (e.data === 'replace your location')
-         {
-            navigate('/', {replace: true});
-            window.location.reload();
-         }
-      };
+      // // opener:
+      // myWindow.opener.onmessage = function (e)
+      // {
+      //    if (e.data === 'replace your location')
+      //    {
+      //       navigate('/', {replace: true});
+      //       window.location.reload();
+      //    }
+      // };
    }
 
    return (
