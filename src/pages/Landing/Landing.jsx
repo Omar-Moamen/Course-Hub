@@ -45,16 +45,12 @@ function Landing()
                            >
                               <Col className="align-self-end" lg="8">
                                  <h1 className='main-heading text-white text-capitalize mb-3'>
-                                    Your favorite place to learn programming
+                                 The best place to teach your children programming                                 
                                  </h1>
                               </Col>
                               <Col className='align-self-sm-start align-self-baseline' lg="8">
                                  <p className='fs-lg-5 mt-5'>
-                                    Something Lorem, ipsum dolor sit amet
-                                    consectetur adipisicing elit. Reiciendis,
-                                    aliquid iure atque magnam delectus ipsa
-                                    explicabo incidunt recusandae voluptatibus,
-                                    rerum, hic aliquam
+                                 Welcome to CourseHub , where coding becomes child's play! 🚀
                                  </p>
                                  <a className='
                            btn border-0
@@ -81,10 +77,12 @@ function Landing()
                            </Col>
                            <Col className='' lg='8'>
                               <p className='fs-lg-5 mt-5'>
-                                 Something Lorem, ipsum dolor sit amet consectetur
-                                 adipisicing elit. Reiciendis, aliquid iure atque magnam
-                                 delectus ipsa explicabo incidunt recusandae
-                                 voluptatibus, rerum, hic aliquam
+                              CourseHub website for kids is a fun and interactive platform designed to teach children the basics of coding in a playful and engaging way.
+                              Through colorful visuals, exciting games, and easy-to-follow tutorials, kids can explore the world of programming,
+                              develop problem-solving skills, and unleash their creativity.
+                              Whether they're learning the fundamentals of block-based coding or diving into more advanced concepts,
+                              our website provides a safe and supportive environment where kids can learn,
+                              experiment, and have fun while gaining valuable skills for the future
                               </p>
                               <Link
                                  to={user ? 'home' : 'login'}

@@ -9,7 +9,7 @@ function Course({data})
       <div className="course-card text-start">
          <div className="image-holder">
             <img className="img-fluid" src={url + data.courseName + ".jpg"} alt={`${data.courseName}`} />
-         </div>
+         </div>  
          <div className="course-info">
             <h6 className="course-title text-capitalize">{data.courseName}</h6>
             <div className="course-rating">
@@ -21,10 +21,8 @@ function Course({data})
                   <span className="stars"><FontAwesomeIcon icon={solidStart} /></span>
                   <span className='stars'><FontAwesomeIcon icon={faStarHalfStroke} /></span>
                </div>
-               <span className="reviews">(150,000)</span>
             </div>
-            <span className='course-price d-block text-uppercase'>{data.coursePrice}</span>
-            <span className='course-badge d-block'>Bestseller</span>
+            <span className='course-price d-block text-uppercase'>{"EGP " + data.coursePrice}</span>
          </div>
       </div>
    )

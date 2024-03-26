@@ -146,6 +146,19 @@ function Settings()
                 Account Settings
               </Button>
             </>}
+            {user && user.role === "student" &&
+            <>
+              <Button
+                id="myCoursesBtn"
+                type="button"
+                variant="secondary"
+                disabled={!!authLoading}
+              >
+                My Courses
+              </Button>
+
+            </>
+          }
           {user && user.role === "instructor" &&
             <>
               <Button
