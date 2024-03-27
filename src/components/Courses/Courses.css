@@ -5,6 +5,8 @@
 #Courses .course-card {
    max-width: 218px;
    margin: auto;
+   cursor: pointer;
+   z-index: -1;
 }
 
 @media(max-width: 767px) {
@@ -19,6 +21,60 @@
    }
 }
 
+#Courses .course-popover {
+   width: 300px;
+   padding: 20px;
+   right: -325px;
+   top: 50%;
+   background-color: #FFF;
+   box-shadow: 0px 0px 1px 0px #d1d7dc, 0 2px 4px 0px rgb(0 0 0 / 8%), 0px 4px 12px 0px rgb(0 0 0 / 8%);
+   opacity: 0;
+   z-index: 10;
+   transition: var(--mainTransition);
+   transform: translateY(-50%);
+   -webkit-transform: translateY(-50%);
+   -moz-transform: translateY(-50%);
+   -ms-transform: translateY(-50%);
+   -o-transform: translateY(-50%);
+   -webkit-transition: var(--mainTransition);
+   -moz-transition: var(--mainTransition);
+   -ms-transition: var(--mainTransition);
+   -o-transition: var(--mainTransition);
+}
+
+#Courses .course-popover::before {
+   content: '';
+   position: absolute;
+   top: 50%;
+   left: -24px;
+   border-style: solid;
+   border-width: 12px;
+   border-color: transparent #FFF transparent transparent;
+   transform: translateY(-50%);
+   -webkit-transform: translateY(-50%);
+   -moz-transform: translateY(-50%);
+   -ms-transform: translateY(-50%);
+   -o-transform: translateY(-50%);
+}
+
+#Courses .course-card:hover {
+   overflow: visible;
+}
+
+#Courses .course-card:hover .course-popover {
+   opacity: 1;
+}
+
+#Courses .course-popover h5 {
+   font-weight: bold
+}
+
+#Courses .course-popover p {
+   color: #2D2F31;
+   font-size: 14px;
+   font-weight: lighter;
+}
+
 #Courses .course-card .image-holder {
    width: 218px;
    border: 1px solid #EEE;
@@ -26,7 +82,7 @@
 
 #Courses .course-info .course-title {
    font-weight: bold;
-   margin: 15px 0 5px;
+   margin: 15px 0 0;
    font-size: 17px;
 }
 
@@ -36,7 +92,31 @@
    margin: 8px 0 4px;
 }
 
-#Courses .course-rating .ratio {
+#Courses .course-level>span {
+   font-size: 15px;
+   font-weight: bold;
+}
+
+#Courses .course-level div[class*="course-process"] {
+   width: 80px;
+   height: 15px;
+   /* background-color: #FFF; */
+   display: flex;
+   align-items: center;
+   gap: 4px;
+}
+
+#Courses .course-level div[class*="course-process"] span {
+   width: 12px;
+   height: 100%;
+   background-color: #eee;
+}
+
+#Courses .course-level div[class*="course-process"] span.fill {
+   background-color: var(--mainColor);
+}
+
+/* #Courses .course-rating .ratio {
    font-size: 15px;
    font-weight: bold;
    margin-right: 5px;
@@ -53,12 +133,12 @@
    margin-left: 8px;
    font-weight: lighter;
    opacity: .8;
-}
+} */
 
 #Courses .course-price {
    font-size: 15px;
    font-weight: bold;
-   margin-top: 5px;
+   margin-top: 8px;
 }
 
 #Courses .course-badge {
@@ -70,6 +150,15 @@
    font-weight: bold;
    margin-top: 8px;
 }
+
+/* courses-carousel */
+.minus-zIndex {
+   z-index: -1 !important;
+}
+
+/* .courses-carousel ul .react-multi-carousel-item--active {
+   z-index: -1 !important;
+} */
 
 .courses-carousel button[class*="left"],
 .courses-carousel button[class*="right"] {

@@ -1,6 +1,28 @@
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
+import useUserData from "../../hooks/use-user-data";
 
 function ActivatePage()
 {
+   const {user} = useUserData();
+   const {role, activated} = user || {};
+
+   const navigate = useNavigate();
+
+   useEffect(() =>
+   {
+      if (user)
+      {
+         if (role !== "instructor" || activated !== 0)
+         {
+            navigate('/', {replace: true});
+         }
+      }
+      if (!user) 
+      {
+         navigate('/', {replace: true});
+      }
+   }, [user, role, activated, navigate]);
 
    return (
       <div className="position-absolute start-50 translate-middle-x"

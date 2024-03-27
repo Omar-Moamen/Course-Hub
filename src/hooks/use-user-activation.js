@@ -15,11 +15,6 @@ function useUserActivation()
       {
          navigate('/activate', {replace: true});
       }
-      else
-      {
-         navigate('/', {replace: true});
-      }
-
    }, [navigate, activated, role]);
 
    return {role, activated};

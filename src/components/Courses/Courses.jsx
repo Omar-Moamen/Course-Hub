@@ -52,6 +52,7 @@ function Courses()
             className='courses-carousel position-static'
             responsive={responsive}
             draggable={false}
+            itemClass='minus-zIndex'
          >
             {courses}
          </Carousel>
