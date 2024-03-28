@@ -1,6 +1,6 @@
 import {useEffect} from 'react';
 
-function Course({data})
+function Course({data, index})
 {
    let url = "http://localhost:5000/cardImages/";
 
@@ -13,13 +13,17 @@ function Course({data})
    }, [data.academyCourseId, data.courseLevel])
 
    return (
-      <div className="course-card text-start position-relative">
+      <div
+         className={`course-card text-start position-relative ${(index + 1) % 5 === 0 &&
+            "left"}`}
+         data-index={index}
+      >
          <div className="image-holder">
-            <img className="img-fluid" src={url + data.courseName + ".jpg"} alt={`${data.courseName}`} />
+            <img src={url + data.courseName + ".jpg"} alt={`${data.courseName}`} />
          </div>
          <div className="course-info">
             <h6 className="course-title text-capitalize">{data.courseName}</h6>
-            <div className="course-level">
+            <div className="course-level d-flex align-items-center gap-2">
                <span>
                   Level {data.courseLevel}
                </span>
@@ -36,8 +40,8 @@ function Course({data})
             </span>
          </div>
          <div className="course-popover position-absolute">
+            <div className="popover-arrow position-absolute"></div>
             <h5 className='text-capitalize'>{data.courseName}</h5>
-            <hr className='my-2' />
             <p>{data.courseDescription}</p>
          </div>
       </div>
