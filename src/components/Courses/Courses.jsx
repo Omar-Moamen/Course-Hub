@@ -1,7 +1,7 @@
 import './Courses.css'
 import {useDispatch, useSelector} from "react-redux";
 import {getCourses} from "../../store/coursesSlice";
-import React, {useEffect} from "react";
+import React, {useEffect,useState} from "react";
 import Course from './Course';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleRight} from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
+
 function SampleNextArrow(props)
+
 {
    const {onClick} = props;
 
@@ -26,7 +28,7 @@ function SampleNextArrow(props)
 function SamplePrevArrow(props)
 {
    const {onClick} = props;
-
+console.log("prevvvvvvvvvvv")
    return (
       <button
          className='carousel-left-arrow position-absolute'
@@ -39,13 +41,22 @@ function SamplePrevArrow(props)
 
 function Courses()
 {
+
+
    const {coursesData, loading} = useSelector(state => state.courses);
 
+   const [currentSlide, setCurrentSlide] = useState(0);
+
+   
    const courses = coursesData && coursesData.map((course, i) => (
-      <Course key={course.academyCourseId} data={course} index={i} />)
+      <Course key={course.academyCourseId} data={course} index={i} side={Slider.SwipeDirection} firstSlide = {currentSlide}/>)
    );
 
    console.log(courses)
+
+   
+   
+
 
    const dispatch = useDispatch();
 
@@ -87,6 +98,7 @@ function Courses()
       swipeToSlide: false,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />,
+      afterChange: (current) => setCurrentSlide(current),
       responsive: [
          {
             breakpoint: 1198,
@@ -117,7 +129,8 @@ function Courses()
             }
          },
          {}
-      ]
+      ],
+      
    };
 
    return (
