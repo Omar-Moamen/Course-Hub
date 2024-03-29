@@ -1,20 +1,37 @@
 import {useEffect,useState} from 'react';
 
 
-function Course({data, index,side,firstSlide})
+function Course({data, index,side,firstSlide,len})
 {
    let url = "http://localhost:5000/cardImages/";
 
    const [numSlides, setNumSlides] = useState(0);
    const [numOfSwaps, setNumOfSwaps] = useState(0);
 
-   const setSide = (firstSlide,numSlides,numOfSwaps,index) =>{
+   const setSide = (firstSlide,numSlides,index) =>{
+      if(len - 1 == index){
+         return "left" 
+      }
+      else if(firstSlide == 0){
+         if(numSlides - 1 == index){
+            return "left" 
+         }
+      }else if((firstSlide + numSlides -1) == index){
+         return "left" 
+      }
+         return "right" 
+      
+   }
+   /* const setSide = (firstSlide,numSlides,numOfSwaps,index) =>{
       if(firstSlide != 0){
          if( firstSlide - 1 == index){
             return "left"
          }else if((firstSlide + numOfSwaps + 1) == index){
             return "left"
-         } 
+         } else if( index % numOfSwaps == 0){
+            return "left"
+//index + firstSlide + numSlides + numOfSwaps         
+ }
          else return "right"
       }else if(numSlides - 1 == index){
          return "left" 
@@ -22,7 +39,10 @@ function Course({data, index,side,firstSlide})
          return "right"
 
       }
-   }
+
+
+      + window.innerWidth  +"  "+ index + firstSlide + numSlides + numOfSwaps + setSide(firstSlide,numSlides,index)
+   } */
    
    useEffect(() =>
    {
@@ -50,14 +70,14 @@ function Course({data, index,side,firstSlide})
 
    return (
       <div
-         className={`course-card text-start position-relative ${setSide(firstSlide,numSlides,numOfSwaps,index)}`}
+         className={`course-card text-start position-relative ${setSide(firstSlide,numSlides,index)}`}
          data-index={index}
       >
          <div className="image-holder">
             <img src={url + data.courseName + ".jpg"} alt={`${data.courseName}`} />
          </div>
          <div className="course-info">
-         <h6 className="course-title text-capitalize">{data.courseName}</h6>
+         <h6 className="course-title text-capitalize">{data.courseName }</h6>
             <div className="course-level d-flex align-items-center gap-2">
                <span>
                   Level {data.courseLevel}

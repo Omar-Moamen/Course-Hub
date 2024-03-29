@@ -28,7 +28,6 @@ function SampleNextArrow(props)
 function SamplePrevArrow(props)
 {
    const {onClick} = props;
-console.log("prevvvvvvvvvvv")
    return (
       <button
          className='carousel-left-arrow position-absolute'
@@ -46,10 +45,9 @@ function Courses()
    const {coursesData, loading} = useSelector(state => state.courses);
 
    const [currentSlide, setCurrentSlide] = useState(0);
-
    
    const courses = coursesData && coursesData.map((course, i) => (
-      <Course key={course.academyCourseId} data={course} index={i} side={Slider.SwipeDirection} firstSlide = {currentSlide}/>)
+      <Course key={course.academyCourseId} data={course} index={i} side={Slider.SwipeDirection} firstSlide = {currentSlide} len = {coursesData.length}/>)
    );
 
    console.log(courses)
