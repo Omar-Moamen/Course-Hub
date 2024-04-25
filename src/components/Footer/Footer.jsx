@@ -49,14 +49,20 @@ function Footer()
                      <Col className='mt-3 mt-md-0 order-4' md="2">
                         <ul className='
                               social-icons
-                              nav-list
+                              m-0
                               list-unstyled
                               d-flex align-items-center
                               gap-3'
                         >
-                           <li className='facebook-icon'><a href="/#"><FontAwesomeIcon icon={faFacebookF} /></a></li>
-                           <li className='x-icon'><a href="/#"><FontAwesomeIcon icon={faXTwitter} /></a></li>
-                           <li className='linkedin-icon'><a href="/#"><FontAwesomeIcon icon={faLinkedinIn} /></a></li>
+                           <li className='facebook-icon'>
+                              <a href="/#"><FontAwesomeIcon icon={faFacebookF} /></a>
+                           </li>
+                           <li className='x-icon'>
+                              <a href="/#"><FontAwesomeIcon icon={faXTwitter} /></a>
+                           </li>
+                           <li className='linkedin-icon'>
+                              <a href="/#"><FontAwesomeIcon icon={faLinkedinIn} /></a>
+                           </li>
                         </ul>
                      </Col>
                      <Col

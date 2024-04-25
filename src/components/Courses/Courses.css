@@ -2,6 +2,7 @@
    max-width: 218px;
    margin: 0 auto;
    cursor: pointer;
+   overflow: hidden;
 }
 
 @media(max-width: 767px) {
@@ -17,7 +18,7 @@
 }
 
 #Courses .course-popover {
-   display: none;
+   display: block;
    width: 300px;
    padding: 20px;
    right: -315px;
@@ -42,11 +43,11 @@
    -o-transition: var(--mainTransition);
 }
 
-@media(min-width: 1200px) {
+/* @media(min-width: 1200px) {
    #Courses .course-popover {
       display: block;
    }
-}
+} */
 
 #Courses .course-card.left .course-popover {
    right: auto;
@@ -54,13 +55,13 @@
 }
 
 #Courses .course-card.top .course-popover {
-   top: -325px;
+   top: -200px;
    left: 50%;
-   transform: translateY(-50%);
-   -webkit-transform: translateY(-50%);
-   -moz-transform: translateY(-50%);
-   -ms-transform: translateY(-50%);
-   -o-transform: translateY(-50%);
+   transform: translateX(-50%);
+   -webkit-transform: translateX(-50%);
+   -moz-transform: translateX(-50%);
+   -ms-transform: translateX(-50%);
+   -o-transform: translateX(-50%);
 }
 
 #Courses .course-popover .popover-arrow {
@@ -69,6 +70,7 @@
    background-color: #FFF;
    left: -29px;
    top: 50%;
+   z-index: 1999;
    transform: translateY(-50%);
    clip-path: polygon(100% 25%, 100% 75%, 10% 50%);
    -webkit-transform: translateY(-50%);
@@ -84,28 +86,6 @@
    right: -29px;
    clip-path: polygon(0% 25%, 0% 75%, 100% 50%);
 }
-
-/* #Courses .course-popover::before {
-   content: '';
-   position: absolute;
-   top: 50%;
-   left: -24px;
-   border-style: solid;
-   border-width: 12px;
-   border-color: transparent #FFF transparent transparent;
-   transform: translateY(-50%);
-   -webkit-transform: translateY(-50%);
-   -moz-transform: translateY(-50%);
-   -ms-transform: translateY(-50%);
-   -o-transform: translateY(-50%);
-}
-
-#Courses .course-card.left .course-popover::before {
-   left: auto;
-   right: -24px;
-   border-color: transparent transparent transparent #FFF;
-
-} */
 
 #Courses .course-card:hover {
    overflow: visible;
@@ -207,8 +187,8 @@
    margin-top: 8px;
 } */
 
-/* courses-carousel */
 
+/* courses-carousel */
 #Courses .carousel-wrapper {
    margin-top: 100px;
 }
@@ -262,4 +242,9 @@
    .courses-carousel button.carousel-right-arrow {
       right: 40px;
    }
+}
+
+#Courses swiper-container .swiper {
+   position: static;
+   overflow: visible !important;
 }
