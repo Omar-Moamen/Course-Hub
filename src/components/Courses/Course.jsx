@@ -31,19 +31,19 @@ function Course({data, index, firstSlide, len})
    useEffect(() =>
    {
       const windowWidth = window.innerWidth;
-      if (windowWidth < 576)
+      if (windowWidth <= 640)
       {
          setNumSlides(1)
          setNumOfSwaps(1)
-      } else if (windowWidth < 767)
+      } else if (windowWidth > 640 && windowWidth <= 767)
       {
          setNumSlides(2)
          setNumOfSwaps(2)
-      } else if (windowWidth < 1024)
+      } else if (windowWidth > 767 && windowWidth <= 1024)
       {
          setNumSlides(3)
          setNumOfSwaps(3)
-      } else if (windowWidth < 1400)
+      } else if (windowWidth > 1024 && windowWidth <= 1280)
       {
          setNumSlides(4)
          setNumOfSwaps(3)
@@ -84,7 +84,9 @@ function Course({data, index, firstSlide, len})
             </span>
          </div>
          <div className="course-popover position-absolute">
-            <div className="popover-arrow position-absolute"></div>
+            <span className="popover-arrow-wrap position-absolute">
+               <span className="popover-arrow d-block"></span>
+            </span>
             <h5 className='text-capitalize'>{data.courseName}</h5>
             <p>{data.courseDescription}</p>
          </div>

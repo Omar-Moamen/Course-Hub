@@ -6,6 +6,7 @@ import {faCircleUser} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import useUserData from '../../hooks/use-user-data';
 import {removeActiveClasses} from '../../util/removeActiveClasses';
+import useScreenSize from '../../hooks/use-screen-size';
 
 function Header()
 {
@@ -14,7 +15,7 @@ function Header()
    console.log("header")
    const {pathname} = useLocation();
    const [showNavbar, setShowNavbar] = useState(false);
-   const [screenSize, setScreenSize] = useState(window.innerWidth);
+   const [screenSize] = useScreenSize();
    const [toggler, setToggler] = useState(false);
 
    // Effects
@@ -82,16 +83,6 @@ function Header()
 
       return () => window.removeEventListener('scroll', switchActiveLinksHandler);
    }, []);
-
-   // Change mainNav according to screenSize
-   useEffect(() =>
-   {
-      const resizeHandler = () => setScreenSize(window.innerWidth);
-
-      window.addEventListener('resize', resizeHandler);
-
-      return () => window.removeEventListener('resize', resizeHandler);
-   }, [screenSize]);
 
    return (
       <>
