@@ -60,19 +60,23 @@ function Courses()
             640: {
                slidesPerView: 2,
                cssMode: false,
+               slidesPerGroup: 2,
             },
             767: {
                slidesPerView: 3,
                cssMode: false,
+               slidesPerGroup: 3,
             },
             1024: {
                slidesPerView: 4,
                cssMode: false,
+               slidesPerGroup: 3,
             },
             1400: {
                slidesPerView: 5,
                //cssMode if (true) popover will be hidden at the Y-axis
                cssMode: true,
+               slidesPerGroup: 3,
             },
          },
       }
