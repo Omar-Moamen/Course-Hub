@@ -4,8 +4,8 @@ import {Formik} from 'formik';
 import {Container, Form, Row, Col, Button} from 'react-bootstrap';
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
-import {forgetPassword} from '../../store/userSlice';
-import {userLogin} from '../../store/authSlice';
+import {actForgetPassword} from '../../store/usersSlice/act/actForgetPassword';
+import {actUserLogin} from '../../store/authSlice/act/actUserLogin';
 import {useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-regular-svg-icons';
@@ -28,6 +28,15 @@ const signInSchema = Yup.object().shape({
 })
 // End Sign in validation schema
 
+// Formik
+const initialValues = {
+   signInEmail: '',
+   signInPassword: '',
+   identifier: '',
+}
+
+const enableReinitialize = true;
+
 // Start Component
 function LoginForm()
 {
@@ -42,22 +51,14 @@ function LoginForm()
    const dispatch = useDispatch();
    const navigate = useNavigate();
 
-   // Formik
-   const initialValues = {
-      signInEmail: '',
-      signInPassword: '',
-      identifier: '',
-   }
-
-   const enableReinitialize = true;
-
    const sendResetPassword = (values) =>
    {
       let backupEmail =
       {
          identifier: values.identifier
       };
-      dispatch(forgetPassword(backupEmail))
+
+      dispatch(actForgetPassword(backupEmail))
          .unwrap()
          .then(() => setShowModal(false))
          .catch(error =>
@@ -76,7 +77,7 @@ function LoginForm()
          email: values.signInEmail,
          password: values.signInPassword,
       }
-      dispatch(userLogin(userCredentials))
+      dispatch(actUserLogin(userCredentials))
          .unwrap()
          .then(() => navigate('/', {replace: true}))
          .catch(error =>

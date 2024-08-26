@@ -1,7 +1,6 @@
 import {Button, Col, Container, Row} from 'react-bootstrap';
-import './InstructorSignUp.css';
 import {ErrorMessage, Field, Formik} from 'formik';
-import {addInstructor} from '../../store/userSlice';
+import {actAddInstructor} from '../../store/usersSlice/act/actAddInstructor';
 import Form from 'react-bootstrap/Form';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
@@ -10,6 +9,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-regular-svg-icons';
 import Swal from 'sweetalert2';
 import * as Yup from 'yup';
+import './InstructorSignUp.css';
 
 // Start Sign in validation schema
 const signInSchema = Yup.object().shape({
@@ -47,6 +47,18 @@ const signInSchema = Yup.object().shape({
 })
 // End Sign in validation schema
 
+// Formik
+const initialValues = {
+   firstName: '',
+   lastName: '',
+   birthDate: '',
+   email: '',
+   password: '',
+   city: '',
+}
+
+const enableReinitialize = true;
+
 export default function InstructorSignUp()
 {
    const [showPassword, setShowPassword] = useState(false);
@@ -55,16 +67,6 @@ export default function InstructorSignUp()
    const navigate = useNavigate();
 
    // Formik
-   const initialValues = {
-      firstName: '',
-      lastName: '',
-      birthDate: '',
-      email: '',
-      password: '',
-      city: '',
-   }
-
-   const enableReinitialize = true;
    const onSubmit = (values) =>
    {
       let userCredentials = {
@@ -78,7 +80,7 @@ export default function InstructorSignUp()
 
       console.log(userCredentials);
 
-      dispatch(addInstructor(userCredentials))
+      dispatch(actAddInstructor(userCredentials))
          .unwrap()
          .then(() => navigate('/login'))
          .catch(error =>

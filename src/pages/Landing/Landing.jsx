@@ -82,7 +82,7 @@ function Landing(role, activated)
                                  experiment, and have fun while gaining valuable skills for the future
                               </p>
                               <Link
-                                 to={user ? 'home' : 'login'}
+                                 to={user ? '/' : 'login'}
                                  className='
                            btn btn-light border-0
                            text-black rounded-pill

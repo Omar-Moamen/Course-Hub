@@ -8,6 +8,8 @@ import useUserData from '../../hooks/use-user-data';
 import {removeActiveClasses} from '../../util/removeActiveClasses';
 import useScreenSize from '../../hooks/use-screen-size';
 
+const navItems = ["About", "Services", "Courses", "Contact"];
+
 function Header()
 {
    // Get The current User with custom hook
@@ -17,6 +19,18 @@ function Header()
    const [showNavbar, setShowNavbar] = useState(false);
    const [screenSize] = useScreenSize();
    const [toggler, setToggler] = useState(false);
+
+   let mainNavClassName = `fixed-top px-lg-4`;
+
+   if (showNavbar || screenSize < 992 || pathname !== "/")
+   {
+      mainNavClassName =
+         "bg-light text-black alt-nav-hover main-shadow active-hover fixed-top px-lg-4";
+   }
+   else
+   {
+      mainNavClassName = "bg-transparent nav-color fixed-top px-lg-4";
+   }
 
    // Effects
 
@@ -38,7 +52,7 @@ function Header()
 
       window.addEventListener('scroll', mainNavStylesHandler);
 
-      return () => window.removeEventListener('scroll', mainNavStylesHandler);
+      return () => window.removeEventListener("scroll", mainNavStylesHandler);
    }, []);
 
    // Switch active links on scrolling
@@ -79,9 +93,9 @@ function Header()
          })
       }
 
-      window.addEventListener('scroll', switchActiveLinksHandler);
+      window.addEventListener("scroll", switchActiveLinksHandler);
 
-      return () => window.removeEventListener('scroll', switchActiveLinksHandler);
+      return () => window.removeEventListener("scroll", switchActiveLinksHandler);
    }, []);
 
    return (
@@ -89,10 +103,7 @@ function Header()
          {
             <Navbar
                id="mainNav"
-               className={`
-         ${showNavbar || screenSize < 992 || pathname !== "/" ?
-                     "bg-light text-black alt-nav-hover main-shadow active-hover" :
-                     "bg-transparent nav-color"} fixed-top px-lg-4`}
+               className={mainNavClassName}
                expand="lg"
             >
                <Container className={`${screenSize < 992 ? "bg-light" : null} px-4 px-lg-5 h-100`}>
@@ -123,17 +134,15 @@ function Header()
                      {
                         pathname === "/" ?
                            <>
-                              <Nav.Link href="#About">About</Nav.Link>
-                              <Nav.Link href="#Services">Services</Nav.Link>
-                              <Nav.Link href="#Courses">Courses</Nav.Link>
-                              <Nav.Link href="#Contact">Contact</Nav.Link>
+                              {navItems.map(item => (
+                                 <Nav.Link key={item} href={`#${item}`}>{item}</Nav.Link>
+                              ))}
                            </>
                            :
                            <>
-                              <NavLink className="navbar-link" to="/">About</NavLink>
-                              <NavLink className="navbar-link" to="/">Services</NavLink>
-                              <NavLink className="navbar-link" to="/">Portfolio</NavLink>
-                              <NavLink className="navbar-link" to="/">Contact</NavLink>
+                              {navItems.map(item => (
+                                 <NavLink key={item} className="navbar-link" to="/">{item}</NavLink>
+                              ))}
                            </>
                      }
                   </Nav>
@@ -150,7 +159,7 @@ function Header()
                         m-auto"
                         >
                            <FontAwesomeIcon icon={faCircleUser} />
-                           <p className="p-0 m-0">{`${user && user.firstName} ${user.lastName}`}</p>
+                           <p className="p-0 m-0">{`${user && user?.firstName} ${user && user?.lastName}`}</p>
                         </div>
                         : null
                   }

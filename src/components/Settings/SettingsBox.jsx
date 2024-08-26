@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from 'react-router-dom';
-import {userLogout} from "../../store/authSlice";
+import {actUserLogout} from "../../store//authSlice/act/actUserLogout";
 import Swal from "sweetalert2";
 import useLocalStorage from "../../hooks/use-local-storage";
 import {removeActiveClasses} from "../../util/removeActiveClasses";
@@ -16,7 +16,7 @@ function Settings()
   const [hover, setHover] = useLocalStorage("main_hover");
 
   // Get The current User with custom hook
-  const {user, authLoading} = useSelector(state => state.auth);
+  const {user, loading} = useSelector(state => state.auth);
 
   const [showSettings, setShowSettings] = useState(false);
 
@@ -30,7 +30,7 @@ function Settings()
 
   const handleUserLogOut = () =>
   {
-    dispatch(userLogout())
+    dispatch(actUserLogout())
       .unwrap()
       .then(() =>
       {
@@ -133,7 +133,7 @@ function Settings()
                 id="profileBtn"
                 type="button"
                 variant="secondary"
-                disabled={!!authLoading}
+                disabled={!!loading}
               >
                 Profile
               </Button>
@@ -141,44 +141,44 @@ function Settings()
                 id="accountSettingsBtn"
                 type="button"
                 variant="secondary"
-                disabled={!!authLoading}
+                disabled={!!loading}
               >
                 Account Settings
               </Button>
             </>}
-            {user && user.role === "student" &&
+          {user && user?.role === "student" &&
             <>
               <Button
                 id="myCoursesBtn"
                 type="button"
                 variant="secondary"
-                disabled={!!authLoading}
+                disabled={!!loading}
               >
                 My Courses
               </Button>
 
             </>
           }
-          {user && user.role === "instructor" &&
+          {user && user?.role === "instructor" &&
             <>
               <Button
                 id="myCoursesBtn"
                 type="button"
                 variant="secondary"
-                disabled={!!authLoading}
+                disabled={!!loading}
               >
                 myCourses
               </Button>
 
             </>
           }
-          {user && user.role === "parent" &&
+          {user && user?.role === "parent" &&
             <>
               <Button
                 id="myChildrenBtn"
                 type="button"
                 variant="secondary"
-                disabled={!!authLoading}
+                disabled={!!loading}
               >
                 My Children
               </Button>
@@ -188,7 +188,7 @@ function Settings()
             <Button
               id="logoutBtn"
               variant="danger"
-              disabled={!!authLoading}
+              disabled={!!loading}
               onClick={handleUserLogOut}>
               Logout
             </Button>

@@ -13,14 +13,14 @@ function ErrorPage()
          className='pt-5 text-center bg-light'>
          <h1 className='fw-light'>Oops!</h1>
          <p className='mx-auto'>Sorry, an unexpected error has occurred.</p>
-         <p className='mx-auto'>
+         <p className='mx-auto text-danger'>
             <i>{error.statusText || error.message}</i>
          </p>
          <Button
             type="button"
+            variant='link'
             className='
             text-uppercase
-            text-white
             border-0
             rounded-0'
             onClick={() => navigate('/', {replace: true})}

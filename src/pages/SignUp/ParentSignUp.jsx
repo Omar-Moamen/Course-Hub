@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import * as Yup from 'yup';
 import {faEye, faEyeSlash, faTrashCan} from '@fortawesome/free-regular-svg-icons';
 import {useDispatch} from 'react-redux';
-import {addUser} from '../../store/userSlice';
+import {actAddUser} from '../../store/usersSlice/act/actAddUser';
 import {useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -60,6 +60,19 @@ const signUPSchema = Yup.object().shape({
 })
 // End Register validation schema
 
+// Formik
+const initialValues = {
+   parentFirstName: '',
+   parentLastName: '',
+   fatherName: '',
+   parentPhone: '',
+   parentEmail: '',
+   parentCity: '',
+   parentPassword: '',
+   students: [{name: '', birthDate: ''},],
+}
+
+const enableReinitialize = true;
 
 // Start Component
 function ParentSignUp()
@@ -68,19 +81,6 @@ function ParentSignUp()
 
    const dispatch = useDispatch();
    const navigate = useNavigate();
-
-   const initialValues = {
-      parentFirstName: '',
-      parentLastName: '',
-      fatherName: '',
-      parentPhone: '',
-      parentEmail: '',
-      parentCity: '',
-      parentPassword: '',
-      students: [{name: '', birthDate: ''},],
-   }
-
-   const enableReinitialize = true;
 
    const onSubmit = (values) =>
    {
@@ -97,7 +97,7 @@ function ParentSignUp()
 
       console.log(userCredentials)
 
-      dispatch(addUser(userCredentials))
+      dispatch(actAddUser(userCredentials))
          .unwrap()
          .then(() => navigate('/login'))
          .catch(error =>

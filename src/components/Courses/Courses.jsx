@@ -1,6 +1,6 @@
 import './Courses.css'
 import {useDispatch, useSelector} from "react-redux";
-import {getCourses} from "../../store/coursesSlice";
+import {actGetCourses} from "../../store/coursesSlice/act/actGetCourses";
 import React, {useEffect, useState, useRef} from "react";
 import Course from './Course';
 
@@ -33,7 +33,7 @@ function Courses()
    {
       console.log('coursesTest')
 
-      dispatch(getCourses());
+      dispatch(actGetCourses());
    }, [dispatch]);
 
    // assign & initialize swiper
@@ -55,6 +55,7 @@ function Courses()
          breakpoints: {
             576: {
                slidesPerView: 1,
+               //cssMode (true) popover will be hidden at the Y-axis
                cssMode: false,
             },
             640: {
@@ -74,7 +75,7 @@ function Courses()
             },
             1400: {
                slidesPerView: 5,
-               //cssMode if (true) popover will be hidden at the Y-axis
+               //cssMode (false) popover will be hidden behind the next course-card
                cssMode: true,
                slidesPerGroup: 3,
             },
