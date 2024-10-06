@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {actAddUser} from "./act/actAddUser";
-import {actAddInstructor} from "./act/actAddInstructor";
-import {actForgetPassword} from "./act/actForgetPassword";
+import {addUser} from "./actions/addUser";
+import {addInstructor} from "./actions/addInstructor";
+import {forgetPassword} from "./actions/forgetPassword";
 
 const initialState = {loading: false, error: null}
 
@@ -13,17 +13,17 @@ const usersSlice = createSlice({
    {
       // addUser
       builder
-         .addCase(actAddUser.pending, (state, _) =>
+         .addCase(addUser.pending, (state, _) =>
          {
             state.loading = true;
             state.error = null;
          })
-         .addCase(actAddUser.fulfilled, (state, _) =>
+         .addCase(addUser.fulfilled, (state, _) =>
          {
             state.loading = false;
             state.error = null;
          })
-         .addCase(actAddUser.rejected, (state, {payload}) =>
+         .addCase(addUser.rejected, (state, {payload}) =>
          {
             state.loading = false;
             state.error = payload;
@@ -31,17 +31,17 @@ const usersSlice = createSlice({
 
       // addInstructor
       builder
-         .addCase(actAddInstructor.pending, (state, _) =>
+         .addCase(addInstructor.pending, (state, _) =>
          {
             state.loading = true;
             state.error = null;
          })
-         .addCase(actAddInstructor.fulfilled, (state) =>
+         .addCase(addInstructor.fulfilled, (state) =>
          {
             state.loading = false;
             state.error = null;
          })
-         .addCase(actAddInstructor.rejected, (state, {payload}) =>
+         .addCase(addInstructor.rejected, (state, {payload}) =>
          {
             state.loading = false;
             state.error = payload;
@@ -49,17 +49,17 @@ const usersSlice = createSlice({
 
       // forgetPassword
       builder
-         .addCase(actForgetPassword.pending, (state, _) =>
+         .addCase(forgetPassword.pending, (state, _) =>
          {
             state.loading = true;
             state.error = null;
          })
-         .addCase(actForgetPassword.fulfilled, (state) =>
+         .addCase(forgetPassword.fulfilled, (state) =>
          {
             state.loading = false;
             state.error = null;
          })
-         .addCase(actForgetPassword.rejected, (state, {payload}) =>
+         .addCase(forgetPassword.rejected, (state, {payload}) =>
          {
             state.loading = false;
             state.error = payload;

@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import * as Yup from 'yup';
 import {faEye, faEyeSlash, faTrashCan} from '@fortawesome/free-regular-svg-icons';
 import {useDispatch} from 'react-redux';
-import {actAddUser} from '../../store/usersSlice/act/actAddUser';
+import {addUser} from '../../store/usersSlice/actions/addUser';
 import {useNavigate} from 'react-router-dom';
 import Swal from 'sweetalert2';
 
@@ -95,9 +95,7 @@ function ParentSignUp()
          students: values.students,
       }
 
-      console.log(userCredentials)
-
-      dispatch(actAddUser(userCredentials))
+      dispatch(addUser(userCredentials))
          .unwrap()
          .then(() => navigate('/login'))
          .catch(error =>

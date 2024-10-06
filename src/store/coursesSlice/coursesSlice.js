@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {actGetCourses} from './act/actGetCourses';
+import {getCourses} from './actions/getCourses';
 
 const initialState = {coursesData: [], loading: false};
 
@@ -10,18 +10,18 @@ const coursesSlice = createSlice({
    extraReducers: (builder) =>
    {
       // getCourses
-      builder.addCase(actGetCourses.pending, (state, _) =>
+      builder.addCase(getCourses.pending, (state, _) =>
       {
          state.loading = true;
          state.error = null;
       })
-         .addCase(actGetCourses.fulfilled, (state, {payload}) =>
+         .addCase(getCourses.fulfilled, (state, {payload}) =>
          {
             state.loading = false;
             state.coursesData = payload;
             state.error = null;
          })
-         .addCase(actGetCourses.rejected, (state, {payload}) =>
+         .addCase(getCourses.rejected, (state, {payload}) =>
          {
             state.loading = false;
             state.error = payload;

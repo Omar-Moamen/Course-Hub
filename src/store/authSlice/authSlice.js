@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {actUserLogin} from "./act/actUserLogin";
-import {actGetUser} from './act/actGetUser';
-import {actUserLogout} from "./act/actUserLogout";
+import {userLogin} from "./actions/userLogin";
+import {getUser} from './actions/getUser';
+import {userLogout} from "./actions/userLogout";
 
 const initialState = {user: null, loading: false, error: null};
 
@@ -13,18 +13,18 @@ const authSlice = createSlice({
    {
       // userLogin
       builder
-         .addCase(actUserLogin.pending, (state, _) =>
+         .addCase(userLogin.pending, (state, _) =>
          {
             state.loading = true;
             state.error = null;
          })
-         .addCase(actUserLogin.fulfilled, (state, {payload}) =>
+         .addCase(userLogin.fulfilled, (state, {payload}) =>
          {
             state.user = payload;
             state.loading = false;
             state.error = null;
          })
-         .addCase(actUserLogin.rejected, (state, {payload}) =>
+         .addCase(userLogin.rejected, (state, {payload}) =>
          {
             state.loading = false;
             state.error = payload;
@@ -32,18 +32,18 @@ const authSlice = createSlice({
 
       // getUser
       builder
-         .addCase(actGetUser.pending, (state, _) =>
+         .addCase(getUser.pending, (state, _) =>
          {
             state.loading = true;
             state.error = null;
          })
-         .addCase(actGetUser.fulfilled, (state, {payload}) =>
+         .addCase(getUser.fulfilled, (state, {payload}) =>
          {
             state.loading = false;
             state.user = payload;
             state.error = null;
          })
-         .addCase(actGetUser.rejected, (state, {payload}) =>
+         .addCase(getUser.rejected, (state, {payload}) =>
          {
             state.loading = false;
             state.error = payload;
@@ -51,18 +51,18 @@ const authSlice = createSlice({
 
       // userLogout
       builder
-         .addCase(actUserLogout.pending, (state, _) =>
+         .addCase(userLogout.pending, (state, _) =>
          {
             state.loading = true;
             state.error = null;
          })
-         .addCase(actUserLogout.fulfilled, (state, {payload}) =>
+         .addCase(userLogout.fulfilled, (state, {payload}) =>
          {
             state.user = null;
             state.loading = false;
             state.error = null;
          })
-         .addCase(actUserLogout.rejected, (state, {payload}) =>
+         .addCase(userLogout.rejected, (state, {payload}) =>
          {
             state.loading = false;
             state.error = payload;

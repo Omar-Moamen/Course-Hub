@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {actGetUser} from "../store/authSlice/act/actGetUser";
+import {getUser} from "../store/authSlice/actions/getUser";
 import {useEffect} from "react";
 
 function useUserData()
@@ -9,7 +9,7 @@ function useUserData()
 
    useEffect(() =>
    {
-      dispatch(actGetUser());
+      dispatch(getUser());
    }, [dispatch]);
 
    return {user};

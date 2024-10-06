@@ -1,15 +1,14 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {client} from "../../../services/client";
 
-export const actGetUser = createAsyncThunk('auth/actGetUser',
-   async (_, thunkAPI) =>
+export const userLogin = createAsyncThunk('auth/userLogin',
+   async (userCredentials, thunkAPI) =>
    {
       const {rejectWithValue} = thunkAPI;
       try
       {
-         const request = await client.get(`http://localhost:5000/getCurrentUser`)
-         const data = await request.data;
-         return data;
+         const request = await client.post(`http://localhost:5000/login`, userCredentials)
+         return request.data;
       }
       catch (error)
       {

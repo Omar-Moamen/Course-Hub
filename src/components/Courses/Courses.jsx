@@ -1,6 +1,6 @@
 import './Courses.css'
 import {useDispatch, useSelector} from "react-redux";
-import {actGetCourses} from "../../store/coursesSlice/act/actGetCourses";
+import {getCourses} from "../../store/coursesSlice/actions/getCourses";
 import React, {useEffect, useState, useRef} from "react";
 import Course from './Course';
 
@@ -10,7 +10,7 @@ register();
 
 function Courses()
 {
-   const {coursesData, loading} = useSelector(state => state.courses);
+   const {coursesData} = useSelector(state => state.courses);
 
    const [currentSlide] = useState(0);
 
@@ -25,15 +25,11 @@ function Courses()
 
    const swiperRef = useRef(null);
 
-   console.log(courses)
-
    const dispatch = useDispatch();
 
    useEffect(() =>
    {
-      console.log('coursesTest')
-
-      dispatch(actGetCourses());
+      dispatch(getCourses());
    }, [dispatch]);
 
    // assign & initialize swiper

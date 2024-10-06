@@ -4,8 +4,8 @@ import {Formik} from 'formik';
 import {Container, Form, Row, Col, Button} from 'react-bootstrap';
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from 'react-redux';
-import {actForgetPassword} from '../../store/usersSlice/act/actForgetPassword';
-import {actUserLogin} from '../../store/authSlice/act/actUserLogin';
+import {forgetPassword} from '../../store/usersSlice/actions/forgetPassword';
+import {userLogin} from '../../store/authSlice/actions/userLogin';
 import {useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faEye, faEyeSlash} from '@fortawesome/free-regular-svg-icons';
@@ -58,7 +58,7 @@ function LoginForm()
          identifier: values.identifier
       };
 
-      dispatch(actForgetPassword(backupEmail))
+      dispatch(forgetPassword(backupEmail))
          .unwrap()
          .then(() => setShowModal(false))
          .catch(error =>
@@ -77,7 +77,7 @@ function LoginForm()
          email: values.signInEmail,
          password: values.signInPassword,
       }
-      dispatch(actUserLogin(userCredentials))
+      dispatch(userLogin(userCredentials))
          .unwrap()
          .then(() => navigate('/', {replace: true}))
          .catch(error =>

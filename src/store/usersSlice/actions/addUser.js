@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {client} from "../../../services/client";
 
-export const actAddUser = createAsyncThunk('user/actAddUser',
+export const addUser = createAsyncThunk('user/addUser',
    async (userCredentials, thunkAPI) =>
    {
       const {rejectWithValue} = thunkAPI;

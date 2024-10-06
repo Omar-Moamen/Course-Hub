@@ -1,6 +1,6 @@
 import {Button, Col, Container, Row} from 'react-bootstrap';
 import {ErrorMessage, Field, Formik} from 'formik';
-import {actAddInstructor} from '../../store/usersSlice/act/actAddInstructor';
+import {addInstructor} from '../../store/usersSlice/actions/addInstructor';
 import Form from 'react-bootstrap/Form';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
@@ -78,9 +78,7 @@ export default function InstructorSignUp()
          city: values.city,
       }
 
-      console.log(userCredentials);
-
-      dispatch(actAddInstructor(userCredentials))
+      dispatch(addInstructor(userCredentials))
          .unwrap()
          .then(() => navigate('/login'))
          .catch(error =>

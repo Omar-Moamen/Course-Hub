@@ -14,7 +14,6 @@ function Header()
 {
    // Get The current User with custom hook
    const {user} = useUserData();
-   console.log("header")
    const {pathname} = useLocation();
    const [showNavbar, setShowNavbar] = useState(false);
    const [screenSize] = useScreenSize();

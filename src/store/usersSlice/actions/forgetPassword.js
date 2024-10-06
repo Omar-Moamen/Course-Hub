@@ -1,7 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {client} from "../../../services/client";
 
-export const actForgetPassword = createAsyncThunk('user/actForgetPassword',
+export const forgetPassword = createAsyncThunk('user/forgetPassword',
    async (identifier, thunkAPI) =>
    {
       const {rejectWithValue} = thunkAPI;

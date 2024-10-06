@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {Button} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from 'react-router-dom';
-import {actUserLogout} from "../../store//authSlice/act/actUserLogout";
+import {userLogout} from "../../store//authSlice/actions/userLogout";
 import Swal from "sweetalert2";
 import useLocalStorage from "../../hooks/use-local-storage";
 import {removeActiveClasses} from "../../util/removeActiveClasses";
@@ -30,7 +30,7 @@ function Settings()
 
   const handleUserLogOut = () =>
   {
-    dispatch(actUserLogout())
+    dispatch(userLogout())
       .unwrap()
       .then(() =>
       {
